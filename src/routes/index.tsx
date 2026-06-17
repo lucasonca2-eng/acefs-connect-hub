@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useInView } from "@/hooks/use-in-view";
 
 export const Route = createFileRoute("/")({
@@ -482,7 +482,8 @@ function RadioBar() {
 function SealMark({ size = 44, dark = false }: { size?: number; dark?: boolean }) {
   const stroke = dark ? "var(--green-deep)" : "var(--gold)";
   const text = dark ? "var(--green-deep)" : "var(--cream)";
-  const id = useRef(`p-${Math.random().toString(36).slice(2)}`).current;
+  const rawId = useId();
+  const id = `p-${rawId.replace(/[:]/g, "")}`;
   return (
     <div className="relative inline-block" style={{ width: size, height: size }}>
       <svg viewBox="0 0 100 100" width={size} height={size} className="seal-spin">
