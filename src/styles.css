@@ -67,20 +67,28 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-soft: var(--navy-soft);
+  --color-surface: var(--surface);
   --font-display: "Fraunces", serif;
   --font-sans: "Public Sans", sans-serif;
 }
 
 :root {
   --radius: 0.625rem;
-  --green: #1F4A28;
-  --green-deep: #0E2A14;
+  --green: #0F3460;
+  --green-deep: #0A2547;
+  --navy: #0F3460;
+  --navy-deep: #0A2547;
+  --navy-soft: #1E4A82;
   --gold: #C9A24B;
   --gold-soft: #E2C97E;
-  --cream: #F4F7F4;
-  --ink: #2B2D33;
-  --ink-soft: #5C5F66;
-  --line: #DCE3DD;
+  --cream: #F7F8FA;
+  --surface: #FFFFFF;
+  --ink: #1F2937;
+  --ink-soft: #6B7280;
+  --line: #E5E7EB;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
