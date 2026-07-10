@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
       { title: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
       { name: "description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região." },
       { property: "og:title", content: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
-      { property: "og:description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana." },
+      { property: "og:description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
     ],

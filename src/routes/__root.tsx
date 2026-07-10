@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
+      { name: "description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
+      { property: "og:description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
+      { name: "twitter:description", content: "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d799de20-5fbf-4520-9657-47c98c2a8790/id-preview-4f1bdb06--aead5de7-981e-4ca2-94d3-fbe95ef85a91.lovable.app-1781716796175.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d799de20-5fbf-4520-9657-47c98c2a8790/id-preview-4f1bdb06--aead5de7-981e-4ca2-94d3-fbe95ef85a91.lovable.app-1781716796175.png" },
     ],
     links: [
       {
