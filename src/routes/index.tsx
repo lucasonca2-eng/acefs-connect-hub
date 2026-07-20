@@ -34,12 +34,12 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative bg-navy text-white overflow-hidden">
+    <section className="relative bg-green-gradient text-white overflow-hidden">
       <div
-        className="absolute inset-0 opacity-40 pointer-events-none"
+        className="absolute inset-0 opacity-60 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at 20% 20%, rgba(201,162,75,0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 90%, rgba(30,74,130,0.6) 0%, transparent 60%)",
+            "radial-gradient(ellipse at 20% 20%, rgba(201,162,75,0.12) 0%, transparent 55%), radial-gradient(ellipse at 85% 90%, rgba(45,106,79,0.5) 0%, transparent 60%)",
         }}
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
@@ -148,7 +148,7 @@ function ServicesTeaser() {
             <Link
               key={s.slug}
               to="/servicos"
-              className="group block bg-cream border border-line rounded-lg p-6 hover:border-navy/30 hover:shadow-md transition-all"
+              className="group block bg-cream border border-line rounded-lg p-6 shadow-soft hover:shadow-soft-lg hover:-translate-y-0.5 hover:border-navy/25 transition-all duration-300 ease-out"
             >
               <div className="w-11 h-11 rounded-md bg-navy/5 text-navy flex items-center justify-center mb-5 group-hover:bg-navy group-hover:text-white transition-colors">
                 <ServiceIcon name={s.icon} />
