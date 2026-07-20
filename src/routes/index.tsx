@@ -247,10 +247,10 @@ export function NewsCard({
     tone === "gold"
       ? "linear-gradient(135deg, #C9A24B, #E2C97E)"
       : tone === "muted"
-        ? "linear-gradient(135deg, #E5E7EB, #F7F8FA)"
-        : "linear-gradient(135deg, #0F3460, #1E4A82)";
+        ? "linear-gradient(135deg, #D8E4DD, #F7F9F8)"
+        : "linear-gradient(135deg, #1B4332, #2D6A4F)";
   return (
-    <article className="group bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+    <article className="group bg-white border border-line rounded-lg overflow-hidden shadow-soft hover:shadow-soft-lg hover:-translate-y-0.5 hover:border-navy/20 transition-all duration-300 ease-out">
       <div className="aspect-[16/10] relative" style={{ background: bg }}>
         <div className="absolute top-4 left-4 bg-white/95 text-navy text-[11px] font-semibold tracking-wide uppercase px-2.5 py-1 rounded">
           {item.category}
