@@ -92,7 +92,7 @@ export const PARTNERS = [
 ] as const;
 
 export const STATS = [
-  { n: "82", suffix: "anos", label: "de atuação contínua" },
+  { n: "81", suffix: "anos", label: "de atuação contínua" },
   { n: "2.400", suffix: "+", label: "empresas associadas" },
   { n: "40", suffix: "+", label: "serviços e benefícios" },
   { n: "120", suffix: "", label: "eventos em 2025" },

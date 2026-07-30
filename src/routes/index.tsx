@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, PARTNERS, SERVICES, STATS } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
+import { RadioFeatureCard } from "@/components/radio-player";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/")({
           "Há mais de 80 anos representando, defendendo e fortalecendo o empresariado de Feira de Santana e região. Conheça nossos serviços e associe-se.",
       },
       { property: "og:title", content: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
-      { property: "og:description", content: "Representação, serviços e formação para o empresariado feirense desde 1944." },
+      { property: "og:description", content: "Representação, serviços e formação para o empresariado feirense desde 1945." },
     ],
   }),
   component: Home,
@@ -26,6 +27,7 @@ function Home() {
       <StatsSection />
       <ServicesTeaser />
       <AboutTeaser />
+      <RadioSection />
       <NewsTeaser />
       <CTABand />
     </>
@@ -34,19 +36,19 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative bg-green-gradient text-white overflow-hidden">
+    <section className="relative bg-navy text-white overflow-hidden">
       <div
-        className="absolute inset-0 opacity-60 pointer-events-none"
+        className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at 20% 20%, rgba(201,162,75,0.12) 0%, transparent 55%), radial-gradient(ellipse at 85% 90%, rgba(45,106,79,0.5) 0%, transparent 60%)",
+            "radial-gradient(ellipse at 20% 20%, rgba(201,162,75,0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 90%, rgba(30,74,130,0.6) 0%, transparent 60%)",
         }}
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
             <span className="w-6 h-px bg-gold" />
-            Associação Comercial · desde 1944
+            Associação Comercial · desde 1945
           </div>
           <h1 className="font-display font-semibold text-[clamp(36px,5.6vw,68px)] leading-[1.05] tracking-[-0.02em] text-white">
             Fortalecendo o empresariado de Feira de Santana há mais de 80 anos.
@@ -76,7 +78,7 @@ function Hero() {
             <div className="absolute inset-6 rounded-full border border-gold/40" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
               <div className="text-[10px] tracking-[0.32em] uppercase text-gold mb-3 font-semibold">Fundada em</div>
-              <div className="font-display text-[96px] leading-none text-white font-semibold">1944</div>
+              <div className="font-display text-[96px] leading-none text-white font-semibold">1945</div>
               <div className="mt-4 text-[11px] tracking-[0.22em] uppercase text-white/50">Feira de Santana · BA</div>
             </div>
           </div>
@@ -148,7 +150,7 @@ function ServicesTeaser() {
             <Link
               key={s.slug}
               to="/servicos"
-              className="group block bg-cream border border-line rounded-lg p-6 shadow-soft hover:shadow-soft-lg hover:-translate-y-0.5 hover:border-navy/25 transition-all duration-300 ease-out"
+              className="group block bg-cream border border-line rounded-lg p-6 hover:border-navy/30 hover:shadow-md transition-all"
             >
               <div className="w-11 h-11 rounded-md bg-navy/5 text-navy flex items-center justify-center mb-5 group-hover:bg-navy group-hover:text-white transition-colors">
                 <ServiceIcon name={s.icon} />
@@ -174,7 +176,7 @@ function AboutTeaser() {
           </h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-soft">
             <p>
-              Fundada em 1944, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
+              Fundada em 1945, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
             </p>
             <p>
               Hoje, reunimos mais de 2.400 empresas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
@@ -204,6 +206,27 @@ function AboutTeaser() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RadioSection() {
+  return (
+    <section className="bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-12 gap-10 items-center">
+        <div className="md:col-span-5">
+          <div className="text-[11px] tracking-[0.22em] uppercase text-gold font-semibold mb-3">No ar</div>
+          <h2 className="font-display font-semibold text-[clamp(28px,3.6vw,42px)] leading-tight tracking-tight text-navy">
+            A voz do comércio feirense, ao vivo.
+          </h2>
+          <p className="mt-4 text-[15px] leading-relaxed text-ink-soft max-w-[440px]">
+            A Rádio ACEFS leva boletins, entrevistas e a pauta econômica da região direto da sede da associação para o empresariado de Feira de Santana.
+          </p>
+        </div>
+        <div className="md:col-span-7">
+          <RadioFeatureCard />
         </div>
       </div>
     </section>
@@ -247,10 +270,10 @@ export function NewsCard({
     tone === "gold"
       ? "linear-gradient(135deg, #C9A24B, #E2C97E)"
       : tone === "muted"
-        ? "linear-gradient(135deg, #D8E4DD, #F7F9F8)"
-        : "linear-gradient(135deg, #1B4332, #2D6A4F)";
+        ? "linear-gradient(135deg, #E5E7EB, #F7F8FA)"
+        : "linear-gradient(135deg, #0F3460, #1E4A82)";
   return (
-    <article className="group bg-white border border-line rounded-lg overflow-hidden shadow-soft hover:shadow-soft-lg hover:-translate-y-0.5 hover:border-navy/20 transition-all duration-300 ease-out">
+    <article className="group bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
       <div className="aspect-[16/10] relative" style={{ background: bg }}>
         <div className="absolute top-4 left-4 bg-white/95 text-navy text-[11px] font-semibold tracking-wide uppercase px-2.5 py-1 rounded">
           {item.category}

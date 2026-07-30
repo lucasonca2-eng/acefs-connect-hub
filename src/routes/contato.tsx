@@ -26,8 +26,8 @@ function Contato() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5 space-y-6">
-            <InfoBlock title="Endereço" lines={["Rua Senhor dos Passos, 100", "Centro — Feira de Santana, BA", "CEP 44001-000"]} />
-            <InfoBlock title="Telefone" lines={["(75) 3221-0000"]} link={{ label: "Ligar agora", href: "tel:+557532210000" }} />
+            <InfoBlock title="Endereço" lines={["Largo São Francisco, 43", "Kalilândia — Feira de Santana, BA", "CEP 44001-024"]} />
+            <InfoBlock title="Telefone" lines={["(75) 3211-7446"]} link={{ label: "Ligar agora", href: "tel:+557532117446" }} />
             <InfoBlock title="E-mail" lines={["contato@acefs.com.br"]} link={{ label: "Enviar e-mail", href: "mailto:contato@acefs.com.br" }} />
             <InfoBlock title="Horário" lines={["Segunda a sexta, 08h às 18h"]} />
           </div>

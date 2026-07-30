@@ -15,7 +15,7 @@ export function SiteHeader() {
     <>
       <div className="bg-navy-deep text-white/70 text-[11.5px] tracking-[0.14em] uppercase">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-9 flex items-center justify-between">
-          <span>Seg a sex · 08h–18h · (75) 3221-0000</span>
+          <span>Seg a sex · 08h–18h · (75) 3211-7446</span>
           <span className="hidden md:block">Feira de Santana · Bahia</span>
         </div>
       </div>
@@ -31,7 +31,7 @@ export function SiteHeader() {
             <Logo />
             <div className="leading-none">
               <div className="font-display text-[20px] text-navy tracking-tight font-semibold">ACEFS</div>
-              <div className="text-[10px] tracking-[0.22em] text-ink-soft uppercase mt-1">desde 1944</div>
+              <div className="text-[10px] tracking-[0.22em] text-ink-soft uppercase mt-1">desde 1945</div>
             </div>
           </Link>
           <nav className="hidden md:block">
