@@ -24,14 +24,14 @@ function Servicos() {
         subtitle="Da consulta de crédito à formação de equipes, oferecemos soluções pensadas para o dia a dia do empresariado."
       />
       <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-2 gap-6">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((s) => (
-            <article key={s.slug} className="bg-cream border border-line rounded-lg p-8 hover:border-navy/30 hover:shadow-md transition-all">
-              <div className="w-12 h-12 rounded-md bg-navy text-white flex items-center justify-center mb-6">
+            <article key={s.slug} className="bg-cream border border-line rounded-lg p-7 hover:border-navy/30 hover:shadow-md transition-all flex flex-col">
+              <div className="w-12 h-12 rounded-md bg-navy text-white flex items-center justify-center mb-5">
                 <ServiceIcon name={s.icon} />
               </div>
-              <h3 className="font-display font-semibold text-[24px] text-navy mb-3">{s.title}</h3>
-              <p className="text-[15px] text-ink-soft leading-relaxed mb-5">{s.desc}</p>
+              <h3 className="font-display font-semibold text-[21px] leading-snug text-navy mb-3">{s.title}</h3>
+              <p className="text-[14.5px] text-ink-soft leading-relaxed mb-5 flex-1">{s.desc}</p>
               <Link to="/contato" className="inline-flex items-center gap-2 text-navy font-semibold text-[14px] hover:text-gold">
                 Solicitar informações
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>

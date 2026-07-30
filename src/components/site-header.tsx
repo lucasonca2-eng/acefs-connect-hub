@@ -34,22 +34,43 @@ export function SiteHeader() {
               <div className="text-[10px] tracking-[0.22em] text-ink-soft uppercase mt-1">desde 1945</div>
             </div>
           </Link>
-          <nav className="hidden md:block">
-            <ul className="flex gap-8 list-none">
+          <nav className="hidden lg:block">
+            <ul className="flex gap-7 list-none">
               {NAV.map((n) => (
-                <li key={n.to}>
+                <li key={n.label} className="relative group">
                   <Link
                     to={n.to}
                     activeOptions={{ exact: n.to === "/" }}
-                    className="text-[14px] font-medium text-ink hover:text-navy transition-colors data-[status=active]:text-navy data-[status=active]:font-semibold"
+                    className="inline-flex items-center gap-1.5 py-6 text-[14px] font-medium text-ink hover:text-navy transition-colors duration-200 data-[status=active]:text-navy data-[status=active]:font-semibold"
                   >
                     {n.label}
+                    {n.children && (
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden className="transition-transform duration-200 group-hover:rotate-180">
+                        <path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
                   </Link>
+                  {n.children && (
+                    <div className="absolute left-0 top-full z-50 pt-1 opacity-0 invisible translate-y-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+                      <ul className="min-w-[230px] list-none rounded-lg border border-line bg-white p-2 shadow-lg">
+                        {n.children.map((c) => (
+                          <li key={c.to}>
+                            <Link
+                              to={c.to}
+                              className="block rounded-md px-3 py-2.5 text-[13.5px] text-ink hover:bg-cream hover:text-navy transition-colors duration-200 data-[status=active]:text-navy data-[status=active]:font-semibold"
+                            >
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
           </nav>
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Link
               to="/contato"
               className="inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-navy-deep transition-colors"
@@ -59,7 +80,8 @@ export function SiteHeader() {
           </div>
           <button
             aria-label="Menu"
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 text-navy"
+            aria-expanded={open}
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 text-navy"
             onClick={() => setOpen((v) => !v)}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -67,19 +89,37 @@ export function SiteHeader() {
             </svg>
           </button>
         </div>
-        {open && (
-          <div className="md:hidden border-t border-line bg-white">
-            <ul className="px-6 py-4 space-y-1">
+        <div
+          className={`lg:hidden overflow-hidden border-t border-line bg-white transition-[max-height,opacity] duration-300 ease-out ${
+            open ? "max-h-[80vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0"
+          }`}
+        >
+            <ul className="px-6 py-4 space-y-1 list-none">
               {NAV.map((n) => (
-                <li key={n.to}>
+                <li key={n.label}>
                   <Link
                     to={n.to}
                     activeOptions={{ exact: n.to === "/" }}
                     onClick={() => setOpen(false)}
-                    className="block py-2 text-[15px] text-ink data-[status=active]:text-navy data-[status=active]:font-semibold"
+                    className="block py-2 text-[15px] font-medium text-ink data-[status=active]:text-navy data-[status=active]:font-semibold"
                   >
                     {n.label}
                   </Link>
+                  {n.children && (
+                    <ul className="list-none ml-3 pl-3 border-l border-line space-y-0.5 pb-1">
+                      {n.children.map((c) => (
+                        <li key={c.to}>
+                          <Link
+                            to={c.to}
+                            onClick={() => setOpen(false)}
+                            className="block py-1.5 text-[14px] text-ink-soft data-[status=active]:text-navy data-[status=active]:font-semibold"
+                          >
+                            {c.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
               <li className="pt-2">
@@ -92,8 +132,7 @@ export function SiteHeader() {
                 </Link>
               </li>
             </ul>
-          </div>
-        )}
+        </div>
       </header>
     </>
   );

@@ -11,8 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as EmpregosRouteImport } from './routes/empregos'
+import { Route as DiretoriaRouteImport } from './routes/diretoria'
+import { Route as CurriculoRouteImport } from './routes/curriculo'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ArtigosRouteImport } from './routes/artigos'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ServicosRoute = ServicosRouteImport.update({
@@ -25,14 +32,49 @@ const QuemSomosRoute = QuemSomosRouteImport.update({
   path: '/quem-somos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
+  id: '/feira-de-santana',
+  path: '/feira-de-santana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpregosRoute = EmpregosRouteImport.update({
+  id: '/empregos',
+  path: '/empregos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiretoriaRoute = DiretoriaRouteImport.update({
+  id: '/diretoria',
+  path: '/diretoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculoRoute = CurriculoRouteImport.update({
+  id: '/curriculo',
+  path: '/curriculo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtigosRoute = ArtigosRouteImport.update({
+  id: '/artigos',
+  path: '/artigos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,38 +85,103 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
+  '/diretoria': typeof DiretoriaRoute
+  '/empregos': typeof EmpregosRoute
+  '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
+  '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
+  '/diretoria': typeof DiretoriaRoute
+  '/empregos': typeof EmpregosRoute
+  '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
+  '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
+  '/diretoria': typeof DiretoriaRoute
+  '/empregos': typeof EmpregosRoute
+  '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
+  '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contato' | '/noticias' | '/quem-somos' | '/servicos'
+  fullPaths:
+    | '/'
+    | '/artigos'
+    | '/contato'
+    | '/curriculo'
+    | '/diretoria'
+    | '/empregos'
+    | '/eventos'
+    | '/feira-de-santana'
+    | '/noticias'
+    | '/parceiros'
+    | '/quem-somos'
+    | '/servicos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contato' | '/noticias' | '/quem-somos' | '/servicos'
-  id: '__root__' | '/' | '/contato' | '/noticias' | '/quem-somos' | '/servicos'
+  to:
+    | '/'
+    | '/artigos'
+    | '/contato'
+    | '/curriculo'
+    | '/diretoria'
+    | '/empregos'
+    | '/eventos'
+    | '/feira-de-santana'
+    | '/noticias'
+    | '/parceiros'
+    | '/quem-somos'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/artigos'
+    | '/contato'
+    | '/curriculo'
+    | '/diretoria'
+    | '/empregos'
+    | '/eventos'
+    | '/feira-de-santana'
+    | '/noticias'
+    | '/parceiros'
+    | '/quem-somos'
+    | '/servicos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArtigosRoute: typeof ArtigosRoute
   ContatoRoute: typeof ContatoRoute
+  CurriculoRoute: typeof CurriculoRoute
+  DiretoriaRoute: typeof DiretoriaRoute
+  EmpregosRoute: typeof EmpregosRoute
+  EventosRoute: typeof EventosRoute
+  FeiraDeSantanaRoute: typeof FeiraDeSantanaRoute
   NoticiasRoute: typeof NoticiasRoute
+  ParceirosRoute: typeof ParceirosRoute
   QuemSomosRoute: typeof QuemSomosRoute
   ServicosRoute: typeof ServicosRoute
 }
@@ -95,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuemSomosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/noticias': {
       id: '/noticias'
       path: '/noticias'
@@ -102,11 +216,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/feira-de-santana': {
+      id: '/feira-de-santana'
+      path: '/feira-de-santana'
+      fullPath: '/feira-de-santana'
+      preLoaderRoute: typeof FeiraDeSantanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empregos': {
+      id: '/empregos'
+      path: '/empregos'
+      fullPath: '/empregos'
+      preLoaderRoute: typeof EmpregosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diretoria': {
+      id: '/diretoria'
+      path: '/diretoria'
+      fullPath: '/diretoria'
+      preLoaderRoute: typeof DiretoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculo': {
+      id: '/curriculo'
+      path: '/curriculo'
+      fullPath: '/curriculo'
+      preLoaderRoute: typeof CurriculoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artigos': {
+      id: '/artigos'
+      path: '/artigos'
+      fullPath: '/artigos'
+      preLoaderRoute: typeof ArtigosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -121,8 +277,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArtigosRoute: ArtigosRoute,
   ContatoRoute: ContatoRoute,
+  CurriculoRoute: CurriculoRoute,
+  DiretoriaRoute: DiretoriaRoute,
+  EmpregosRoute: EmpregosRoute,
+  EventosRoute: EventosRoute,
+  FeiraDeSantanaRoute: FeiraDeSantanaRoute,
   NoticiasRoute: NoticiasRoute,
+  ParceirosRoute: ParceirosRoute,
   QuemSomosRoute: QuemSomosRoute,
   ServicosRoute: ServicosRoute,
 }
