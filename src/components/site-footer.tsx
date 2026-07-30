@@ -21,15 +21,17 @@ export function SiteFooter() {
 
         <FooterCol title="Institucional" links={[
           { label: "Quem Somos", to: "/quem-somos" },
-          { label: "Notícias", to: "/noticias" },
-          { label: "Contato", to: "/contato" },
+          { label: "Diretoria", to: "/diretoria" },
+          { label: "Feira de Santana", to: "/feira-de-santana" },
+          { label: "Parceiros", to: "/parceiros" },
         ]} />
 
-        <FooterCol title="Serviços" links={[
-          { label: "SCPC · Boa Vista", to: "/servicos" },
-          { label: "Certificado Digital", to: "/servicos" },
-          { label: "Cursos & Capacitação", to: "/servicos" },
-          { label: "Networking & Eventos", to: "/servicos" },
+        <FooterCol title="Conteúdo" links={[
+          { label: "Serviços", to: "/servicos" },
+          { label: "Notícias", to: "/noticias" },
+          { label: "Artigos", to: "/artigos" },
+          { label: "Eventos", to: "/eventos" },
+          { label: "Empregos", to: "/empregos" },
         ]} />
 
         <div className="md:col-span-3">
@@ -38,7 +40,7 @@ export function SiteFooter() {
             <li>Largo São Francisco, 43</li>
             <li>Kalilândia · Feira de Santana — BA</li>
             <li><a href="tel:+557532117446" className="hover:text-white">(75) 3211-7446</a></li>
-            <li><a href="mailto:contato@acefs.com.br" className="hover:text-white">contato@acefs.com.br</a></li>
+            <li><a href="mailto:acefs@acefs.com.br" className="hover:text-white">acefs@acefs.com.br</a></li>
           </ul>
           <div className="mt-5 flex gap-3">
             {["Instagram", "LinkedIn", "Facebook"].map((s) => (
