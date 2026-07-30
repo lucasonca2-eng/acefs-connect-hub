@@ -5,7 +5,7 @@ export const Route = createFileRoute("/quem-somos")({
   head: () => ({
     meta: [
       { title: "Quem Somos — ACEFS" },
-      { name: "description", content: "Conheça a história, a missão e a estrutura da Associação Comercial e Empresarial de Feira de Santana, fundada em 1944." },
+      { name: "description", content: "Conheça a história, a missão e a estrutura da Associação Comercial e Empresarial de Feira de Santana, fundada em 1945." },
       { property: "og:title", content: "Quem Somos — ACEFS" },
       { property: "og:description", content: "Conheça a história, a missão e a estrutura da ACEFS." },
     ],
@@ -27,7 +27,7 @@ function QuemSomos() {
           <div className="md:col-span-7 space-y-5 text-[16px] leading-relaxed text-ink">
             <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy leading-tight">Nossa história</h2>
             <p>
-              A Associação Comercial e Empresarial de Feira de Santana foi fundada em 1944, no auge do crescimento comercial da cidade, por um grupo de empresários que compreendia a importância da união e da representação coletiva.
+              A Associação Comercial e Empresarial de Feira de Santana foi fundada em 1945, no auge do crescimento comercial da cidade, por um grupo de empresários que compreendia a importância da união e da representação coletiva.
             </p>
             <p>
               Ao longo de mais de oito décadas, a ACEFS consolidou-se como referência institucional na Bahia, sendo filiada à CACB (Confederação das Associações Comerciais e Empresariais do Brasil) e membro fundador da FACEB (Federação das Associações Comerciais e Empresariais da Bahia).

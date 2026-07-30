@@ -11,7 +11,7 @@ export function SiteFooter() {
             </div>
             <div className="leading-tight">
               <div className="font-display text-[20px] text-white font-semibold">ACEFS</div>
-              <div className="text-[10px] tracking-[0.22em] text-white/50 uppercase mt-0.5">desde 1944</div>
+              <div className="text-[10px] tracking-[0.22em] text-white/50 uppercase mt-0.5">desde 1945</div>
             </div>
           </div>
           <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">
@@ -35,9 +35,9 @@ export function SiteFooter() {
         <div className="md:col-span-3">
           <h4 className="text-[11px] uppercase tracking-[0.22em] text-gold mb-4 font-semibold">Contato</h4>
           <ul className="space-y-2 text-[14px] text-white/70">
-            <li>Rua Senhor dos Passos, 100</li>
-            <li>Centro · Feira de Santana — BA</li>
-            <li><a href="tel:+557532210000" className="hover:text-white">(75) 3221-0000</a></li>
+            <li>Largo São Francisco, 43</li>
+            <li>Kalilândia · Feira de Santana — BA</li>
+            <li><a href="tel:+557532117446" className="hover:text-white">(75) 3211-7446</a></li>
             <li><a href="mailto:contato@acefs.com.br" className="hover:text-white">contato@acefs.com.br</a></li>
           </ul>
           <div className="mt-5 flex gap-3">
