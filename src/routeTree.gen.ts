@@ -13,6 +13,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as EmpregosRouteImport } from './routes/empregos'
 import { Route as DiretoriaRouteImport } from './routes/diretoria'
@@ -39,6 +40,11 @@ const ParceirosRoute = ParceirosRouteImport.update({
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
+  id: '/feira-de-santana',
+  path: '/feira-de-santana',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventosRoute = EventosRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
+  '/feira-de-santana': typeof FeiraDeSantanaRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/diretoria'
     | '/empregos'
     | '/eventos'
+    | '/feira-de-santana'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/diretoria'
     | '/empregos'
     | '/eventos'
+    | '/feira-de-santana'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/diretoria'
     | '/empregos'
     | '/eventos'
+    | '/feira-de-santana'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   DiretoriaRoute: typeof DiretoriaRoute
   EmpregosRoute: typeof EmpregosRoute
   EventosRoute: typeof EventosRoute
+  FeiraDeSantanaRoute: typeof FeiraDeSantanaRoute
   NoticiasRoute: typeof NoticiasRoute
   ParceirosRoute: typeof ParceirosRoute
   QuemSomosRoute: typeof QuemSomosRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/noticias'
       preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feira-de-santana': {
+      id: '/feira-de-santana'
+      path: '/feira-de-santana'
+      fullPath: '/feira-de-santana'
+      preLoaderRoute: typeof FeiraDeSantanaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eventos': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiretoriaRoute: DiretoriaRoute,
   EmpregosRoute: EmpregosRoute,
   EventosRoute: EventosRoute,
+  FeiraDeSantanaRoute: FeiraDeSantanaRoute,
   NoticiasRoute: NoticiasRoute,
   ParceirosRoute: ParceirosRoute,
   QuemSomosRoute: QuemSomosRoute,
