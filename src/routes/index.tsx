@@ -146,7 +146,7 @@ function ServicesTeaser() {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SERVICES.map((s) => (
+          {SERVICES.slice(0, 8).map((s) => (
             <Link
               key={s.slug}
               to="/servicos"
