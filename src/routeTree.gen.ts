@@ -16,6 +16,7 @@ import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as EmpregosRouteImport } from './routes/empregos'
 import { Route as DiretoriaRouteImport } from './routes/diretoria'
+import { Route as CurriculoRouteImport } from './routes/curriculo'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -54,6 +55,11 @@ const DiretoriaRoute = DiretoriaRouteImport.update({
   path: '/diretoria',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CurriculoRoute = CurriculoRouteImport.update({
+  id: '/curriculo',
+  path: '/curriculo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -68,6 +74,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/curriculo': typeof CurriculoRoute
   '/diretoria': typeof DiretoriaRoute
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contato'
+    | '/curriculo'
     | '/diretoria'
     | '/empregos'
     | '/eventos'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/contato'
+    | '/curriculo'
     | '/diretoria'
     | '/empregos'
     | '/eventos'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/contato'
+    | '/curriculo'
     | '/diretoria'
     | '/empregos'
     | '/eventos'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
+  CurriculoRoute: typeof CurriculoRoute
   DiretoriaRoute: typeof DiretoriaRoute
   EmpregosRoute: typeof EmpregosRoute
   EventosRoute: typeof EventosRoute
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiretoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/curriculo': {
+      id: '/curriculo'
+      path: '/curriculo'
+      fullPath: '/curriculo'
+      preLoaderRoute: typeof CurriculoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
@@ -218,6 +238,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
+  CurriculoRoute: CurriculoRoute,
   DiretoriaRoute: DiretoriaRoute,
   EmpregosRoute: EmpregosRoute,
   EventosRoute: EventosRoute,
