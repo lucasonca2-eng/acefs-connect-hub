@@ -13,6 +13,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as DiretoriaRouteImport } from './routes/diretoria'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
@@ -37,6 +38,11 @@ const NoticiasRoute = NoticiasRouteImport.update({
   path: '/noticias',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiretoriaRoute = DiretoriaRouteImport.update({
   id: '/diretoria',
   path: '/diretoria',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/diretoria': typeof DiretoriaRoute
+  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/diretoria': typeof DiretoriaRoute
+  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/diretoria': typeof DiretoriaRoute
+  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/diretoria'
+    | '/eventos'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/diretoria'
+    | '/eventos'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/diretoria'
+    | '/eventos'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
   DiretoriaRoute: typeof DiretoriaRoute
+  EventosRoute: typeof EventosRoute
   NoticiasRoute: typeof NoticiasRoute
   ParceirosRoute: typeof ParceirosRoute
   QuemSomosRoute: typeof QuemSomosRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diretoria': {
       id: '/diretoria'
       path: '/diretoria'
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
   DiretoriaRoute: DiretoriaRoute,
+  EventosRoute: EventosRoute,
   NoticiasRoute: NoticiasRoute,
   ParceirosRoute: ParceirosRoute,
   QuemSomosRoute: QuemSomosRoute,
