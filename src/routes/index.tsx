@@ -114,24 +114,6 @@ function Partners() {
   );
 }
 
-export function StatsSection() {
-  return (
-    <section className="bg-cream border-b border-line">
-      <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
-        {STATS.map((s) => (
-          <div key={s.label} className="text-center md:text-left">
-            <div className="font-display font-semibold text-[44px] md:text-[52px] leading-none text-navy tracking-tight">
-              {s.n}
-              <span className="text-gold">{s.suffix}</span>
-            </div>
-            <div className="mt-2 text-[13px] text-ink-soft">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ServicesTeaser() {
   return (
     <section className="bg-white py-20 md:py-24">
