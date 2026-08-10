@@ -156,14 +156,14 @@ function AboutTeaser() {
         <div className="md:col-span-6">
           <div className="text-[11px] tracking-[0.22em] uppercase text-gold font-semibold mb-3">Sobre a ACEFS</div>
           <h2 className="font-display font-semibold text-[clamp(28px,3.6vw,42px)] leading-tight tracking-tight text-navy">
-            Uma instituição construída por quem empreende em Feira de Santana.
+            Nossa história
           </h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-soft">
             <p>
               Fundada em 1945, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
             </p>
-            <p>
-              Hoje, reunimos mais de 2.400 empresas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
+            <p className="text-ink text-[16px] font-medium">
+              Hoje, reunimos uma gama de empresas associadas, atuando em prol do desenvolvimento econômico, da defesa dos interesses do empresariado e da geração de oportunidades para toda a região.
             </p>
           </div>
           <div className="mt-8">
@@ -176,20 +176,14 @@ function AboutTeaser() {
           </div>
         </div>
         <div className="md:col-span-6">
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { t: "Representação", d: "Voz do empresariado junto ao poder público municipal e estadual." },
-              { t: "Serviços", d: "Certificado digital, SCPC, cursos e mais de 40 benefícios." },
-              { t: "Formação", d: "Capacitação contínua em parceria com o Sebrae Bahia." },
-              { t: "Networking", d: "Rede consolidada com mais de 2.400 empresas associadas." },
-            ].map((p) => (
-              <div key={p.t} className="bg-white border border-line rounded-lg p-5">
-                <div className="w-8 h-1 bg-gold mb-4" />
-                <div className="font-display font-semibold text-navy text-[17px] mb-1.5">{p.t}</div>
-                <div className="text-[13px] text-ink-soft leading-relaxed">{p.d}</div>
-              </div>
-            ))}
-          </div>
+          <img
+            src={sedeImg}
+            alt="Sede da ACEFS em Feira de Santana"
+            loading="lazy"
+            width={1280}
+            height={960}
+            className="rounded-xl shadow-lg w-full object-cover border-4 border-mint"
+          />
         </div>
       </div>
     </section>
