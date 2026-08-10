@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NEWS } from "@/lib/site-data";
+import { useState } from "react";
+import { NEWS, NEWS_CATEGORIES } from "@/lib/site-data";
 import { NewsCard } from "./index";
 import { PageHeader } from "./quem-somos";
 
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/noticias")({
   component: Noticias,
 });
 
-const CATEGORIES = ["Todas", "Encontro", "Formação", "Parceria", "Institucional", "Evento"] as const;
-
 function Noticias() {
+  const [cat, setCat] = useState<string>("Todas");
+  const items = cat === "Todas" ? NEWS : NEWS.filter((n) => n.category === cat);
   return (
     <>
       <PageHeader
@@ -28,11 +29,14 @@ function Noticias() {
       <section className="bg-white py-14 md:py-20">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10">
           <div className="flex flex-wrap gap-2 mb-10">
-            {CATEGORIES.map((c, i) => (
+            {NEWS_CATEGORIES.map((c) => (
               <button
                 key={c}
-                className={`px-4 py-2 rounded-full text-[13px] font-medium border transition-colors ${
-                  i === 0
+                type="button"
+                aria-pressed={cat === c}
+                onClick={() => setCat(c)}
+                className={`px-4 py-2 rounded-full text-[13px] font-medium border transition-colors duration-200 active:scale-[0.98] ${
+                  cat === c
                     ? "bg-navy text-white border-navy"
                     : "bg-white text-ink border-line hover:border-navy hover:text-navy"
                 }`}
@@ -42,7 +46,7 @@ function Noticias() {
             ))}
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {NEWS.map((n, i) => (
+            {items.map((n, i) => (
               <NewsCard key={n.slug} item={n} tone={i % 3 === 0 ? "navy" : i % 3 === 1 ? "gold" : "muted"} />
             ))}
           </div>

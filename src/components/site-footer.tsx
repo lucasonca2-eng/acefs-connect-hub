@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { LINKS } from "@/lib/site-data";
 
 export function SiteFooter() {
   return (
@@ -31,6 +32,7 @@ export function SiteFooter() {
           { label: "Notícias", to: "/noticias" },
           { label: "Artigos", to: "/artigos" },
           { label: "Eventos", to: "/eventos" },
+          { label: "Negócios & Conexões", to: "/negocios-e-conexoes" },
           { label: "Empregos", to: "/empregos" },
         ]} />
 
@@ -42,17 +44,24 @@ export function SiteFooter() {
             <li><a href="tel:+557532117446" className="hover:text-white">(75) 3211-7446</a></li>
             <li><a href="mailto:acefs@acefs.com.br" className="hover:text-white">acefs@acefs.com.br</a></li>
           </ul>
-          <div className="mt-5 flex gap-3">
-            {["Instagram", "LinkedIn", "Facebook"].map((s) => (
-              <a
-                key={s}
-                href="#"
-                aria-label={s}
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold hover:text-navy-deep transition-colors flex items-center justify-center text-[11px] font-semibold"
-              >
-                {s[0]}
-              </a>
-            ))}
+          <div className="mt-6 flex items-center gap-4">
+            <a
+              href={LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram da ACEFS"
+              className="bg-green text-white p-3 rounded-full hover:bg-green-bright transition-colors duration-200"
+            >
+              <InstagramIcon />
+            </a>
+            <a
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-md bg-green-bright px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-green transition-colors duration-200"
+            >
+              Fale conosco
+            </a>
           </div>
         </div>
       </div>
