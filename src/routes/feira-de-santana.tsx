@@ -1,5 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./quem-somos";
+import feira1 from "@/assets/feira-1.jpg";
+import feira2 from "@/assets/feira-2.jpg";
+import feira3 from "@/assets/feira-3.jpg";
+import sedeImg from "@/assets/acefs-sede.jpg";
+
+const GALLERY = [
+  { src: feira1, alt: "Vista aérea de Feira de Santana" },
+  { src: feira2, alt: "Centro histórico e igreja de Feira de Santana" },
+  { src: feira3, alt: "Monumento em avenida de Feira de Santana" },
+  { src: sedeImg, alt: "Sede da ACEFS em Feira de Santana" },
+];
 
 export const Route = createFileRoute("/feira-de-santana")({
   head: () => ({
@@ -92,6 +103,26 @@ function Cidade() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+      <section className="bg-cream py-14 md:py-20 border-t border-line">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-10">
+          <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy mb-8 text-center">
+            Conheça Feira de Santana
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {GALLERY.map((g) => (
+              <img
+                key={g.alt}
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                width={1200}
+                height={800}
+                className="rounded-lg shadow-md w-full h-full object-cover hover:scale-[1.03] transition-transform duration-300"
+              />
+            ))}
+          </div>
         </div>
       </section>
     </>
