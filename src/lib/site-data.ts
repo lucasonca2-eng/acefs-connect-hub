@@ -24,6 +24,7 @@ export const NAV: NavItem[] = [
       { label: "Notícias", to: "/noticias" },
       { label: "Artigos", to: "/artigos" },
       { label: "Eventos", to: "/eventos" },
+      { label: "Negócios & Conexões", to: "/negocios-e-conexoes" },
     ],
   },
   {
@@ -36,6 +37,12 @@ export const NAV: NavItem[] = [
   },
   { label: "Contato", to: "/contato" },
 ];
+
+export const LINKS = {
+  instagram: "https://www.instagram.com/acefsassociacao/",
+  linktree: "https://linktr.ee/acefs",
+  whatsapp: "https://wa.me/557532117446?text=Oii%2C%20vim%20do%20site%20da%20ACEFS",
+} as const;
 
 export const CONTACT = {
   address: "Largo São Francisco, nº 43 — Kalilândia",
@@ -71,21 +78,24 @@ export const DIRECTORY: { group: string; people: { name: string; role?: string; 
   {
     group: "Diretoria Executiva",
     people: [
-      { name: "Genildo Oliveira de Melo", role: "Presidente", company: "Setex Representações de Venda" },
-      { name: "Adauto Alves Franco Júnior", role: "Vice-Presidente", company: "Rodotrac Assist. Técnica Autorizada" },
-      { name: "Kleison da Silva Melo", role: "Diretor de Comércio", company: "Ana Clara Com. de Bijuterias" },
-      { name: "Edison Virgínio Nogueira Correia", role: "Diretor de Indústria", company: "Top Bahia Camisetas" },
-      { name: "Laêmia Abreu Gondim", role: "Diretora de Marketing", company: "Vilage Marcas e Patentes" },
-      { name: "Mauro Ricardo de Freitas Souza", role: "Diretor Financeiro", company: "Contas Contabilidade" },
-      { name: "Josemir de Carvalho Santos", role: "Segundo Diretor Financeiro", company: "Joca Contabilidade" },
-      { name: "Marco Antonio S. da Silva", role: "Diretor Adm. de Patrimônio", company: "Sindicato do Com. de Feira de Santana" },
-      { name: "Ednelson de C. Mendes Júnior", role: "Diretor de Exp. Social e Eventos", company: "Revista Sacada" },
-      { name: "Alexandre Brandão Lima", role: "Diretor Jurídico", company: "Brandão Advocacia" },
-      { name: "Luis Henrique Mercês Santos", role: "Diretor de Ass. Gov. e Políticas Públicas", company: "Mersan" },
-      { name: "Maria José Santos Silva", role: "Diretora de Serviços" },
-      { name: "Maria Cecília Castelo Branco de Santana", role: "Diretora ACEFS Mulher" },
-      { name: "Evaldo Alves Pinto", role: "Diretor de Assuntos Comunitários", company: "Risma Produções" },
-      { name: "Luize Nunes Arapiraca", role: "Diretora de Desenvolvimento Humano" },
+      { name: "Adauto Franco", role: "Vice-Diretor" },
+      { name: "Tatiana Novaes", role: "Diretora Executiva" },
+      { name: "Modezil Ferreira de Cerqueira", role: "Conselho / Diretoria" },
+      { name: "Kleison Melo", role: "Comércio" },
+      { name: "Edison Virgínio", role: "Indústria" },
+      { name: "Ednelson Mendes Jr.", role: "Diretor de Exp. Social e Eventos" },
+      { name: "Genildo Melo", role: "Diretor de Relações Est. com Empresas e Entidades" },
+      { name: "Nathalia Oliveira", role: "Diretora Empresarial" },
+      { name: "Laémia Gondim", role: "Marketing" },
+      { name: "Alexandre Brandão", role: "Diretor Jurídico" },
+      { name: "Mauro Ricardo", role: "Financeiro" },
+      { name: "Josemir Santos", role: "Financeiro" },
+      { name: "Marco Silva", role: "Patrimônio" },
+      { name: "Evaldo Pinto", role: "Diretor de Assuntos Comunitários" },
+      { name: "Luis Mercês", role: "Diretor de Ass. Gov. e Políticas Públicas" },
+      { name: "Maria José S. Silva", role: "Serviços" },
+      { name: "Maria Cecília C. Branco", role: "Diretora ACEFS Mulheres" },
+      { name: "Luize Arapiraca", role: "Desenvolvimento Humano" },
     ],
   },
   {
@@ -160,49 +170,29 @@ export const ARTICLES = [
 ] as const;
 
 export const NEWS = [
-  {
-    slug: "acefs-reune-liderancas-varejo",
-    category: "Encontro",
-    date: "12 Jun 2026",
-    title: "ACEFS reúne lideranças para debater o futuro do varejo regional",
-    excerpt: "Mais de 200 empresários no auditório discutiram crédito, logística urbana e digitalização do comércio.",
-  },
-  {
-    slug: "cursos-gratuitos-julho",
-    category: "Formação",
-    date: "04 Jun 2026",
-    title: "Nova rodada de cursos gratuitos para associados em julho",
-    excerpt: "Inscrições abertas para capacitações em gestão financeira e marketing digital.",
-  },
-  {
-    slug: "sebrae-acefs-consultoria",
-    category: "Parceria",
-    date: "28 Mai 2026",
-    title: "Sebrae e ACEFS ampliam consultoria gratuita às MPEs",
-    excerpt: "Atendimento semanal começa em junho na sede da associação.",
-  },
-  {
-    slug: "assembleia-2026",
-    category: "Institucional",
-    date: "15 Mai 2026",
-    title: "Assembleia geral aprova diretrizes para o próximo biênio",
-    excerpt: "Associados definem prioridades em representação, formação e serviços digitais.",
-  },
-  {
-    slug: "feira-negocios",
-    category: "Evento",
-    date: "02 Mai 2026",
-    title: "Feira de Negócios ACEFS reúne 80 expositores no centro",
-    excerpt: "Rodadas de compras conectaram indústrias locais a compradores de todo o Nordeste.",
-  },
-  {
-    slug: "premio-mercado",
-    category: "Reconhecimento",
-    date: "22 Abr 2026",
-    title: "Prêmio Mérito do Comércio homenageia 12 empresas centenárias",
-    excerpt: "Cerimônia celebrou negócios que ajudaram a construir Feira de Santana.",
-  },
+  { slug: "acefs-reune-liderancas-varejo", category: "Encontro", date: "12 Jun 2026", title: "ACEFS reúne lideranças para debater o futuro do varejo regional", excerpt: "Mais de 200 empresários no auditório discutiram crédito, logística urbana e digitalização do comércio." },
+  { slug: "cursos-gratuitos-julho", category: "Formação", date: "04 Jun 2026", title: "Nova rodada de cursos gratuitos para associados em julho", excerpt: "Inscrições abertas para capacitações em gestão financeira e marketing digital." },
+  { slug: "sebrae-acefs-consultoria", category: "Parceria", date: "28 Mai 2026", title: "Sebrae e ACEFS ampliam consultoria gratuita às MPEs", excerpt: "Atendimento semanal começa em junho na sede da associação." },
+  { slug: "assembleia-2026", category: "Institucional", date: "15 Mai 2026", title: "Assembleia geral aprova diretrizes para o próximo biênio", excerpt: "Associados definem prioridades em representação, formação e serviços digitais." },
+  { slug: "feira-negocios", category: "Evento", date: "02 Mai 2026", title: "Feira de Negócios ACEFS reúne 80 expositores no centro", excerpt: "Rodadas de compras conectaram indústrias locais a compradores de todo o Nordeste." },
+  { slug: "premio-mercado", category: "Institucional", date: "22 Abr 2026", title: "Prêmio Mérito do Comércio homenageia 12 empresas centenárias", excerpt: "Cerimônia celebrou negócios que ajudaram a construir Feira de Santana." },
+  { slug: "negocios-conexoes-estreia", category: "Evento", date: "10 Abr 2026", title: "Programa Negócios & Conexões estreia na Sociedade News FM 102.1", excerpt: "Aos domingos, das 13h às 15h, o programa debate o ambiente de negócios da região." },
+  { slug: "mle-economia-energia", category: "Parceria", date: "28 Mar 2026", title: "Associados economizam com migração para o mercado livre de energia", excerpt: "Grupo de empresas negocia contratos coletivos com apoio técnico da ACEFS." },
+  { slug: "acefs-mulher-encontro", category: "Encontro", date: "14 Mar 2026", title: "ACEFS Mulher promove encontro de empreendedoras", excerpt: "Painéis sobre liderança, crédito e sucessão reuniram empresárias da cidade." },
+  { slug: "certificado-digital-recorde", category: "Institucional", date: "01 Mar 2026", title: "Posto de certificação digital bate recorde de emissões", excerpt: "Demanda por e-CNPJ cresceu com a digitalização das obrigações fiscais." },
+  { slug: "reforma-tributaria-seminario", category: "Formação", date: "18 Fev 2026", title: "Seminário esclarece impactos da reforma tributária no comércio", excerpt: "Especialistas detalharam a transição para o novo modelo de tributos." },
+  { slug: "caravana-cacb", category: "Parceria", date: "05 Fev 2026", title: "Caravana da CACB visita Feira de Santana", excerpt: "Confederação apresentou programas de crédito e associativismo às lideranças locais." },
+  { slug: "balanco-natal-2025", category: "Institucional", date: "20 Jan 2026", title: "Comércio feirense registra alta nas vendas de fim de ano", excerpt: "Levantamento da ACEFS aponta crescimento em vestuário, calçados e eletrônicos." },
+  { slug: "empreender-nucleos", category: "Formação", date: "08 Jan 2026", title: "Programa Empreender abre novos núcleos setoriais", excerpt: "Segmentos de alimentação, moda e serviços iniciam ciclos de reuniões." },
+  { slug: "acefs-prefeitura-mobilidade", category: "Institucional", date: "12 Dez 2025", title: "ACEFS discute mobilidade do centro com a Prefeitura", excerpt: "Pauta incluiu estacionamento rotativo, carga e descarga e acessibilidade." },
+  { slug: "expofeira-parceria", category: "Evento", date: "28 Nov 2025", title: "ACEFS apoia a EXPOFEIRA com espaço para associados", excerpt: "Estandes coletivos ampliaram a visibilidade de pequenas indústrias." },
+  { slug: "mediacao-camara-balanco", category: "Institucional", date: "10 Nov 2025", title: "Câmara de Mediação resolve 9 em cada 10 casos sem Judiciário", excerpt: "Balanço anual mostra prazo médio de 45 dias para acordo." },
+  { slug: "cdl-sicomercio-acordo", category: "Parceria", date: "22 Out 2025", title: "ACEFS, CDL e Sicomércio firmam agenda conjunta", excerpt: "Entidades unem esforços em representação e capacitação empresarial." },
+  { slug: "posse-diretoria", category: "Institucional", date: "05 Out 2025", title: "Nova diretoria toma posse em solenidade na sede", excerpt: "Gestão apresenta plano de trabalho com foco em serviços e formação." },
+  { slug: "rodada-credito-bancos", category: "Encontro", date: "18 Set 2025", title: "Rodada de crédito conecta associados a cinco instituições financeiras", excerpt: "Empresas negociaram capital de giro com condições diferenciadas." },
 ] as const;
+
+export const NEWS_CATEGORIES = ["Todas", "Institucional", "Encontro", "Formação", "Parceria", "Evento"] as const;
 
 export const PARTNERS = [
   "CACB",

@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { NEWS, PARTNERS, SERVICES, STATS } from "@/lib/site-data";
+import { NEWS, PARTNERS, SERVICES, LINKS } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
+import sedeImg from "@/assets/acefs-sede.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,7 +25,6 @@ function Home() {
     <>
       <Hero />
       <Partners />
-      <StatsSection />
       <ServicesTeaser />
       <AboutTeaser />
       <RadioSection />
@@ -57,13 +57,15 @@ function Hero() {
             Representação institucional, serviços empresariais e formação contínua para quem constrói o comércio, a indústria e os serviços da nossa região.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link
-              to="/contato"
-              className="inline-flex items-center gap-2 bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
+            <a
+              href={LINKS.linktree}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-bright text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200"
             >
               Associe-se
               <Arrow />
-            </Link>
+            </a>
             <Link
               to="/servicos"
               className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3.5 rounded-md font-medium text-[14px] hover:bg-white/10 transition-colors"
@@ -112,24 +114,6 @@ function Partners() {
   );
 }
 
-export function StatsSection() {
-  return (
-    <section className="bg-cream border-b border-line">
-      <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
-        {STATS.map((s) => (
-          <div key={s.label} className="text-center md:text-left">
-            <div className="font-display font-semibold text-[44px] md:text-[52px] leading-none text-navy tracking-tight">
-              {s.n}
-              <span className="text-gold">{s.suffix}</span>
-            </div>
-            <div className="mt-2 text-[13px] text-ink-soft">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ServicesTeaser() {
   return (
     <section className="bg-white py-20 md:py-24">
@@ -172,14 +156,14 @@ function AboutTeaser() {
         <div className="md:col-span-6">
           <div className="text-[11px] tracking-[0.22em] uppercase text-gold font-semibold mb-3">Sobre a ACEFS</div>
           <h2 className="font-display font-semibold text-[clamp(28px,3.6vw,42px)] leading-tight tracking-tight text-navy">
-            Uma instituição construída por quem empreende em Feira de Santana.
+            Nossa história
           </h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-soft">
             <p>
               Fundada em 1945, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
             </p>
-            <p>
-              Hoje, reunimos mais de 2.400 empresas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
+            <p className="text-ink text-[16px] font-medium">
+              Hoje, reunimos uma gama de empresas associadas, atuando em prol do desenvolvimento econômico, da defesa dos interesses do empresariado e da geração de oportunidades para toda a região.
             </p>
           </div>
           <div className="mt-8">
@@ -192,20 +176,14 @@ function AboutTeaser() {
           </div>
         </div>
         <div className="md:col-span-6">
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { t: "Representação", d: "Voz do empresariado junto ao poder público municipal e estadual." },
-              { t: "Serviços", d: "Certificado digital, SCPC, cursos e mais de 40 benefícios." },
-              { t: "Formação", d: "Capacitação contínua em parceria com o Sebrae Bahia." },
-              { t: "Networking", d: "Rede consolidada com mais de 2.400 empresas associadas." },
-            ].map((p) => (
-              <div key={p.t} className="bg-white border border-line rounded-lg p-5">
-                <div className="w-8 h-1 bg-gold mb-4" />
-                <div className="font-display font-semibold text-navy text-[17px] mb-1.5">{p.t}</div>
-                <div className="text-[13px] text-ink-soft leading-relaxed">{p.d}</div>
-              </div>
-            ))}
-          </div>
+          <img
+            src={sedeImg}
+            alt="Sede da ACEFS em Feira de Santana"
+            loading="lazy"
+            width={1280}
+            height={960}
+            className="rounded-xl shadow-lg w-full object-cover border-4 border-mint"
+          />
         </div>
       </div>
     </section>
@@ -302,12 +280,14 @@ function CTABand() {
             Associe-se e tenha acesso a benefícios exclusivos, formação e a força coletiva da maior rede empresarial da região.
           </p>
         </div>
-        <Link
-          to="/contato"
-          className="inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors shrink-0"
+        <a
+          href={LINKS.linktree}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-green-bright text-white px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200 shrink-0"
         >
           Quero me associar <Arrow />
-        </Link>
+        </a>
       </div>
     </section>
   );

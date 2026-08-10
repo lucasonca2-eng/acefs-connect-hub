@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { NAV } from "@/lib/site-data";
+import { NAV, LINKS } from "@/lib/site-data";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -71,12 +71,14 @@ export function SiteHeader() {
             </ul>
           </nav>
           <div className="hidden lg:block">
-            <Link
-              to="/contato"
-              className="inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-navy-deep transition-colors"
+            <a
+              href={LINKS.linktree}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-bright text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-green transition-colors duration-200"
             >
               Associe-se
-            </Link>
+            </a>
           </div>
           <button
             aria-label="Menu"
@@ -123,13 +125,15 @@ export function SiteHeader() {
                 </li>
               ))}
               <li className="pt-2">
-                <Link
-                  to="/contato"
+                <a
+                  href={LINKS.linktree}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="block text-center bg-navy text-white py-2.5 rounded-md text-[14px] font-semibold"
+                  className="block text-center bg-green-bright text-white py-2.5 rounded-md text-[14px] font-semibold"
                 >
                   Associe-se
-                </Link>
+                </a>
               </li>
             </ul>
         </div>

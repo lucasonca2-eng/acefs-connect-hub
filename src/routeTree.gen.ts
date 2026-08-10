@@ -13,6 +13,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as NegociosEConexoesRouteImport } from './routes/negocios-e-conexoes'
 import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as EmpregosRouteImport } from './routes/empregos'
@@ -40,6 +41,11 @@ const ParceirosRoute = ParceirosRouteImport.update({
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NegociosEConexoesRoute = NegociosEConexoesRouteImport.update({
+  id: '/negocios-e-conexoes',
+  path: '/negocios-e-conexoes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
   '/feira-de-santana': typeof FeiraDeSantanaRoute
+  '/negocios-e-conexoes': typeof NegociosEConexoesRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
   '/feira-de-santana': typeof FeiraDeSantanaRoute
+  '/negocios-e-conexoes': typeof NegociosEConexoesRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/empregos': typeof EmpregosRoute
   '/eventos': typeof EventosRoute
   '/feira-de-santana': typeof FeiraDeSantanaRoute
+  '/negocios-e-conexoes': typeof NegociosEConexoesRoute
   '/noticias': typeof NoticiasRoute
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/empregos'
     | '/eventos'
     | '/feira-de-santana'
+    | '/negocios-e-conexoes'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/empregos'
     | '/eventos'
     | '/feira-de-santana'
+    | '/negocios-e-conexoes'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/empregos'
     | '/eventos'
     | '/feira-de-santana'
+    | '/negocios-e-conexoes'
     | '/noticias'
     | '/parceiros'
     | '/quem-somos'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   EmpregosRoute: typeof EmpregosRoute
   EventosRoute: typeof EventosRoute
   FeiraDeSantanaRoute: typeof FeiraDeSantanaRoute
+  NegociosEConexoesRoute: typeof NegociosEConexoesRoute
   NoticiasRoute: typeof NoticiasRoute
   ParceirosRoute: typeof ParceirosRoute
   QuemSomosRoute: typeof QuemSomosRoute
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/noticias'
       preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/negocios-e-conexoes': {
+      id: '/negocios-e-conexoes'
+      path: '/negocios-e-conexoes'
+      fullPath: '/negocios-e-conexoes'
+      preLoaderRoute: typeof NegociosEConexoesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feira-de-santana': {
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmpregosRoute: EmpregosRoute,
   EventosRoute: EventosRoute,
   FeiraDeSantanaRoute: FeiraDeSantanaRoute,
+  NegociosEConexoesRoute: NegociosEConexoesRoute,
   NoticiasRoute: NoticiasRoute,
   ParceirosRoute: ParceirosRoute,
   QuemSomosRoute: QuemSomosRoute,

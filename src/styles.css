@@ -61,6 +61,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-green: var(--green);
   --color-green-deep: var(--green-deep);
+  --color-green-bright: var(--green-bright);
+  --color-mint: var(--mint);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-cream: var(--cream);
@@ -77,16 +79,18 @@
 
 :root {
   --radius: 0.625rem;
-  --green: #1B4332;
-  --green-deep: #10281D;
-  --navy: #1B4332;
-  --navy-deep: #10281D;
-  --navy-soft: #2D6A4F;
+  --green: #14532D;
+  --green-deep: #0E3A20;
+  --green-bright: #22C55E;
+  --mint: #DCFCE7;
+  --navy: #14532D;
+  --navy-deep: #0E3A20;
+  --navy-soft: #22C55E;
   --gold: #C9A24B;
   --gold-soft: #E2C97E;
-  --cream: #F7F9F8;
+  --cream: #F9FAFB;
   --surface: #FFFFFF;
-  --ink: #1F2937;
+  --ink: #111827;
   --ink-soft: #6B7280;
   --line: #E5E7EB;
   --background: oklch(1 0 0);

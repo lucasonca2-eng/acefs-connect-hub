@@ -47,8 +47,8 @@ function Diretoria() {
             ))}
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {group.people.map((p) => (
-              <article key={p.name} className="bg-cream border border-line rounded-lg p-6">
+            {group.people.map((p, i) => (
+              <article key={`${p.name}-${i}`} className="bg-cream border border-line rounded-lg p-6">
                 <div className="w-10 h-1 bg-gold mb-4" />
                 <h3 className="font-display font-semibold text-[18px] text-navy leading-snug">{p.name}</h3>
                 {p.role && <p className="mt-2 text-[13.5px] text-ink font-medium">{p.role}</p>}
