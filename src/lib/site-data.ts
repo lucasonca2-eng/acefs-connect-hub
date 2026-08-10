@@ -78,7 +78,6 @@ export const DIRECTORY: { group: string; people: { name: string; role?: string; 
   {
     group: "Diretoria Executiva",
     people: [
-      { name: "Genildo Melo", role: "Presidente" },
       { name: "Adauto Franco", role: "Vice-Diretor" },
       { name: "Tatiana Novaes", role: "Diretora Executiva" },
       { name: "Modezil Ferreira de Cerqueira", role: "Conselho / Diretoria" },

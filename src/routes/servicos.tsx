@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SERVICES } from "@/lib/site-data";
+import { SERVICES, LINKS } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { PageHeader } from "./quem-somos";
 
@@ -32,12 +32,17 @@ function Servicos() {
               </div>
               <h3 className="font-display font-semibold text-[21px] leading-snug text-navy mb-3">{s.title}</h3>
               <p className="text-[14.5px] text-ink-soft leading-relaxed mb-5 flex-1">{s.desc}</p>
-              <Link to="/contato" className="inline-flex items-center gap-2 text-navy font-semibold text-[14px] hover:text-gold">
-                Solicitar informações
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-green-bright text-white font-semibold text-[14px] py-3 px-6 rounded-md hover:bg-green transition-colors duration-200 self-start"
+              >
+                SAIBA MAIS
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </Link>
+              </a>
             </article>
           ))}
         </div>
@@ -50,9 +55,14 @@ function Servicos() {
             </h2>
             <p className="mt-2 text-[15px] text-ink-soft">Nossa equipe atende associados e não associados em horário comercial.</p>
           </div>
-          <Link to="/contato" className="bg-navy text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors shrink-0">
-            Fale com a equipe
-          </Link>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-navy text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-green-bright transition-colors duration-200 shrink-0"
+          >
+            Fale com a equipe no WhatsApp
+          </a>
         </div>
       </section>
     </>
