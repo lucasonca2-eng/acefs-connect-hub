@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { NEWS, PARTNERS, SERVICES, STATS } from "@/lib/site-data";
+import { NEWS, PARTNERS, SERVICES, LINKS } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
+import sedeImg from "@/assets/acefs-sede.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,7 +25,6 @@ function Home() {
     <>
       <Hero />
       <Partners />
-      <StatsSection />
       <ServicesTeaser />
       <AboutTeaser />
       <RadioSection />
@@ -57,13 +57,15 @@ function Hero() {
             Representação institucional, serviços empresariais e formação contínua para quem constrói o comércio, a indústria e os serviços da nossa região.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link
-              to="/contato"
-              className="inline-flex items-center gap-2 bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
+            <a
+              href={LINKS.linktree}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-bright text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200"
             >
               Associe-se
               <Arrow />
-            </Link>
+            </a>
             <Link
               to="/servicos"
               className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3.5 rounded-md font-medium text-[14px] hover:bg-white/10 transition-colors"
