@@ -280,12 +280,14 @@ function CTABand() {
             Associe-se e tenha acesso a benefícios exclusivos, formação e a força coletiva da maior rede empresarial da região.
           </p>
         </div>
-        <Link
-          to="/contato"
-          className="inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors shrink-0"
+        <a
+          href={LINKS.linktree}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-green-bright text-white px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200 shrink-0"
         >
           Quero me associar <Arrow />
-        </Link>
+        </a>
       </div>
     </section>
   );
