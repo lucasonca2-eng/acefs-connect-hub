@@ -98,3 +98,152 @@ export const STATS = [
   { n: "40", suffix: "+", label: "serviços e benefícios" },
   { n: "120", suffix: "", label: "eventos em 2025" },
 ] as const;
+
+export const EVENTS = [
+  {
+    slug: "cafe-empresarial-julho",
+    date: "18 Jul",
+    title: "Café Empresarial: Crédito e Financiamento para MPEs",
+    excerpt: "Encontro com gerentes de bancos regionais para esclarecer linhas de crédito, garantias e prazos para micro e pequenas empresas.",
+    time: "08h às 10h",
+    place: "Auditório da ACEFS",
+  },
+  {
+    slug: "seminario-gestao-fiscal",
+    date: "25 Jul",
+    title: "Seminário de Gestão Fiscal e Tributária",
+    excerpt: "Especialistas debatem mudanças tributárias, planejamento fiscal e impactos da reforma para o comércio regional.",
+    time: "14h às 18h",
+    place: "Auditório da ACEFS",
+  },
+  {
+    slug: "rodada-negocios-agosto",
+    date: "08 Ago",
+    title: "Rodada de Negócios ACEFS × Sicomércio",
+    excerpt: "Compradores de grandes redes conhecem fornecedores locais em encontros de negócios cronometrados.",
+    time: "09h às 13h",
+    place: "Sede da ACEFS",
+  },
+  {
+    slug: "feira-mulher-empreendedora",
+    date: "22 Ago",
+    title: "Feira da Mulher Empreendedora",
+    excerpt: "Expositores e palestras destacam a participação feminina na economia de Feira de Santana.",
+    time: "10h às 17h",
+    place: "Centro de Convenções",
+  },
+] as const;
+
+export const JOBS = [
+  {
+    slug: "vendedor-interno",
+    area: "Comércio",
+    date: "10 Jun 2026",
+    title: "Vendedor interno",
+    company: "Comercial Ferreira Ltda.",
+    type: "CLT",
+    city: "Feira de Santana",
+  },
+  {
+    slug: "auxiliar-contabil",
+    area: "Administrativo",
+    date: "08 Jun 2026",
+    title: "Auxiliar contábil",
+    company: "Escritório Saraiva Contabilidade",
+    type: "CLT",
+    city: "Feira de Santana",
+  },
+  {
+    slug: "logista-estoquista",
+    area: "Logística",
+    date: "05 Jun 2026",
+    title: "Estoquista / Conferente",
+    company: "Distribuidora Norte BA",
+    type: "CLT",
+    city: "Feira de Santana",
+  },
+  {
+    slug: "marketing-digital",
+    area: "Marketing",
+    date: "02 Jun 2026",
+    title: "Analista de marketing digital",
+    company: "Agência Ideia Viva",
+    type: "PJ",
+    city: "Feira de Santana",
+  },
+] as const;
+
+export const DIRECTORY = [
+  {
+    group: "Diretoria Executiva",
+    people: [
+      { name: "Genildo Melo", role: "Presidente", company: "Sicomércio BA" },
+      { name: "Danillo Freitas", role: "Vice-Presidente", company: "Grupo DF Comunicação" },
+      { name: "Carla Ribeiro", role: "Diretora Administrativa", company: "Ribeiro Assessoria" },
+      { name: "Marcos Antônio", role: "Diretor Financeiro", company: "Contabilidade Antônio" },
+      { name: "Patrícia Sales", role: "Diretora de Marketing", company: "Sales Marketing" },
+      { name: "Ronaldo Carneiro", role: "Diretor de Associados", company: "Carneiro & Cia" },
+    ],
+  },
+  {
+    group: "Conselho Diretor",
+    people: [
+      { name: "José Bonfim", role: "Conselheiro", company: "Bonfim Distribuidora" },
+      { name: "Ana Lúcia Tavares", role: "Conselheira", company: "Tavares Advogados" },
+      { name: "Edson Mascarenhas", role: "Conselheiro", company: "Mascarenhas & Filhos" },
+      { name: "Lúcia Helena", role: "Conselheira", company: "Helena Cosméticos" },
+      { name: "Paulo Afonso", role: "Conselheiro", company: "Afonso Construção" },
+    ],
+  },
+  {
+    group: "Conselho Fiscal",
+    people: [
+      { name: "Roberto Lima", role: "Presidente", company: "Lima Contabilidade" },
+      { name: "Sandra Mota", role: "Membro", company: "Mota Eventos" },
+      { name: "Fábio Cardoso", role: "Membro", company: "Cardoso Representações" },
+    ],
+  },
+  {
+    group: "Conselho Superior",
+    people: [
+      { name: "Dr. Heber Lopes", role: "Conselheiro", company: "Lopes Advocacia" },
+      { name: "Economista Regina Paz", role: "Conselheira", company: "Paz Consultoria" },
+      { name: "Contador Adilson Reis", role: "Conselheiro", company: "Reis Contábil" },
+    ],
+  },
+] as const;
+
+export const ARTICLES = [
+  {
+    slug: "reforma-tributaria-mpe",
+    category: "Tributário",
+    date: "10 Jun 2026",
+    title: "O que a reforma tributária muda para a micro e pequena empresa",
+    excerpt: "Entenda os principais pontos da reforma e como o Simples Nacional, o CBS e o IBS afetam o dia a dia do empresário regional.",
+    author: "Conselho Fiscal ACEFS",
+  },
+  {
+    slug: "credito-garantias",
+    category: "Crédito",
+    date: "30 Mai 2026",
+    title: "Garantias de crédito: como melhorar o seu score e acessar melhores linhas",
+    excerpt: "Dicas práticas para regularizar pendências, manter o nome limpo e negociar condições mais vantajosas com os bancos.",
+    author: "Diretoria Administrativa ACEFS",
+  },
+  {
+    slug: "digitalizacao-varejo",
+    category: "Gestão",
+    date: "18 Mai 2026",
+    title: "Digitalização do varejo: por onde começar sem perder vendas",
+    excerpt: "Passos simples para integrar e-commerce, redes sociais e gestão de estoque sem interromper a operação da loja física.",
+    author: "Sebrae × ACEFS",
+  },
+  {
+    slug: "direito-empresarial-sociedades",
+    category: "Jurídico",
+    date: "02 Mai 2026",
+    title: "Sociedades em conflito: como evitar a dissolução indesejada",
+    excerpt: "Acordos de sócios, capitalização e governança interna como instrumentos de prevenção de litígios empresariais.",
+    author: "Dr. Heber Lopes — Conselho Superior ACEFS",
+  },
+] as const;
