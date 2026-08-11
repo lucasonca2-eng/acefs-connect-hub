@@ -1,128 +1,87 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./quem-somos";
-import feira1 from "@/assets/feira-1.jpg";
-import feira2 from "@/assets/feira-2.jpg";
-import feira3 from "@/assets/feira-3.jpg";
-import sedeImg from "@/assets/acefs-sede.jpg";
-
-const GALLERY = [
-  { src: feira1, alt: "Vista aérea de Feira de Santana" },
-  { src: feira2, alt: "Centro histórico e igreja de Feira de Santana" },
-  { src: feira3, alt: "Monumento em avenida de Feira de Santana" },
-  { src: sedeImg, alt: "Sede da ACEFS em Feira de Santana" },
-];
 
 export const Route = createFileRoute("/feira-de-santana")({
   head: () => ({
     meta: [
-      { title: "Feira de Santana — Perfil econômico | ACEFS" },
-      { name: "description", content: "História, economia, educação, saúde e infraestrutura de Feira de Santana, o maior centro urbano do interior do Nordeste." },
-      { property: "og:title", content: "Feira de Santana — Perfil econômico | ACEFS" },
-      { property: "og:description", content: "Conheça a cidade: economia, transporte, educação, saúde e festividades." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Feira de Santana — ACEFS" },
+      {
+        name: "description",
+        content:
+          "Conheça Feira de Santana, o Portal do Sertão baiano: sua história, sua vocação comercial e o papel da ACEFS no desenvolvimento da cidade.",
+      },
+      { property: "og:title", content: "Feira de Santana — ACEFS" },
+      {
+        property: "og:description",
+        content: "Conheça Feira de Santana, o Portal do Sertão baiano, e a força do seu comércio.",
+      },
     ],
   }),
-  component: Cidade,
+  component: FeiraDeSantana,
 });
 
-const BLOCKS = [
-  {
-    t: "Origem e localização",
-    p: [
-      "Feira de Santana originou-se no início do século XVIII, na fazenda Santana dos Olhos D'Água, cujos donos, o português Domingos Barbosa de Araújo e Ana Brandoa, construíram uma capela em torno da qual se estruturou uma povoação e, depois, uma feira que se tornou importante centro de permuta comercial.",
-      "O município perfaz 1.339 km² e situa-se na planície entre o Recôncavo e os tabuleiros semiáridos do nordeste baiano, a 234 metros de altitude, tendo como principais rios o Jacuípe e o Paraguaçu.",
-      "Localizada a 108 km de Salvador, é um dos principais entroncamentos rodoviários do país — o maior do Norte-Nordeste — cortada pelas BRs 101, 116 e 324 e pelas BAs 052, 502, 503 e 504.",
-    ],
-  },
-  {
-    t: "Diagnóstico socioeconômico",
-    p: [
-      "É o segundo maior centro urbano da Bahia e o maior do interior do Norte-Nordeste, liderando uma macrorregião de 96 municípios com cerca de 2,7 milhões de habitantes.",
-      "O comércio é o ponto forte da economia, seguido pela indústria, com os polos CIS Tomba e CIS BR-324. A produção industrial é diversificada: alimentos, material de transporte, elétricos, mecânica, química, vestuário, têxtil, móveis, autopeças, bebidas, papel e aeronáutico.",
-      "Na pecuária, o município se destaca nacionalmente na criação de asininos, equinos e coelhos, além da produção de frangos, ovos e leite.",
-    ],
-  },
-  {
-    t: "Eventos e festividades",
-    p: [
-      "O calendário anual reúne a Micareta, a EXPOFEIRA (Exposição Agropecuária), o São João de São José, o São Pedro de Humildes, a Caminhada pela Paz, a Feira do Caminhoneiro e o Natal Encantado.",
-    ],
-  },
-  {
-    t: "Educação e cultura",
-    p: [
-      "A cidade é polo de ensino superior na Bahia, com a UEFS, o IFBA, um polo da UFRB e nove instituições particulares.",
-      "A rede conta com cerca de 253 escolas de educação infantil, 443 de ensino fundamental e 74 de ensino médio, além do SENAI e do CETEB no ensino profissionalizante.",
-    ],
-  },
-  {
-    t: "Transporte, saúde e segurança",
-    p: [
-      "O município possui aeroporto para aeronaves de pequeno e médio porte, terminal rodoviário e um sistema integrado de transporte com terminais de integração.",
-      "Na saúde, são 318 estabelecimentos, 1.358 leitos e 2.522 profissionais, com 2,83 médicos e 3,32 leitos por mil habitantes.",
-      "A segurança conta com o 1º Batalhão da Polícia Militar, distribuído em seis companhias, a Polícia Civil e programas em parceria com a prefeitura, como Polícia Cidadã e Ronda Escolar.",
-    ],
-  },
+const PHOTOS = [
+  { src: "/images/feira-1.jpg", alt: "Vista aérea do centro histórico de Feira de Santana" },
+  { src: "/images/feira-2.jpg", alt: "Praça central de Feira de Santana com a igreja matriz" },
+  { src: "/images/feira-3.jpg", alt: "Monumento do relógio de São João, símbolo da cidade" },
+  { src: "/images/feira-4.webp", alt: "Feira de Santana, tradição do comércio popular baiano" },
 ];
 
-const FACTS = [
-  { n: "627 mil", l: "habitantes (IBGE)" },
-  { n: "R$ 19,1 bi", l: "maior PIB do interior do NE" },
-  { n: "1.339 km²", l: "de área territorial" },
-  { n: "108 km", l: "de distância de Salvador" },
-];
-
-function Cidade() {
+function FeiraDeSantana() {
   return (
     <>
       <PageHeader
-        eyebrow="A cidade"
-        title="Conhecendo Feira de Santana"
-        subtitle="O maior centro urbano do interior do Norte-Nordeste e a praça comercial que deu origem à ACEFS."
+        eyebrow="Institucional"
+        title="Feira de Santana"
+        subtitle="O Portal do Sertão — maior polo comercial do interior da Bahia e casa da ACEFS há mais de 80 anos."
       />
-      <section className="bg-cream py-12 border-b border-line">
-        <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {FACTS.map((f) => (
-            <div key={f.l} className="bg-white border border-line rounded-lg p-6">
-              <div className="font-display font-semibold text-[26px] text-navy tracking-tight">{f.n}</div>
-              <div className="mt-1 text-[13px] text-ink-soft leading-relaxed">{f.l}</div>
-            </div>
-          ))}
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1080px] px-6 md:px-10">
+          <div className="max-w-[720px] space-y-5 text-[16px] leading-relaxed text-ink">
+            <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy leading-tight">
+              A cidade que move o interior da Bahia
+            </h2>
+            <p>
+              Conhecida como o "Portal do Sertão", Feira de Santana ocupa uma posição estratégica no
+              cruzamento das principais rodovias que ligam Salvador ao interior do estado — uma
+              vocação comercial que remonta às antigas feiras de gado do século XIX e que hoje faz da
+              cidade o maior polo econômico, comercial e industrial do interior baiano.
+            </p>
+            <p>
+              É nesse cenário que a ACEFS nasceu e se desenvolveu: representando um empresariado
+              diverso, que vai do pequeno comerciante do centro histórico às indústrias que hoje geram
+              empregos para toda a região.
+            </p>
+          </div>
         </div>
       </section>
-      <section className="bg-white py-14 md:py-20">
-        <div className="mx-auto max-w-[860px] px-6 md:px-10 space-y-12">
-          {BLOCKS.map((b) => (
-            <div key={b.t}>
-              <h2 className="font-display font-semibold text-[26px] md:text-[30px] text-navy leading-tight mb-4">{b.t}</h2>
-              <div className="space-y-4 text-[16px] leading-[1.75] text-ink">
-                {b.p.map((par) => (
-                  <p key={par.slice(0, 24)}>{par}</p>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="bg-cream py-14 md:py-20 border-t border-line">
+
+      <section className="bg-cream py-4 md:py-6">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10">
-          <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy mb-8 text-center">
-            Conheça Feira de Santana
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {GALLERY.map((g) => (
-              <img
-                key={g.alt}
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                width={1200}
-                height={800}
-                className="rounded-lg shadow-md w-full h-full object-cover hover:scale-[1.03] transition-transform duration-300"
-              />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+            {PHOTOS.map((photo) => (
+              <div key={photo.src} className="rounded-lg overflow-hidden border border-line aspect-[3/4]">
+                <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+              </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-10 text-center">
+          <h2 className="font-display font-semibold text-[24px] md:text-[30px] text-navy leading-tight">
+            Faça parte do comércio que constrói Feira de Santana.
+          </h2>
+          <a
+            href="https://linktr.ee/acefs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
+          >
+            Associe-se
+          </a>
         </div>
       </section>
     </>

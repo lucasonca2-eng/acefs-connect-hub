@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SERVICES, LINKS } from "@/lib/site-data";
+import { SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { PageHeader } from "./quem-somos";
 
@@ -24,21 +24,21 @@ function Servicos() {
         subtitle="Da consulta de crédito à formação de equipes, oferecemos soluções pensadas para o dia a dia do empresariado."
       />
       <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-2 gap-6">
           {SERVICES.map((s) => (
-            <article key={s.slug} className="bg-cream border border-line rounded-lg p-7 hover:border-navy/30 hover:shadow-md transition-all flex flex-col">
-              <div className="w-12 h-12 rounded-md bg-navy text-white flex items-center justify-center mb-5">
+            <article key={s.slug} className="bg-cream border border-line rounded-lg p-8 hover:border-navy/30 hover:shadow-md transition-all">
+              <div className="w-12 h-12 rounded-md bg-navy text-white flex items-center justify-center mb-6">
                 <ServiceIcon name={s.icon} />
               </div>
-              <h3 className="font-display font-semibold text-[21px] leading-snug text-navy mb-3">{s.title}</h3>
-              <p className="text-[14.5px] text-ink-soft leading-relaxed mb-5 flex-1">{s.desc}</p>
+              <h3 className="font-display font-semibold text-[24px] text-navy mb-3">{s.title}</h3>
+              <p className="text-[15px] text-ink-soft leading-relaxed mb-5">{s.desc}</p>
               <a
-                href={LINKS.whatsapp}
+                href="https://wa.me/557532117446?text=Oii%2C%20vim%20do%20site%20da%20ACEFS"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-green-bright text-white font-semibold text-[14px] py-3 px-6 rounded-md hover:bg-green transition-colors duration-200 self-start"
+                className="inline-flex items-center gap-2 text-navy font-semibold text-[14px] hover:text-gold"
               >
-                SAIBA MAIS
+                Saiba mais
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -56,12 +56,12 @@ function Servicos() {
             <p className="mt-2 text-[15px] text-ink-soft">Nossa equipe atende associados e não associados em horário comercial.</p>
           </div>
           <a
-            href={LINKS.whatsapp}
+            href="https://wa.me/557532117446?text=Oii%2C%20vim%20do%20site%20da%20ACEFS"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-navy text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-green-bright transition-colors duration-200 shrink-0"
+            className="bg-navy text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors shrink-0"
           >
-            Fale com a equipe no WhatsApp
+            Fale conosco
           </a>
         </div>
       </section>

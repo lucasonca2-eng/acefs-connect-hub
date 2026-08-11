@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { LINKS } from "@/lib/site-data";
 
 export function SiteFooter() {
   return (
@@ -22,18 +21,15 @@ export function SiteFooter() {
 
         <FooterCol title="Institucional" links={[
           { label: "Quem Somos", to: "/quem-somos" },
-          { label: "Diretoria", to: "/diretoria" },
-          { label: "Feira de Santana", to: "/feira-de-santana" },
-          { label: "Parceiros", to: "/parceiros" },
+          { label: "Notícias", to: "/noticias" },
+          { label: "Contato", to: "/contato" },
         ]} />
 
-        <FooterCol title="Conteúdo" links={[
-          { label: "Serviços", to: "/servicos" },
-          { label: "Notícias", to: "/noticias" },
-          { label: "Artigos", to: "/artigos" },
-          { label: "Eventos", to: "/eventos" },
-          { label: "Negócios & Conexões", to: "/negocios-e-conexoes" },
-          { label: "Empregos", to: "/empregos" },
+        <FooterCol title="Serviços" links={[
+          { label: "SCPC · Boa Vista", to: "/servicos" },
+          { label: "Certificado Digital", to: "/servicos" },
+          { label: "Cursos & Capacitação", to: "/servicos" },
+          { label: "Networking & Eventos", to: "/servicos" },
         ]} />
 
         <div className="md:col-span-3">
@@ -42,27 +38,24 @@ export function SiteFooter() {
             <li>Largo São Francisco, 43</li>
             <li>Kalilândia · Feira de Santana — BA</li>
             <li><a href="tel:+557532117446" className="hover:text-white">(75) 3211-7446</a></li>
-            <li><a href="mailto:acefs@acefs.com.br" className="hover:text-white">acefs@acefs.com.br</a></li>
+            <li><a href="mailto:contato@acefs.com.br" className="hover:text-white">contato@acefs.com.br</a></li>
           </ul>
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-5 flex gap-3">
             <a
-              href={LINKS.instagram}
+              href="https://www.instagram.com/acefsassociacao/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram da ACEFS"
-              className="bg-green text-white p-3 rounded-full hover:bg-green-bright transition-colors duration-200"
+              aria-label="Instagram"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold hover:text-navy-deep transition-colors flex items-center justify-center"
             >
-              <InstagramIcon />
-            </a>
-            <a
-              href={LINKS.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-md bg-green-bright px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-green transition-colors duration-200"
-            >
-              Fale conosco
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="12" cy="12" r="4.4" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" />
+              </svg>
             </a>
           </div>
+
         </div>
       </div>
       <div className="border-t border-white/10">
@@ -87,15 +80,5 @@ function FooterCol({ title, links }: { title: string; links: { label: string; to
         ))}
       </ul>
     </div>
-  );
-}
-
-function InstagramIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
   );
 }

@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { NEWS, PARTNERS, SERVICES, LINKS } from "@/lib/site-data";
+import { NEWS, SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
-import sedeImg from "@/assets/acefs-sede.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,10 +57,10 @@ function Hero() {
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a
-              href={LINKS.linktree}
+              href="https://linktr.ee/acefs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-green-bright text-white px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200"
+              className="inline-flex items-center gap-2 bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
             >
               Associe-se
               <Arrow />
@@ -98,15 +97,8 @@ function Partners() {
           <div className="text-[11px] tracking-[0.22em] uppercase text-ink-soft font-semibold shrink-0">
             Filiações e parcerias
           </div>
-          <div className="flex-1 grid grid-cols-3 md:grid-cols-6 gap-6 items-center">
-            {PARTNERS.map((p) => (
-              <div
-                key={p}
-                className="text-center font-display text-[15px] text-ink-soft/80 tracking-tight border border-line rounded-md py-3 px-2 hover:text-navy hover:border-navy/30 transition-colors"
-              >
-                {p}
-              </div>
-            ))}
+          <div className="flex-1">
+            <img src="/images/parceiros.png" alt="Principais parceiros da ACEFS" className="max-h-[110px] w-auto mx-auto md:mx-0" />
           </div>
         </div>
       </div>
@@ -130,7 +122,7 @@ function ServicesTeaser() {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SERVICES.slice(0, 8).map((s) => (
+          {SERVICES.map((s) => (
             <Link
               key={s.slug}
               to="/servicos"
@@ -156,14 +148,14 @@ function AboutTeaser() {
         <div className="md:col-span-6">
           <div className="text-[11px] tracking-[0.22em] uppercase text-gold font-semibold mb-3">Sobre a ACEFS</div>
           <h2 className="font-display font-semibold text-[clamp(28px,3.6vw,42px)] leading-tight tracking-tight text-navy">
-            Nossa história
+            Uma instituição construída por quem empreende em Feira de Santana.
           </h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-soft">
             <p>
               Fundada em 1945, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
             </p>
-            <p className="text-ink text-[16px] font-medium">
-              Hoje, reunimos uma gama de empresas associadas, atuando em prol do desenvolvimento econômico, da defesa dos interesses do empresariado e da geração de oportunidades para toda a região.
+            <p>
+              Hoje, reunimos mais de 2.400 empresas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
             </p>
           </div>
           <div className="mt-8">
@@ -176,14 +168,20 @@ function AboutTeaser() {
           </div>
         </div>
         <div className="md:col-span-6">
-          <img
-            src={sedeImg}
-            alt="Sede da ACEFS em Feira de Santana"
-            loading="lazy"
-            width={1280}
-            height={960}
-            className="rounded-xl shadow-lg w-full object-cover border-4 border-mint"
-          />
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { t: "Representação", d: "Voz do empresariado junto ao poder público municipal e estadual." },
+              { t: "Serviços", d: "Certificado digital, SCPC, cursos e mais de 40 benefícios." },
+              { t: "Formação", d: "Capacitação contínua em parceria com o Sebrae Bahia." },
+              { t: "Networking", d: "Rede consolidada com mais de 2.400 empresas associadas." },
+            ].map((p) => (
+              <div key={p.t} className="bg-white border border-line rounded-lg p-5">
+                <div className="w-8 h-1 bg-gold mb-4" />
+                <div className="font-display font-semibold text-navy text-[17px] mb-1.5">{p.t}</div>
+                <div className="text-[13px] text-ink-soft leading-relaxed">{p.d}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -205,6 +203,31 @@ function RadioSection() {
         </div>
         <div className="md:col-span-7">
           <RadioFeatureCard />
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1240px] px-6 md:px-10 mt-14 grid md:grid-cols-12 gap-10 items-start">
+        <div className="md:col-span-6">
+          <img
+            src="/images/radio-negocios-conexoes.png"
+            alt="Programa Negócios & Conexões — Rádio Sociedade News FM 102.1"
+            className="w-full h-auto rounded-lg border border-line"
+          />
+        </div>
+        <div className="md:col-span-6 text-[14.5px] leading-relaxed text-ink-soft space-y-4">
+          <p>
+            <strong className="text-navy">Negócios & Conexões</strong> é o programa na Rádio Sociedade News FM 102.1 oferecido pela ACEFS, Sicomércio BA Feira de Santana e CDL Feira de Santana, que conecta empresários, empreendedores, lideranças e especialistas em um espaço dedicado ao desenvolvimento econômico e ao fortalecimento do ambiente de negócios de Feira de Santana e região.
+          </p>
+          <p>
+            Todos os domingos, das 13h às 15h, apresentado por Genildo Melo, presidente da ACEFS, e o jornalista e empresário Danillo Freitas, o programa promove entrevistas, análises e debates sobre empreendedorismo, inovação, gestão, associativismo, oportunidades de mercado e os principais temas que impactam o setor produtivo.
+          </p>
+          <button
+            disabled
+            title="Em breve — edições anteriores estarão disponíveis em podcast"
+            className="mt-2 inline-flex items-center gap-2 border border-line text-ink-soft/60 px-5 py-2.5 rounded-md font-semibold text-[13px] cursor-not-allowed"
+          >
+            Veja edições anteriores
+          </button>
         </div>
       </div>
     </section>
@@ -281,10 +304,10 @@ function CTABand() {
           </p>
         </div>
         <a
-          href={LINKS.linktree}
+          href="https://linktr.ee/acefs"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-green-bright text-white px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-white hover:text-green transition-colors duration-200 shrink-0"
+          className="inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors shrink-0"
         >
           Quero me associar <Arrow />
         </a>
