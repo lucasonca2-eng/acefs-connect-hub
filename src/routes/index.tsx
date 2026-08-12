@@ -89,16 +89,38 @@ function Hero() {
   );
 }
 
+const PARTNER_LOGOS = [
+  { name: "Feira", file: "feira" },
+  { name: "Sicomércio", file: "sicomercio" },
+  { name: "CDL Feira de Santana", file: "cdl" },
+  { name: "CIFS", file: "cifs" },
+  { name: "Sebrae", file: "sebrae" },
+  { name: "Convention & Visitors Bureau", file: "convention" },
+  { name: "Instituto Pensar Feira", file: "pensar_feira" },
+  { name: "Sindfeira", file: "sindfeira" },
+] as const;
+
 function Partners() {
+  const track = [...PARTNER_LOGOS, ...PARTNER_LOGOS]; // duplicated for seamless loop
   return (
     <section className="bg-white border-b border-line">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-8">
-        <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+        <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
           <div className="text-[11px] tracking-[0.22em] uppercase text-ink-soft font-semibold shrink-0">
             Filiações e parcerias
           </div>
-          <div className="flex-1">
-            <img src="/images/parceiros.png" alt="Principais parceiros da ACEFS" className="max-h-[110px] w-auto mx-auto md:mx-0" />
+          <div className="flex-1 overflow-hidden marquee-wrap [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="marquee-track items-center">
+              {track.map((p, i) => (
+                <div
+                  key={`${p.file}-${i}`}
+                  className="shrink-0 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  title={p.name}
+                >
+                  <img src={`/images/partners/${p.file}.png`} alt={p.name} className="h-9 md:h-10 w-auto" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +144,7 @@ function ServicesTeaser() {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SERVICES.map((s) => (
+          {SERVICES.slice(0, 4).map((s) => (
             <Link
               key={s.slug}
               to="/servicos"
@@ -155,7 +177,7 @@ function AboutTeaser() {
               Fundada em 1945, a Associação Comercial e Empresarial de Feira de Santana nasceu da união de comerciantes que entendiam a força da representação coletiva. Desde então, atuamos como voz do empresariado local junto ao poder público e como parceira técnica das empresas associadas.
             </p>
             <p>
-              Hoje, reunimos mais de 2.400 empresas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
+              Hoje, reunimos uma gama de empresas associadas de diferentes portes e setores, oferecendo serviços, formação e articulação em benefício do desenvolvimento econômico regional.
             </p>
           </div>
           <div className="mt-8">
@@ -173,7 +195,7 @@ function AboutTeaser() {
               { t: "Representação", d: "Voz do empresariado junto ao poder público municipal e estadual." },
               { t: "Serviços", d: "Certificado digital, SCPC, cursos e mais de 40 benefícios." },
               { t: "Formação", d: "Capacitação contínua em parceria com o Sebrae Bahia." },
-              { t: "Networking", d: "Rede consolidada com mais de 2.400 empresas associadas." },
+              { t: "Networking", d: "Rede consolidada de empresas associadas em toda a região." },
             ].map((p) => (
               <div key={p.t} className="bg-white border border-line rounded-lg p-5">
                 <div className="w-8 h-1 bg-gold mb-4" />

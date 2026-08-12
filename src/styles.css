@@ -216,6 +216,7 @@
   animation: marquee-x 60s linear infinite;
   white-space: nowrap;
 }
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 
 .seal-spin { animation: seal-rotate 50s linear infinite; transform-origin: center; }
 .blink { animation: blink-dot 1.6s ease-in-out infinite; }
