@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
