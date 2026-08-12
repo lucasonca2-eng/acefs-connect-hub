@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export function SiteFooter() {
   return (
