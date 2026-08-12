@@ -99,17 +99,3 @@ export function SiteHeader() {
     </>
   );
 }
-
-function Logo() {
-  return (
-    <div
-      className="w-11 h-11 rounded-md bg-navy flex items-center justify-center font-display text-white text-[22px] font-semibold shrink-0"
-      aria-hidden
-    >
-      <span className="relative">
-        A
-        <span className="absolute -right-1 -top-1 w-1.5 h-1.5 rounded-full bg-gold" />
-      </span>
-    </div>
-  );
-}
