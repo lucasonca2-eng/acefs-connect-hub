@@ -29,11 +29,7 @@ export function SiteHeader() {
       >
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-[72px] flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <Logo />
-            <div className="leading-none">
-              <div className="font-display text-[20px] text-navy tracking-tight font-semibold">ACEFS</div>
-              <div className="text-[10px] tracking-[0.22em] text-ink-soft uppercase mt-1">desde 1945</div>
-            </div>
+            <AnimatedLogo variant="header" />
           </Link>
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
