@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,8 +46,8 @@ function Hero() {
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
-          <div className="inline-block bg-white rounded-lg px-6 py-4 mb-7 shadow-lg">
-            <img src="/images/acefs-logo-mark.png" alt="ACEFS" className="h-12 md:h-16 w-auto" />
+          <div className="inline-block mb-7">
+            <AnimatedLogo variant="hero" />
           </div>
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
             <span className="w-6 h-px bg-gold" />

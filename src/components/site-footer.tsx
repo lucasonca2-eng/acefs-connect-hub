@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export function SiteFooter() {
   return (
@@ -6,17 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div className="md:col-span-4">
           <div className="flex items-center gap-3 mb-5">
-            <div className="h-auto w-auto rounded-md bg-white flex items-center justify-center p-3 shrink-0">
-              <img
-                src="/images/acefs-logo-mark.png"
-                alt="ACEFS"
-                className="h-8 md:h-9 w-auto max-w-[160px] object-contain"
-              />
-            </div>
-            <div className="leading-tight">
-              <div className="font-display text-[20px] text-white font-semibold">ACEFS</div>
-              <div className="text-[10px] tracking-[0.22em] text-white/50 uppercase mt-0.5">desde 1945</div>
-            </div>
+            <AnimatedLogo variant="footer" />
           </div>
           <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">
             Associação Comercial e Empresarial de Feira de Santana. Representando, defendendo e fortalecendo o empresariado baiano há mais de oito décadas.

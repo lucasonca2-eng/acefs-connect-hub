@@ -221,6 +221,38 @@
 .seal-spin { animation: seal-rotate 50s linear infinite; transform-origin: center; }
 .blink { animation: blink-dot 1.6s ease-in-out infinite; }
 
+/* Logo animation */
+.logo-animate {
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
+}
+.logo-animate:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.35));
+}
+
+.logo-shine {
+  position: relative;
+  overflow: hidden;
+}
+.logo-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  transition: transform 0s;
+  pointer-events: none;
+}
+.logo-shine:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.8s ease-out;
+}
+
 .font-display { font-family: var(--font-display); }
 .vertical-rl { writing-mode: vertical-rl; }
 
