@@ -1,12 +1,15 @@
 import logoAsset from "@/assets/acefs-logo.png.asset.json";
 
 interface AnimatedLogoProps {
-  variant?: "header" | "footer";
+  variant?: "header" | "footer" | "hero";
   className?: string;
 }
 
 export function AnimatedLogo({ variant = "header", className }: AnimatedLogoProps) {
-  const heightClass = variant === "header" ? "h-10 md:h-11" : "h-12 md:h-14";
+  const heightClass =
+    variant === "header" ? "h-10 md:h-11" :
+    variant === "footer" ? "h-12 md:h-14" :
+    "h-12 md:h-16";
 
   return (
     <div className={`logo-shine inline-flex items-center justify-center rounded-md bg-white p-2 md:p-3 shrink-0 ${className}`}>
@@ -20,3 +23,4 @@ export function AnimatedLogo({ variant = "header", className }: AnimatedLogoProp
     </div>
   );
 }
+
