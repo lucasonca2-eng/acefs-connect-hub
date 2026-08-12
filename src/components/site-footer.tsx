@@ -6,11 +6,11 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div className="md:col-span-4">
           <div className="flex items-center gap-3 mb-5">
-            <div className="h-12 w-auto rounded-md bg-white/10 flex items-center justify-center p-2 shrink-0">
+            <div className="h-auto w-auto rounded-md bg-white flex items-center justify-center p-3 shrink-0">
               <img
                 src="/images/acefs-logo-mark.png"
                 alt="ACEFS"
-                className="h-full w-auto max-w-[140px] object-contain"
+                className="h-8 md:h-9 w-auto max-w-[160px] object-contain"
               />
             </div>
             <div className="leading-tight">
