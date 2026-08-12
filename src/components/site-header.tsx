@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
