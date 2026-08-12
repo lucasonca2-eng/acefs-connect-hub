@@ -45,6 +45,9 @@ function Hero() {
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
+          <div className="inline-block bg-white rounded-lg px-6 py-4 mb-7 shadow-lg">
+            <img src="/images/acefs-logo-mark.png" alt="ACEFS" className="h-12 md:h-16 w-auto" />
+          </div>
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
             <span className="w-6 h-px bg-gold" />
             Associação Comercial · desde 1945
@@ -148,9 +151,9 @@ function ServicesTeaser() {
             <Link
               key={s.slug}
               to="/servicos"
-              className="group block bg-cream border border-line rounded-lg p-6 hover:border-navy/30 hover:shadow-md transition-all"
+              className="group block bg-mint border border-navy-soft/20 rounded-lg p-6 hover:border-navy-soft hover:shadow-lg hover:-translate-y-0.5 transition-all"
             >
-              <div className="w-11 h-11 rounded-md bg-navy/5 text-navy flex items-center justify-center mb-5 group-hover:bg-navy group-hover:text-white transition-colors">
+              <div className="w-11 h-11 rounded-md bg-navy-soft text-white flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform">
                 <ServiceIcon name={s.icon} />
               </div>
               <h3 className="font-display font-semibold text-[19px] text-navy leading-tight mb-2">{s.title}</h3>

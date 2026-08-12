@@ -28,7 +28,12 @@ function Contato() {
           <div className="md:col-span-5 space-y-6">
             <InfoBlock title="Endereço" lines={["Largo São Francisco, 43", "Kalilândia — Feira de Santana, BA", "CEP 44001-024"]} />
             <InfoBlock title="Telefone" lines={["(75) 3211-7446"]} link={{ label: "Ligar agora", href: "tel:+557532117446" }} />
-            <InfoBlock title="E-mail" lines={["contato@acefs.com.br"]} link={{ label: "Enviar e-mail", href: "mailto:contato@acefs.com.br" }} />
+            <InfoBlock title="E-mail" lines={["acefs@acefs.com.br"]} link={{ label: "Enviar e-mail", href: "mailto:acefs@acefs.com.br" }} />
+            <InfoBlock
+              title="WhatsApp"
+              lines={["(75) 3211-7446"]}
+              link={{ label: "Chamar no WhatsApp", href: "https://wa.me/557532117446?text=Oii%2C%20vim%20do%20site%20da%20ACEFS" }}
+            />
             <InfoBlock title="Horário" lines={["Segunda a sexta, 08h às 18h"]} />
           </div>
           <div className="md:col-span-7">

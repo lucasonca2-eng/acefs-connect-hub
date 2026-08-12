@@ -38,7 +38,8 @@ export function SiteFooter() {
             <li>Largo São Francisco, 43</li>
             <li>Kalilândia · Feira de Santana — BA</li>
             <li><a href="tel:+557532117446" className="hover:text-white">(75) 3211-7446</a></li>
-            <li><a href="mailto:contato@acefs.com.br" className="hover:text-white">contato@acefs.com.br</a></li>
+            <li><a href="mailto:acefs@acefs.com.br" className="hover:text-white">acefs@acefs.com.br</a></li>
+            <li><a href="https://wa.me/557532117446?text=Oii%2C%20vim%20do%20site%20da%20ACEFS" target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp: (75) 3211-7446</a></li>
           </ul>
           <div className="mt-5 flex gap-3">
             <a

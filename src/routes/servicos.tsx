@@ -26,8 +26,8 @@ function Servicos() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-2 gap-6">
           {SERVICES.map((s) => (
-            <article key={s.slug} className="bg-cream border border-line rounded-lg p-8 hover:border-navy/30 hover:shadow-md transition-all">
-              <div className="w-12 h-12 rounded-md bg-navy text-white flex items-center justify-center mb-6">
+            <article key={s.slug} className="bg-mint border border-navy-soft/20 rounded-lg p-8 hover:border-navy-soft hover:shadow-lg transition-all">
+              <div className="w-12 h-12 rounded-md bg-navy-soft text-white flex items-center justify-center mb-6 shadow-sm">
                 <ServiceIcon name={s.icon} />
               </div>
               <h3 className="font-display font-semibold text-[24px] text-navy mb-3">{s.title}</h3>
