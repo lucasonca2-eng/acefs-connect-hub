@@ -29,7 +29,7 @@ export function SiteHeader() {
       >
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-[72px] flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <AnimatedLogo variant="header" />
+            <AnimatedLogo as="span" />
           </Link>
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
