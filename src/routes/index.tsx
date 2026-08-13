@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
-import { AnimatedLogo } from "@/components/animated-logo";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,7 +47,12 @@ function Hero() {
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
           <div className="mb-7">
-            <AnimatedLogo variant="hero" />
+            <h1 className="text-6xl md:text-8xl font-serif text-white tracking-widest font-light italic opacity-90 drop-shadow-sm">
+              ACEFS
+            </h1>
+            <p className="text-white/70 tracking-[0.3em] text-sm uppercase mt-2 font-light">
+              Associação Comercial e Empresarial
+            </p>
           </div>
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
             <span className="w-6 h-px bg-gold" />
