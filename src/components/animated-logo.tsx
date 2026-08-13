@@ -1,26 +1,25 @@
-import logoAsset from "@/assets/acefs-logo.png.asset.json";
-
 interface AnimatedLogoProps {
   variant?: "header" | "footer" | "hero";
   className?: string;
 }
 
 export function AnimatedLogo({ variant = "header", className }: AnimatedLogoProps) {
-  const heightClass =
-    variant === "header" ? "h-10 md:h-11" :
-    variant === "footer" ? "h-12 md:h-14" :
-    "h-16 md:h-24";
+  const sizeClass =
+    variant === "header"
+      ? "text-2xl md:text-[28px]"
+      : variant === "footer"
+      ? "text-3xl md:text-4xl"
+      : "text-6xl md:text-8xl";
+
+  const colorClass =
+    variant === "header" ? "text-navy" : "text-white";
 
   return (
-    <div className={`inline-flex items-center justify-center shrink-0 ${className}`}>
-      <img
-        src={logoAsset.url}
-        alt="ACEFS — Associação Comercial e Empresarial de Feira de Santana"
-        width={606}
-        height={192}
-        className={`${heightClass} w-auto object-contain`}
-      />
-    </div>
+    <span
+      className={`inline-block font-serif font-light italic tracking-widest opacity-90 drop-shadow-sm ${sizeClass} ${colorClass} ${className}`}
+      aria-label="ACEFS — Associação Comercial e Empresarial de Feira de Santana"
+    >
+      ACEFS
+    </span>
   );
 }
-
