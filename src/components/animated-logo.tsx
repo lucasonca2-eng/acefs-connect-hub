@@ -1,25 +1,11 @@
-interface AnimatedLogoProps {
-  variant?: "header" | "footer" | "hero";
-  className?: string;
-}
+import { Link } from "@tanstack/react-router";
 
-export function AnimatedLogo({ variant = "header", className }: AnimatedLogoProps) {
-  const sizeClass =
-    variant === "header"
-      ? "text-2xl md:text-[28px]"
-      : variant === "footer"
-      ? "text-3xl md:text-4xl"
-      : "text-6xl md:text-8xl";
-
-  const colorClass =
-    variant === "header" ? "text-navy" : "text-white";
-
+export function AnimatedLogo() {
   return (
-    <span
-      className={`inline-block font-serif font-light italic tracking-widest opacity-90 drop-shadow-sm ${sizeClass} ${colorClass} ${className}`}
-      aria-label="ACEFS — Associação Comercial e Empresarial de Feira de Santana"
-    >
-      ACEFS
-    </span>
+    <Link to="/" className="flex items-center group">
+      <h1 className="text-2xl md:text-3xl font-light tracking-[0.25em] text-[#14532D] group-hover:text-[#22C55E] transition-colors">
+        ACEFS
+      </h1>
+    </Link>
   );
 }
