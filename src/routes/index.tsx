@@ -46,7 +46,7 @@ function Hero() {
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
-          <div className="inline-block mb-7">
+          <div className="mb-7">
             <AnimatedLogo variant="hero" />
           </div>
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
