@@ -76,13 +76,26 @@ function QuemSomos() {
       </section>
 
       <section className="bg-navy-deep text-white py-16">
-        <div className="mx-auto max-w-[1240px] px-6 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <h2 className="font-display font-semibold text-[26px] md:text-[32px] leading-tight max-w-2xl">
-            Faça parte da maior rede empresarial da região.
-          </h2>
-          <a href="https://linktr.ee/acefs" target="_blank" rel="noopener noreferrer" className="bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors">
-            Associe-se
-          </a>
+        <div className="mx-auto max-w-[1240px] px-6 md:px-10">
+          <div className="max-w-3xl">
+            <div className="w-10 h-1 bg-gold mb-6" />
+            <h2 className="font-display font-semibold text-[26px] md:text-[34px] leading-tight">
+              Por que se associar à ACEFS?
+            </h2>
+            <p className="mt-5 text-[16px] leading-relaxed text-white/75">
+              Fazer parte da ACEFS é fortalecer o seu negócio com representatividade, conexões e oportunidades. Tenha
+              acesso a serviços, capacitações, networking e benefícios exclusivos, além de fazer parte de uma rede que
+              atua na defesa dos interesses empresariais e no desenvolvimento econômico de Feira de Santana.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-t border-white/15 pt-10">
+            <h3 className="font-display font-semibold text-[22px] md:text-[28px] leading-tight max-w-2xl">
+              Faça parte da maior rede empresarial da região.
+            </h3>
+            <a href="https://linktr.ee/acefs" target="_blank" rel="noopener noreferrer" className="bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors">
+              Associe-se
+            </a>
+          </div>
         </div>
       </section>
     </>
