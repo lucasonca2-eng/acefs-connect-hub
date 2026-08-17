@@ -9,73 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicosRouteImport } from './routes/servicos'
-import { Route as QuemSomosRouteImport } from './routes/quem-somos'
-import { Route as ParceirosRouteImport } from './routes/parceiros'
-import { Route as NoticiasRouteImport } from './routes/noticias'
-import { Route as NegociosEConexoesRouteImport } from './routes/negocios-e-conexoes'
-import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
-import { Route as EventosRouteImport } from './routes/eventos'
-import { Route as EmpregosRouteImport } from './routes/empregos'
-import { Route as DiretoriaRouteImport } from './routes/diretoria'
-import { Route as CurriculoRouteImport } from './routes/curriculo'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ArtigosRouteImport } from './routes/artigos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtigosRouteImport } from './routes/artigos'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as CurriculoRouteImport } from './routes/curriculo'
+import { Route as DiretoriaRouteImport } from './routes/diretoria'
+import { Route as EmpregosRouteImport } from './routes/empregos'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
+import { Route as NegociosEConexoesRouteImport } from './routes/negocios-e-conexoes'
+import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as QuemSomosRouteImport } from './routes/quem-somos'
+import { Route as ServicosRouteImport } from './routes/servicos'
 
-const ServicosRoute = ServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuemSomosRoute = QuemSomosRouteImport.update({
-  id: '/quem-somos',
-  path: '/quem-somos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ParceirosRoute = ParceirosRouteImport.update({
-  id: '/parceiros',
-  path: '/parceiros',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NoticiasRoute = NoticiasRouteImport.update({
-  id: '/noticias',
-  path: '/noticias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NegociosEConexoesRoute = NegociosEConexoesRouteImport.update({
-  id: '/negocios-e-conexoes',
-  path: '/negocios-e-conexoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
-  id: '/feira-de-santana',
-  path: '/feira-de-santana',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventosRoute = EventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmpregosRoute = EmpregosRouteImport.update({
-  id: '/empregos',
-  path: '/empregos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiretoriaRoute = DiretoriaRouteImport.update({
-  id: '/diretoria',
-  path: '/diretoria',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurriculoRoute = CurriculoRouteImport.update({
-  id: '/curriculo',
-  path: '/curriculo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtigosRoute = ArtigosRouteImport.update({
@@ -83,9 +33,59 @@ const ArtigosRoute = ArtigosRouteImport.update({
   path: '/artigos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculoRoute = CurriculoRouteImport.update({
+  id: '/curriculo',
+  path: '/curriculo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiretoriaRoute = DiretoriaRouteImport.update({
+  id: '/diretoria',
+  path: '/diretoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpregosRoute = EmpregosRouteImport.update({
+  id: '/empregos',
+  path: '/empregos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
+  id: '/feira-de-santana',
+  path: '/feira-de-santana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NegociosEConexoesRoute = NegociosEConexoesRouteImport.update({
+  id: '/negocios-e-conexoes',
+  path: '/negocios-e-conexoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuemSomosRoute = QuemSomosRouteImport.update({
+  id: '/quem-somos',
+  path: '/quem-somos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -201,81 +201,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/servicos': {
-      id: '/servicos'
-      path: '/servicos'
-      fullPath: '/servicos'
-      preLoaderRoute: typeof ServicosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quem-somos': {
-      id: '/quem-somos'
-      path: '/quem-somos'
-      fullPath: '/quem-somos'
-      preLoaderRoute: typeof QuemSomosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/parceiros': {
-      id: '/parceiros'
-      path: '/parceiros'
-      fullPath: '/parceiros'
-      preLoaderRoute: typeof ParceirosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/noticias': {
-      id: '/noticias'
-      path: '/noticias'
-      fullPath: '/noticias'
-      preLoaderRoute: typeof NoticiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/negocios-e-conexoes': {
-      id: '/negocios-e-conexoes'
-      path: '/negocios-e-conexoes'
-      fullPath: '/negocios-e-conexoes'
-      preLoaderRoute: typeof NegociosEConexoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/feira-de-santana': {
-      id: '/feira-de-santana'
-      path: '/feira-de-santana'
-      fullPath: '/feira-de-santana'
-      preLoaderRoute: typeof FeiraDeSantanaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/eventos': {
-      id: '/eventos'
-      path: '/eventos'
-      fullPath: '/eventos'
-      preLoaderRoute: typeof EventosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/empregos': {
-      id: '/empregos'
-      path: '/empregos'
-      fullPath: '/empregos'
-      preLoaderRoute: typeof EmpregosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/diretoria': {
-      id: '/diretoria'
-      path: '/diretoria'
-      fullPath: '/diretoria'
-      preLoaderRoute: typeof DiretoriaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curriculo': {
-      id: '/curriculo'
-      path: '/curriculo'
-      fullPath: '/curriculo'
-      preLoaderRoute: typeof CurriculoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artigos': {
@@ -285,11 +215,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtigosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculo': {
+      id: '/curriculo'
+      path: '/curriculo'
+      fullPath: '/curriculo'
+      preLoaderRoute: typeof CurriculoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diretoria': {
+      id: '/diretoria'
+      path: '/diretoria'
+      fullPath: '/diretoria'
+      preLoaderRoute: typeof DiretoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empregos': {
+      id: '/empregos'
+      path: '/empregos'
+      fullPath: '/empregos'
+      preLoaderRoute: typeof EmpregosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feira-de-santana': {
+      id: '/feira-de-santana'
+      path: '/feira-de-santana'
+      fullPath: '/feira-de-santana'
+      preLoaderRoute: typeof FeiraDeSantanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/negocios-e-conexoes': {
+      id: '/negocios-e-conexoes'
+      path: '/negocios-e-conexoes'
+      fullPath: '/negocios-e-conexoes'
+      preLoaderRoute: typeof NegociosEConexoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quem-somos': {
+      id: '/quem-somos'
+      path: '/quem-somos'
+      fullPath: '/quem-somos'
+      preLoaderRoute: typeof QuemSomosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

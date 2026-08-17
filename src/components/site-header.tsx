@@ -1,17 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
-import { AnimatedLogo } from "@/components/animated-logo";
+import logoAcefs from "@/assets/acefs-logo-transparent.png";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <>
       <div className="bg-navy-deep text-white/70 text-[11.5px] tracking-[0.14em] uppercase">
@@ -28,8 +30,12 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-[72px] flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-3 shrink-0">
-            <AnimatedLogo as="span" />
+          <Link to="/" className="flex items-center shrink-0">
+            <img
+              src={logoAcefs}
+              alt="ACEFS - Associação Comercial e Empresarial de Feira de Santana"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
           </Link>
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
@@ -62,7 +68,12 @@ export function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d={open ? "M4 4l14 14M18 4L4 18" : "M3 6h16M3 11h16M3 16h16"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d={open ? "M4 4l14 14M18 4L4 18" : "M3 6h16M3 11h16M3 16h16"}
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
         </div>
