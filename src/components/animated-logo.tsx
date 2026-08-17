@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import logoAsset from "@/assets/acefs-logo.png.asset.json";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,9 +14,11 @@ interface AnimatedLogoProps {
 
 export function AnimatedLogo({ className, as = "link" }: AnimatedLogoProps) {
   const content = (
-    <h1 className="text-2xl md:text-3xl font-light tracking-[0.25em] text-[#14532D] group-hover:text-[#22C55E] transition-colors">
-      ACEFS
-    </h1>
+    <img
+      src={logoAsset.url}
+      alt="ACEFS — Associação Comercial e Empresarial de Feira de Santana"
+      className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+    />
   );
 
   if (as === "span") {

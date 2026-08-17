@@ -90,15 +90,6 @@ export const SERVICES = [
 
 export const EVENTS = [
   {
-    slug: "3a-colorrida",
-    title: "3ª Colorrida — em prol do combate ao câncer infantil",
-    date: "06 de agosto de 2026",
-    time: "19h30",
-    location: "Auditório da ACEFS — Largo São Francisco, 43, Kalilândia, Feira de Santana",
-    desc: "Lançamento oficial 2026. Vem participar de um passeio colorido que ajuda a construir a nova sede da AAPC, ampliando o acolhimento e o cuidado a pessoas em tratamento contra o câncer. A Colorrida é muito mais que uma corrida — é um movimento de solidariedade, esperança e amor ao próximo. Sua presença faz toda a diferença.",
-    hasArt: true,
-  },
-  {
     slug: "cafe-empresarial-acefs",
     title: "Café Empresarial ACEFS",
     date: "Mensal",
@@ -119,7 +110,7 @@ export const EVENTS = [
   {
     slug: "caminhada-ame-se",
     title: "Caminhada Ame-se — Setembro Amarelo",
-    date: "13 de setembro de 2026",
+    date: "20 de setembro de 2026",
     time: "A confirmar",
     location: "A confirmar",
     desc: "Ação de conscientização sobre saúde mental e valorização da vida, em apoio à campanha Setembro Amarelo.",
