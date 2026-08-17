@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
-import logoAcefs from "@/assets/acefs-logo-transparent.png";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +31,7 @@ export function SiteHeader() {
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-[72px] flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src={logoAcefs}
+              src="/logo.png"
               alt="ACEFS - Associação Comercial e Empresarial de Feira de Santana"
               className="h-10 md:h-12 w-auto object-contain"
             />
