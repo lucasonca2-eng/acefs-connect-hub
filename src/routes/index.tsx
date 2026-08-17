@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
+import { HeroCarousel } from "@/components/hero-carousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <>
+      <HeroCarousel />
       <Hero />
       <Partners />
       <ServicesTeaser />
@@ -45,17 +47,6 @@ function Hero() {
       />
       <div className="relative mx-auto max-w-[1240px] px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
-          
-          {/* Logo Tipográfica Corrigida - Minimalista e Premium */}
-          <div className="mb-10 flex flex-col items-start">
-            <h1 className="text-5xl md:text-7xl font-light text-white tracking-[0.2em] drop-shadow-md">
-              ACEFS
-            </h1>
-            <p className="text-white/80 tracking-[0.3em] text-[10px] md:text-xs uppercase mt-4 font-light">
-              Associação Comercial e Empresarial
-            </p>
-          </div>
-
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold mb-6 font-semibold">
             <span className="w-6 h-px bg-gold" />
             Associação Comercial · desde 1945
