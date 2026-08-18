@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
+import { newsImage, DEFAULT_NEWS_IMAGE } from "@/lib/news-images";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
