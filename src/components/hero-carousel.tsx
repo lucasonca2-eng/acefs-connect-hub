@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import sede from "@/assets/acefs-sede.jpg";
+import bannerPremioFama from "@/assets/banner-premio-fama.png.asset.json";
 
-// Troque os caminhos abaixo pelos banners oficiais (1.png / 2.png) quando enviados.
 const BANNERS = [
+  { src: bannerPremioFama.url, alt: "Prêmio Fama — Vem aí! O maior reconhecimento empresarial de Feira de Santana" },
   { src: "/images/acefs-predio.png", alt: "Sede da ACEFS em Feira de Santana" },
-  { src: sede, alt: "ACEFS — Associação Comercial e Empresarial de Feira de Santana" },
 ];
 
 export function HeroCarousel() {
