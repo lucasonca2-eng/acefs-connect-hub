@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS, SERVICES } from "@/lib/site-data";
+import { newsImage, DEFAULT_NEWS_IMAGE } from "@/lib/news-images";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
@@ -286,20 +287,28 @@ function NewsTeaser() {
 
 export function NewsCard({
   item,
-  tone = "navy",
 }: {
   item: (typeof NEWS)[number];
   tone?: "navy" | "gold" | "muted";
 }) {
-  const bg =
-    tone === "gold"
-      ? "linear-gradient(135deg, #C9A24B, #E2C97E)"
-      : tone === "muted"
-        ? "linear-gradient(135deg, #E5E7EB, #F7F8FA)"
-        : "linear-gradient(135deg, #0F3460, #1E4A82)";
+  const src = newsImage(item.slug, item.category);
   return (
     <article className="group bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="aspect-[16/10] relative" style={{ background: bg }}>
+      <div className="aspect-[16/10] relative overflow-hidden bg-[#E5E7EB]">
+        <img
+          src={src}
+          alt={item.title}
+          width={1280}
+          height={800}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          style={{ objectFit: "cover" }}
+          onError={(e) => {
+            const el = e.currentTarget;
+            if (el.src !== DEFAULT_NEWS_IMAGE) el.src = DEFAULT_NEWS_IMAGE;
+          }}
+        />
         <div className="absolute top-4 left-4 bg-white/95 text-navy text-[11px] font-semibold tracking-wide uppercase px-2.5 py-1 rounded">
           {item.category}
         </div>
