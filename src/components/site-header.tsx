@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
+import { AnimatedLogo } from "@/components/animated-logo";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,13 +30,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 h-[72px] flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center shrink-0">
-            <img
-              src="/logo.png"
-              alt="ACEFS - Associação Comercial e Empresarial de Feira de Santana"
-              className="h-10 md:h-12 w-auto object-contain"
-            />
-          </Link>
+          <AnimatedLogo className="shrink-0" />
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
               {NAV.map((n) => (

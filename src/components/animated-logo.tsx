@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import logoAsset from "@/assets/acefs-logo-transparent.png.asset.json";
+import logoAsset from "@/assets/acefs-mark.png.asset.json";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
