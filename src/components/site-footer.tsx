@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div className="md:col-span-4">
           <div className="flex items-center gap-3 mb-5">
-            <AnimatedLogo />
+            <AnimatedLogo variant="white" />
           </div>
           <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">
             Associação Comercial e Empresarial de Feira de Santana. Representando, defendendo e fortalecendo o empresariado baiano há mais de oito décadas.
