@@ -29,6 +29,9 @@ const PHOTOS = [
 ];
 
 function FeiraDeSantana() {
+  const { data: settings } = useSettings();
+  const texto = settings?.feira_de_santana_texto?.trim() || "";
+
   return (
     <>
       <PageHeader
