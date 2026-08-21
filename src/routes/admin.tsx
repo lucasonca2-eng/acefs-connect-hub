@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouter, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -24,6 +24,9 @@ function AdminLayout() {
   const [state, setState] = useState<State>("loading");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isPublicAuthPage =
+    pathname.startsWith("/admin/recuperar-senha") || pathname.startsWith("/admin/redefinir-senha");
 
   async function check() {
     const { data } = await supabase.auth.getUser();
@@ -56,6 +59,8 @@ function AdminLayout() {
     setState("anon");
     void router.invalidate();
   }
+
+  if (isPublicAuthPage) return <Outlet />;
 
   if (state === "loading") {
     return (
@@ -198,6 +203,12 @@ function LoginScreen() {
             {busy && <Loader2 size={16} className="animate-spin" />}
             Entrar
           </button>
+          <Link
+            to="/admin/recuperar-senha"
+            className="block text-center text-[13px] font-semibold text-ink-soft hover:text-navy transition-colors"
+          >
+            Esqueci minha senha
+          </Link>
         </form>
       </div>
     </div>
