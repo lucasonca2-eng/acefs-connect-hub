@@ -75,3 +75,30 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
 }
+
+export type Servico = Tables<"servicos">;
+export type Evento = Tables<"eventos">;
+
+export async function fetchServicos(onlyActive = true): Promise<Servico[]> {
+  let q = supabase.from("servicos").select("*").order("ordem", { ascending: true });
+  if (onlyActive) q = q.eq("ativo", true);
+  const { data } = await q;
+  return data ?? [];
+}
+
+export async function fetchServicoBySlug(slug: string): Promise<Servico | null> {
+  const { data } = await supabase.from("servicos").select("*").eq("slug", slug).maybeSingle();
+  return data ?? null;
+}
+
+export async function fetchEventos(onlyActive = true): Promise<Evento[]> {
+  let q = supabase.from("eventos").select("*").order("data_evento", { ascending: true });
+  if (onlyActive) q = q.eq("ativo", true);
+  const { data } = await q;
+  return data ?? [];
+}
+
+export async function fetchEventoBySlug(slug: string): Promise<Evento | null> {
+  const { data } = await supabase.from("eventos").select("*").eq("slug", slug).maybeSingle();
+  return data ?? null;
+}
