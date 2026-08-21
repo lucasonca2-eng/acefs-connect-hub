@@ -66,8 +66,12 @@ function AdminLayout() {
   async function signOut() {
     await supabase.auth.signOut();
     setState("anon");
+    setRole(null);
     void router.invalidate();
   }
+
+  const isJournalist = role === "jornalista";
+  const journalistBlocked = isJournalist && !pathname.startsWith("/admin/noticias");
 
   if (isPublicAuthPage) return <Outlet />;
 
