@@ -19,9 +19,11 @@ export const Route = createFileRoute("/admin")({
 });
 
 type State = "loading" | "anon" | "denied" | "ok";
+type Role = "admin" | "jornalista";
 
 function AdminLayout() {
   const [state, setState] = useState<State>("loading");
+  const [role, setRole] = useState<Role | null>(null);
   const [email, setEmail] = useState("");
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -33,15 +35,22 @@ function AdminLayout() {
     const user = data.user;
     if (!user) {
       setState("anon");
+      setRole(null);
       return;
     }
     setEmail(user.email ?? "");
     const { data: roles } = await supabase
       .from("user_roles")
       .select("role")
-      .eq("user_id", user.id)
-      .eq("role", "admin");
-    setState(roles && roles.length > 0 ? "ok" : "denied");
+      .eq("user_id", user.id);
+    const names = (roles ?? []).map((r) => r.role as string);
+    const resolved: Role | null = names.includes("admin")
+      ? "admin"
+      : names.includes("jornalista")
+        ? "jornalista"
+        : null;
+    setRole(resolved);
+    setState(resolved ? "ok" : "denied");
   }
 
   useEffect(() => {
