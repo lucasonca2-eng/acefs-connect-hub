@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./quem-somos";
+import { useSettings } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/feira-de-santana")({
   head: () => ({
