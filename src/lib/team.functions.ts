@@ -15,7 +15,8 @@ async function assertAdmin(context: { supabase: any; userId: string }) {
     _user_id: context.userId,
     _role: "admin",
   });
-  if (error || !data) throw new Error("Forbidden");
+  if (error) throw new Error(`Falha ao validar permissão: ${error.message}`);
+  if (!data) throw new Error("Apenas administradores gerais podem gerenciar a equipe.");
 }
 
 export const listAdmins = createServerFn({ method: "GET" })
