@@ -97,6 +97,7 @@ function AdminLayout() {
             <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
             <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
             <SideLink to="/admin/noticias" icon={<Newspaper size={16} />} label="Notícias" />
+            <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
           </nav>
           <button
             onClick={signOut}
