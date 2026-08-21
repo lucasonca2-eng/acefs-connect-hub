@@ -112,12 +112,20 @@ function AdminLayout() {
             <div className="text-[13px] text-ink-soft mt-1 break-all">{email}</div>
           </div>
           <nav className="space-y-1">
-            <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
-            <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
+            {!isJournalist && (
+              <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
+            )}
+            {!isJournalist && (
+              <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
+            )}
             <SideLink to="/admin/noticias" icon={<Newspaper size={16} />} label="Notícias" />
-            <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
-            <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
-            <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+            {!isJournalist && (
+              <>
+                <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
+                <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
+                <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+              </>
+            )}
           </nav>
           <button
             onClick={signOut}
