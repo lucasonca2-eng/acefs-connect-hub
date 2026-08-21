@@ -2,6 +2,27 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
 export type Settings = Tables<"settings">;
+
+export type NavLink = { label: string; to: string };
+
+/** Converte o JSON salvo no banco em uma lista de links válida. */
+export function parseLinks(value: unknown, fallback: NavLink[] = []): NavLink[] {
+  const raw = typeof value === "string" ? safeJson(value) : value;
+  if (!Array.isArray(raw)) return fallback;
+  const list = raw
+    .filter((i): i is Record<string, unknown> => !!i && typeof i === "object")
+    .map((i) => ({ label: String(i["label"] ?? ""), to: String(i["to"] ?? i["url"] ?? "") }))
+    .filter((i) => i.label && i.to);
+  return list.length ? list : fallback;
+}
+
+function safeJson(value: string): unknown {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return null;
+  }
+}
 export type Banner = Tables<"banners">;
 export type Noticia = Tables<"noticias">;
 
