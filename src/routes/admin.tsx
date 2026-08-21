@@ -19,9 +19,11 @@ export const Route = createFileRoute("/admin")({
 });
 
 type State = "loading" | "anon" | "denied" | "ok";
+type Role = "admin" | "jornalista";
 
 function AdminLayout() {
   const [state, setState] = useState<State>("loading");
+  const [role, setRole] = useState<Role | null>(null);
   const [email, setEmail] = useState("");
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -33,15 +35,22 @@ function AdminLayout() {
     const user = data.user;
     if (!user) {
       setState("anon");
+      setRole(null);
       return;
     }
     setEmail(user.email ?? "");
     const { data: roles } = await supabase
       .from("user_roles")
       .select("role")
-      .eq("user_id", user.id)
-      .eq("role", "admin");
-    setState(roles && roles.length > 0 ? "ok" : "denied");
+      .eq("user_id", user.id);
+    const names = (roles ?? []).map((r) => r.role as string);
+    const resolved: Role | null = names.includes("admin")
+      ? "admin"
+      : names.includes("jornalista")
+        ? "jornalista"
+        : null;
+    setRole(resolved);
+    setState(resolved ? "ok" : "denied");
   }
 
   useEffect(() => {
@@ -57,8 +66,12 @@ function AdminLayout() {
   async function signOut() {
     await supabase.auth.signOut();
     setState("anon");
+    setRole(null);
     void router.invalidate();
   }
+
+  const isJournalist = role === "jornalista";
+  const journalistBlocked = isJournalist && !pathname.startsWith("/admin/noticias");
 
   if (isPublicAuthPage) return <Outlet />;
 
@@ -99,12 +112,20 @@ function AdminLayout() {
             <div className="text-[13px] text-ink-soft mt-1 break-all">{email}</div>
           </div>
           <nav className="space-y-1">
-            <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
-            <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
+            {!isJournalist && (
+              <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
+            )}
+            {!isJournalist && (
+              <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
+            )}
             <SideLink to="/admin/noticias" icon={<Newspaper size={16} />} label="Notícias" />
-            <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
-            <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
-            <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+            {!isJournalist && (
+              <>
+                <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
+                <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
+                <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+              </>
+            )}
           </nav>
           <button
             onClick={signOut}
@@ -114,7 +135,24 @@ function AdminLayout() {
           </button>
         </aside>
         <main className="min-w-0">
-          <Outlet />
+          {journalistBlocked ? (
+            <div className="bg-white border border-line rounded-lg p-8 text-center">
+              <h1 className="font-display font-semibold text-[22px] text-navy mb-2">
+                Área restrita a administradores
+              </h1>
+              <p className="text-[14px] text-ink-soft">
+                Seu perfil de jornalista tem acesso apenas à gestão de notícias.
+              </p>
+              <Link
+                to="/admin/noticias"
+                className="mt-6 inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors"
+              >
+                Ir para Notícias
+              </Link>
+            </div>
+          ) : (
+            <Outlet />
+          )}
         </main>
       </div>
     </div>
