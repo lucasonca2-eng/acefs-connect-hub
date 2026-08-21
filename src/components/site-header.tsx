@@ -38,7 +38,7 @@ export function SiteHeader() {
           <AnimatedLogo className="shrink-0" />
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <li key={n.to}>
                   <Link
                     to={n.to}
@@ -79,7 +79,7 @@ export function SiteHeader() {
         {open && (
           <div className="md:hidden border-t border-line bg-white">
             <ul className="px-6 py-4 space-y-1">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <li key={n.to}>
                   <Link
                     to={n.to}
