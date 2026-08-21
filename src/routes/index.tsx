@@ -293,7 +293,11 @@ export function NewsCard({
 }) {
   const src = newsImage(item.slug, item.category);
   return (
-    <article className="group bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+    <Link
+      to="/noticias"
+      hash={item.slug}
+      className="group block bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+    >
       <div className="aspect-[16/10] relative overflow-hidden bg-[#E5E7EB]">
         <img
           src={src}
@@ -320,7 +324,7 @@ export function NewsCard({
         </h3>
         <p className="text-[14px] text-ink-soft leading-relaxed">{item.excerpt}</p>
       </div>
-    </article>
+    </Link>
   );
 }
 

@@ -1,30 +1,29 @@
-import encontro from "@/assets/news-encontro.jpg.asset.json";
-import formacao from "@/assets/news-formacao.jpg.asset.json";
-import parceria from "@/assets/news-parceria.jpg.asset.json";
-import institucional from "@/assets/news-institucional.jpg.asset.json";
-import evento from "@/assets/news-evento.jpg.asset.json";
-import premio from "@/assets/news-premio.jpg.asset.json";
-import padrao from "@/assets/news-default.jpg.asset.json";
-
 /** Imagem institucional padrão da ACEFS — usada sempre que uma imagem falhar. */
-export const DEFAULT_NEWS_IMAGE = padrao.url;
+export const DEFAULT_NEWS_IMAGE = "/images/news/news-default.jpg";
+
+const encontro = "/images/news/news-encontro.jpg";
+const formacao = "/images/news/news-formacao.jpg";
+const parceria = "/images/news/news-parceria.jpg";
+const institucional = "/images/news/news-institucional.jpg";
+const evento = "/images/news/news-evento.jpg";
+const premio = "/images/news/news-premio.jpg";
 
 const BY_SLUG: Record<string, string> = {
-  "acefs-reune-liderancas-varejo": encontro.url,
-  "cursos-gratuitos-julho": formacao.url,
-  "sebrae-acefs-consultoria": parceria.url,
-  "assembleia-2026": institucional.url,
-  "feira-negocios": evento.url,
-  "premio-mercado": premio.url,
+  "acefs-reune-liderancas-varejo": encontro,
+  "cursos-gratuitos-julho": formacao,
+  "sebrae-acefs-consultoria": parceria,
+  "assembleia-2026": institucional,
+  "feira-negocios": evento,
+  "premio-mercado": premio,
 };
 
 const BY_CATEGORY: Record<string, string> = {
-  Encontro: encontro.url,
-  "Formação": formacao.url,
-  Parceria: parceria.url,
-  Institucional: institucional.url,
-  Evento: evento.url,
-  Reconhecimento: premio.url,
+  Encontro: encontro,
+  "Formação": formacao,
+  Parceria: parceria,
+  Institucional: institucional,
+  Evento: evento,
+  Reconhecimento: premio,
 };
 
 export function newsImage(slug?: string, category?: string): string {

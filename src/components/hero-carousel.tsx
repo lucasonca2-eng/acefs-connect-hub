@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import bannerPremioFama from "@/assets/banner-premio-fama.png.asset.json";
 
 const BANNERS = [
-  { src: bannerPremioFama.url, alt: "Prêmio Fama — Vem aí! O maior reconhecimento empresarial de Feira de Santana" },
+  { src: "/images/banner-premio-fama.png", alt: "Prêmio Fama — Vem aí! O maior reconhecimento empresarial de Feira de Santana" },
   { src: "/images/acefs-predio.png", alt: "Sede da ACEFS em Feira de Santana" },
 ];
 
