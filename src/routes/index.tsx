@@ -296,7 +296,9 @@ export function NewsCard({
     <Link
       to="/noticias"
       hash={item.slug}
-      className="group block bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
     >
       <div className="aspect-[16/10] relative overflow-hidden bg-[#E5E7EB]">
         <img
@@ -306,7 +308,7 @@ export function NewsCard({
           height={800}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
           style={{ objectFit: "cover" }}
           onError={(e) => {
             const el = e.currentTarget;
@@ -319,7 +321,7 @@ export function NewsCard({
       </div>
       <div className="p-6">
         <div className="text-[12px] text-ink-soft mb-2">{item.date}</div>
-        <h3 className="font-display font-semibold text-[19px] text-navy leading-snug mb-3 group-hover:text-gold transition-colors">
+        <h3 className="font-display font-semibold text-[19px] text-navy leading-snug mb-3 group-hover:text-gold transition-colors duration-200">
           {item.title}
         </h3>
         <p className="text-[14px] text-ink-soft leading-relaxed">{item.excerpt}</p>
