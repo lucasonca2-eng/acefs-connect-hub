@@ -46,7 +46,7 @@ function NoticiaDetalhe() {
       <div className="mx-auto max-w-[820px] px-6 md:px-10 py-10 md:py-14">
         <Link
           to="/noticias"
-          className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-soft hover:text-navy transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-soft hover:text-navy transition-colors mb-6"
         >
           <ArrowLeft size={16} />
           Voltar
