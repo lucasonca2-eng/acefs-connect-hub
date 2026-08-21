@@ -1,28 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { NEWS } from "@/lib/site-data";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { fetchNoticiaBySlug, formatDate } from "@/lib/cms";
 import { newsImage, DEFAULT_NEWS_IMAGE } from "@/lib/news-images";
-import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/noticia/$slug")({
-  head: ({ params }) => {
-    const item = NEWS.find((n) => n.slug === params.slug);
-    const title = item ? `${item.title} — ACEFS` : "Notícia — ACEFS";
-    const desc = item?.excerpt ?? "Leia a matéria completa na ACEFS.";
-    return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-      ],
-    };
-  },
+  head: () => ({
+    meta: [
+      { title: "Notícia — ACEFS" },
+      { name: "description", content: "Leia a matéria completa no site da ACEFS." },
+      { property: "og:title", content: "Notícia — ACEFS" },
+      { property: "og:description", content: "Leia a matéria completa no site da ACEFS." },
+    ],
+  }),
   component: NoticiaDetalhe,
 });
 
 function NoticiaDetalhe() {
   const { slug } = Route.useParams();
-  const item = NEWS.find((n) => n.slug === slug);
+  const { data: item, isLoading } = useQuery({
+    queryKey: ["noticia", slug],
+    queryFn: () => fetchNoticiaBySlug(slug),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh] bg-white flex items-center justify-center">
+        <Loader2 className="animate-spin text-navy" />
+      </div>
+    );
+  }
 
   if (!item) {
     return (
@@ -39,7 +46,8 @@ function NoticiaDetalhe() {
     );
   }
 
-  const src = newsImage(item.slug, item.category);
+  const src = item.imagem_capa_url || newsImage(item.slug, item.categoria);
+  const paragraphs = (item.conteudo ?? "").split(/\n\s*\n/).filter((p) => p.trim().length > 0);
 
   return (
     <article className="bg-white">
@@ -53,55 +61,42 @@ function NoticiaDetalhe() {
         </Link>
 
         <span className="inline-block text-[11px] tracking-[0.2em] uppercase text-gold font-semibold mb-4">
-          {item.category}
+          {item.categoria}
         </span>
         <h1 className="font-display font-semibold text-[clamp(28px,4.2vw,44px)] leading-tight tracking-tight text-navy mb-4">
-          {item.title}
+          {item.titulo}
         </h1>
         <div className="flex items-center gap-3 text-[13px] text-ink-soft mb-8">
           <span className="font-medium text-navy">ACEFS</span>
           <span className="w-1 h-1 rounded-full bg-ink-soft/40" />
-          <span>{item.date}</span>
+          <span>{formatDate(item.data_publicacao)}</span>
         </div>
       </div>
 
       <div className="w-full h-64 md:h-[420px] bg-[#E5E7EB] overflow-hidden">
         <img
           src={src}
-          alt={item.title}
+          alt={item.titulo}
           width={1280}
           height={600}
           className="w-full h-full object-cover"
           onError={(e) => {
             const el = e.currentTarget;
-            if (el.src !== DEFAULT_NEWS_IMAGE) el.src = DEFAULT_NEWS_IMAGE;
+            if (!el.src.endsWith(DEFAULT_NEWS_IMAGE)) el.src = DEFAULT_NEWS_IMAGE;
           }}
         />
       </div>
 
       <div className="mx-auto max-w-[820px] px-6 md:px-10 py-10 md:py-14">
-        <div className="prose prose-lg max-w-none text-[16px] md:text-[17px] leading-[1.8] text-ink">
-          <p className="font-medium text-navy text-[18px] md:text-[19px] leading-relaxed">
-            {item.excerpt}
-          </p>
-          <p>
-            A ACEFS, em sua missão de representar e fortalecer o empresariado de Feira de Santana e região, acompanha de perto as principais pautas que movimentam o cenário econômico local. Este comunicado tem o objetivo de informar associados, parceiros e a comunidade empresarial sobre os detalhes desta iniciativa e seu impacto no desenvolvimento regional.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          </p>
-          <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-          </p>
-          <h2 className="font-display font-semibold text-[22px] md:text-[24px] text-navy mt-10 mb-4">
-            Impacto para o empresariado local
-          </h2>
-          <p>
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-          </p>
-          <p>
-            A ACEFS segue à disposição de seus associados para esclarecimentos, apoio institucional e acesso aos benefícios oferecidos pela associação. Para mais informações, entre em contato com nossa equipe ou acompanhe as próximas comunicações em nossos canais oficiais.
-          </p>
+        <div className="max-w-none text-[16px] md:text-[17px] leading-[1.8] text-ink space-y-5">
+          {item.resumo && (
+            <p className="font-medium text-navy text-[18px] md:text-[19px] leading-relaxed">
+              {item.resumo}
+            </p>
+          )}
+          {paragraphs.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
         </div>
 
         <div className="mt-12 pt-8 border-t border-line">
