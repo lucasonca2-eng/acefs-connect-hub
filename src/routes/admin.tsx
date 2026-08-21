@@ -120,14 +120,14 @@ function AdminLayout() {
             )}
             <SideLink to="/admin/noticias" icon={<Newspaper size={16} />} label="Notícias" />
             {!isJournalist && (
-            <>
-              <SideLink to="/admin/paginas" icon={<FileText size={16} />} label="Páginas institucionais" />
-              <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
-              <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
-              <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
-              <SideLink to="/admin/ajuda" icon={<HelpCircle size={16} />} label="Ajuda" />
-            </>
+              <>
+                <SideLink to="/admin/paginas" icon={<FileText size={16} />} label="Páginas institucionais" />
+                <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
+                <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
+                <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+              </>
             )}
+            <SideLink to="/admin/ajuda" icon={<HelpCircle size={16} />} label="Ajuda" />
           </nav>
           <button
             onClick={signOut}
