@@ -1,9 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
+export type TeamRole = "admin" | "jornalista";
+
 export type TeamMember = {
   userId: string;
   email: string;
+  role: TeamRole;
   createdAt: string;
 };
 
@@ -23,8 +26,8 @@ export const listAdmins = createServerFn({ method: "GET" })
 
     const { data: roles, error } = await supabaseAdmin
       .from("user_roles")
-      .select("user_id, created_at")
-      .eq("role", "admin")
+      .select("user_id, role, created_at")
+      .in("role", ["admin", "jornalista"])
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
 
@@ -33,6 +36,7 @@ export const listAdmins = createServerFn({ method: "GET" })
 
     return (roles ?? []).map((r) => ({
       userId: r.user_id,
+      role: r.role as TeamRole,
       email: byId.get(r.user_id) ?? "(conta removida)",
       createdAt: r.created_at,
     }));
@@ -40,12 +44,13 @@ export const listAdmins = createServerFn({ method: "GET" })
 
 export const createAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { email: string; password: string }) => {
+  .inputValidator((input: { email: string; password: string; role: TeamRole }) => {
     const email = String(input?.email ?? "").trim().toLowerCase();
     const password = String(input?.password ?? "");
+    const role = input?.role === "jornalista" ? "jornalista" : "admin";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("E-mail inválido");
     if (password.length < 8) throw new Error("A senha precisa ter ao menos 8 caracteres");
-    return { email, password };
+    return { email, password, role: role as TeamRole };
   })
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
@@ -60,10 +65,10 @@ export const createAdmin = createServerFn({ method: "POST" })
 
     const { error: roleError } = await supabaseAdmin
       .from("user_roles")
-      .insert({ user_id: created.user.id, role: "admin" });
+      .insert({ user_id: created.user.id, role: data.role });
     if (roleError) throw new Error(roleError.message);
 
-    return { userId: created.user.id, email: data.email };
+    return { userId: created.user.id, email: data.email, role: data.role };
   });
 
 export const removeAdmin = createServerFn({ method: "POST" })
