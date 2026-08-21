@@ -2,10 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
 import { AnimatedLogo } from "@/components/animated-logo";
+import { useSettings } from "@/hooks/use-cms";
+import { parseLinks } from "@/lib/cms";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { data: settings } = useSettings();
+  const nav = parseLinks(settings?.menu_links, [...NAV]);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
