@@ -25,6 +25,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
+import { Route as AdminServicosRouteImport } from './routes/admin.servicos'
 import { Route as AdminRedefinirSenhaRouteImport } from './routes/admin.redefinir-senha'
 import { Route as AdminRecuperarSenhaRouteImport } from './routes/admin.recuperar-senha'
 import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
@@ -111,6 +112,11 @@ const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   path: '/noticia/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminServicosRoute = AdminServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRedefinirSenhaRoute = AdminRedefinirSenhaRouteImport.update({
   id: '/redefinir-senha',
   path: '/redefinir-senha',
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin'
   id:
@@ -273,6 +284,7 @@ export interface FileRouteTypes {
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -409,6 +421,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/servicos': {
+      id: '/admin/servicos'
+      path: '/servicos'
+      fullPath: '/admin/servicos'
+      preLoaderRoute: typeof AdminServicosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/redefinir-senha': {
       id: '/admin/redefinir-senha'
       path: '/redefinir-senha'
@@ -453,6 +472,7 @@ interface AdminRouteChildren {
   AdminNoticiasRoute: typeof AdminNoticiasRoute
   AdminRecuperarSenhaRoute: typeof AdminRecuperarSenhaRoute
   AdminRedefinirSenhaRoute: typeof AdminRedefinirSenhaRoute
+  AdminServicosRoute: typeof AdminServicosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -462,6 +482,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminNoticiasRoute: AdminNoticiasRoute,
   AdminRecuperarSenhaRoute: AdminRecuperarSenhaRoute,
   AdminRedefinirSenhaRoute: AdminRedefinirSenhaRoute,
+  AdminServicosRoute: AdminServicosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
