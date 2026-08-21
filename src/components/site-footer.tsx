@@ -1,7 +1,22 @@
 import { Link } from "@tanstack/react-router";
 import { AnimatedLogo } from "@/components/animated-logo";
+import { useSettings } from "@/hooks/use-cms";
+import { parseLinks } from "@/lib/cms";
+
+const DEFAULT_DESC =
+  "Associação Comercial e Empresarial de Feira de Santana. Representando, defendendo e fortalecendo o empresariado baiano há mais de oito décadas.";
+
+const DEFAULT_INSTITUCIONAL = [
+  { label: "Quem Somos", to: "/quem-somos" },
+  { label: "Notícias", to: "/noticias" },
+  { label: "Contato", to: "/contato" },
+];
 
 export function SiteFooter() {
+  const { data: settings } = useSettings();
+  const descricao = settings?.rodape_descricao?.trim() || DEFAULT_DESC;
+  const institucional = parseLinks(settings?.rodape_links_institucionais, DEFAULT_INSTITUCIONAL);
+
   return (
     <footer className="bg-navy-deep text-white/75 mt-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
