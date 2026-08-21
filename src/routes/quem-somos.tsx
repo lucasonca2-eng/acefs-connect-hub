@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { useSettings } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/quem-somos")({
   head: () => ({
