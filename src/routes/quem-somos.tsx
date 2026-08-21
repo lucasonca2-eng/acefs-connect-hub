@@ -25,15 +25,21 @@ function QuemSomos() {
         <div className="mx-auto max-w-[1080px] px-6 md:px-10 grid md:grid-cols-12 gap-10">
           <div className="md:col-span-7 space-y-5 text-[16px] leading-relaxed text-ink">
             <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy leading-tight">Nossa história</h2>
-            <p>
-              A Associação Comercial e Empresarial de Feira de Santana foi fundada em 1945, no auge do crescimento comercial da cidade, por um grupo de empresários que compreendia a importância da união e da representação coletiva.
-            </p>
-            <p>
-              Ao longo de mais de oito décadas, a ACEFS consolidou-se como referência institucional na Bahia, sendo filiada à CACB (Confederação das Associações Comerciais e Empresariais do Brasil) e membro fundador da FACEB (Federação das Associações Comerciais e Empresariais da Bahia).
-            </p>
-            <p>
-              Hoje, reunimos uma gama de empresas associadas, atuando em prol do desenvolvimento econômico, da defesa dos interesses do empresariado e da geração de oportunidades para toda a região.
-            </p>
+            {texto ? (
+              <div className="cms-content" dangerouslySetInnerHTML={{ __html: texto }} />
+            ) : (
+              <>
+                <p>
+                  A Associação Comercial e Empresarial de Feira de Santana foi fundada em 1945, no auge do crescimento comercial da cidade, por um grupo de empresários que compreendia a importância da união e da representação coletiva.
+                </p>
+                <p>
+                  Ao longo de mais de oito décadas, a ACEFS consolidou-se como referência institucional na Bahia, sendo filiada à CACB (Confederação das Associações Comerciais e Empresariais do Brasil) e membro fundador da FACEB (Federação das Associações Comerciais e Empresariais da Bahia).
+                </p>
+                <p>
+                  Hoje, reunimos uma gama de empresas associadas, atuando em prol do desenvolvimento econômico, da defesa dos interesses do empresariado e da geração de oportunidades para toda a região.
+                </p>
+              </>
+            )}
           </div>
           <aside className="md:col-span-5">
             <div className="rounded-lg overflow-hidden border border-line">
