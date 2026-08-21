@@ -135,7 +135,24 @@ function AdminLayout() {
           </button>
         </aside>
         <main className="min-w-0">
-          <Outlet />
+          {journalistBlocked ? (
+            <div className="bg-white border border-line rounded-lg p-8 text-center">
+              <h1 className="font-display font-semibold text-[22px] text-navy mb-2">
+                Área restrita a administradores
+              </h1>
+              <p className="text-[14px] text-ink-soft">
+                Seu perfil de jornalista tem acesso apenas à gestão de notícias.
+              </p>
+              <Link
+                to="/admin/noticias"
+                className="mt-6 inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors"
+              >
+                Ir para Notícias
+              </Link>
+            </div>
+          ) : (
+            <Outlet />
+          )}
         </main>
       </div>
     </div>
