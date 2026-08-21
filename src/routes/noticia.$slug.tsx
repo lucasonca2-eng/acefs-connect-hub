@@ -47,7 +47,9 @@ function NoticiaDetalhe() {
   }
 
   const src = item.imagem_capa_url || newsImage(item.slug, item.categoria);
-  const paragraphs = (item.conteudo ?? "").split(/\n\s*\n/).filter((p) => p.trim().length > 0);
+  const conteudo = item.conteudo ?? "";
+  const isHtml = /<\/?(p|h[1-6]|ul|ol|li|strong|em|br|a)\b/i.test(conteudo);
+  const paragraphs = conteudo.split(/\n\s*\n/).filter((p) => p.trim().length > 0);
 
   return (
     <article className="bg-white">
@@ -94,9 +96,11 @@ function NoticiaDetalhe() {
               {item.resumo}
             </p>
           )}
-          {paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          {isHtml ? (
+            <div className="cms-content" dangerouslySetInnerHTML={{ __html: conteudo }} />
+          ) : (
+            paragraphs.map((p, i) => <p key={i}>{p}</p>)
+          )}
         </div>
 
         <div className="mt-12 pt-8 border-t border-line">

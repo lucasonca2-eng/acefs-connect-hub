@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchBanners, fetchNoticias, fetchSettings } from "@/lib/cms";
+import { fetchBanners, fetchNoticias, fetchSettings, fetchServicos, fetchEventos } from "@/lib/cms";
 
 export function useSettings() {
   return useQuery({ queryKey: ["settings"], queryFn: fetchSettings, staleTime: 60_000 });
@@ -17,6 +17,22 @@ export function useNoticias(onlyPublished = true) {
   return useQuery({
     queryKey: ["noticias", onlyPublished],
     queryFn: () => fetchNoticias(onlyPublished),
+    staleTime: 60_000,
+  });
+}
+
+export function useServicos(onlyActive = true) {
+  return useQuery({
+    queryKey: ["servicos", onlyActive],
+    queryFn: () => fetchServicos(onlyActive),
+    staleTime: 60_000,
+  });
+}
+
+export function useEventos(onlyActive = true) {
+  return useQuery({
+    queryKey: ["eventos", onlyActive],
+    queryFn: () => fetchEventos(onlyActive),
     staleTime: 60_000,
   });
 }

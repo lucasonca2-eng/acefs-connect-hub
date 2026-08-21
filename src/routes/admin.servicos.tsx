@@ -2,66 +2,62 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useNoticias } from "@/hooks/use-cms";
-import { slugify, formatDate, type Noticia } from "@/lib/cms";
+import { useServicos } from "@/hooks/use-cms";
+import { slugify, type Servico } from "@/lib/cms";
 import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
-import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { toast } from "sonner";
 import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
 
-export const Route = createFileRoute("/admin/noticias")({
+export const Route = createFileRoute("/admin/servicos")({
   ssr: false,
-  component: AdminNoticias,
+  component: AdminServicos,
 });
-
-const CATEGORIAS = ["Encontro", "Formação", "Parceria", "Institucional", "Evento", "Reconhecimento"];
 
 type Draft = {
   id?: string;
   titulo: string;
   slug: string;
-  resumo: string;
-  conteudo: string;
-  categoria: string;
-  imagem_capa_url: string;
-  data_publicacao: string;
-  publicado: boolean;
+  descricao_curta: string;
+  conteudo_detalhado: string;
+  imagem_url: string;
+  link_externo: string;
+  ordem: number;
+  ativo: boolean;
 };
-
-const today = () => new Date().toISOString().slice(0, 10);
 
 const EMPTY: Draft = {
   titulo: "",
   slug: "",
-  resumo: "",
-  conteudo: "",
-  categoria: "Institucional",
-  imagem_capa_url: "",
-  data_publicacao: today(),
-  publicado: true,
+  descricao_curta: "",
+  conteudo_detalhado: "",
+  imagem_url: "",
+  link_externo: "",
+  ordem: 0,
+  ativo: true,
 };
 
-function AdminNoticias() {
-  const { data: noticias, isLoading } = useNoticias(false);
+function AdminServicos() {
+  const { data: servicos, isLoading } = useServicos(false);
   const qc = useQueryClient();
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
 
-  const refresh = () => qc.invalidateQueries({ queryKey: ["noticias"] });
+  const refresh = () => qc.invalidateQueries({ queryKey: ["servicos"] });
 
-  function edit(n: Noticia) {
+  function edit(s: Servico) {
     setDraft({
-      id: n.id,
-      titulo: n.titulo,
-      slug: n.slug,
-      resumo: n.resumo ?? "",
-      conteudo: n.conteudo ?? "",
-      categoria: n.categoria,
-      imagem_capa_url: n.imagem_capa_url ?? "",
-      data_publicacao: n.data_publicacao.slice(0, 10),
-      publicado: n.publicado,
+      id: s.id,
+      titulo: s.titulo,
+      slug: s.slug,
+      descricao_curta: s.descricao_curta ?? "",
+      conteudo_detalhado: s.conteudo_detalhado ?? "",
+      imagem_url: s.imagem_url ?? "",
+      link_externo: s.link_externo ?? "",
+      ordem: s.ordem,
+      ativo: s.ativo,
     });
   }
 
@@ -69,44 +65,42 @@ function AdminNoticias() {
     if (!draft) return;
     const slug = (draft.slug || slugify(draft.titulo)).trim();
     if (!draft.titulo.trim() || !slug) {
-      toast.error("Informe o título da notícia.");
+      toast.error("Informe o título do serviço.");
       return;
     }
     setSaving(true);
     const payload = {
       titulo: draft.titulo,
       slug,
-      resumo: draft.resumo || null,
-      conteudo: draft.conteudo || null,
-      categoria: draft.categoria,
-      imagem_capa_url: draft.imagem_capa_url || null,
-      data_publicacao: new Date(`${draft.data_publicacao}T12:00:00`).toISOString(),
-      publicado: draft.publicado,
+      descricao_curta: draft.descricao_curta || null,
+      conteudo_detalhado: draft.conteudo_detalhado || null,
+      imagem_url: draft.imagem_url || null,
+      link_externo: draft.link_externo || null,
+      ordem: Number(draft.ordem) || 0,
+      ativo: draft.ativo,
     };
     const { error } = draft.id
-      ? await supabase.from("noticias").update(payload).eq("id", draft.id)
-      : await supabase.from("noticias").insert(payload);
+      ? await supabase.from("servicos").update(payload).eq("id", draft.id)
+      : await supabase.from("servicos").insert(payload);
     setSaving(false);
     if (error) {
       toast.error(
-        error.code === "23505"
-          ? "Já existe uma notícia com esse endereço (slug)."
-          : "Não foi possível salvar a notícia.",
+        error.code === "23505" ? "Já existe um serviço com esse endereço (slug)." : "Não foi possível salvar.",
       );
       return;
     }
-    toast.success("Notícia salva.");
+    toast.success("Serviço salvo.");
     setDraft(null);
     void refresh();
   }
 
   async function remove(id: string) {
-    const { error } = await supabase.from("noticias").delete().eq("id", id);
+    const { error } = await supabase.from("servicos").delete().eq("id", id);
     if (error) {
       toast.error("Não foi possível excluir.");
       return;
     }
-    toast.success("Notícia excluída.");
+    toast.success("Serviço excluído.");
     void refresh();
   }
 
@@ -115,14 +109,14 @@ function AdminNoticias() {
       <div className="bg-white border border-line rounded-lg p-6 md:p-8">
         <div className="flex items-start justify-between gap-4 mb-6">
           <div>
-            <h1 className="font-display font-semibold text-[26px] text-navy mb-1">Notícias</h1>
-            <p className="text-[14px] text-ink-soft">Publique e edite as matérias do site.</p>
+            <h1 className="font-display font-semibold text-[26px] text-navy mb-1">Serviços</h1>
+            <p className="text-[14px] text-ink-soft">Cadastre os serviços exibidos no site.</p>
           </div>
           <button
             onClick={() => setDraft({ ...EMPTY })}
             className="inline-flex items-center gap-2 bg-navy text-white px-4 py-2.5 rounded-md font-semibold text-[13px] hover:bg-navy-deep transition-colors active:scale-[0.99] cursor-pointer shrink-0"
           >
-            <Plus size={16} /> Nova notícia
+            <Plus size={16} /> Novo serviço
           </button>
         </div>
 
@@ -130,36 +124,37 @@ function AdminNoticias() {
           <div className="flex items-center gap-2 text-ink-soft text-[14px]">
             <Loader2 size={16} className="animate-spin" /> Carregando…
           </div>
-        ) : (noticias?.length ?? 0) === 0 ? (
-          <p className="text-[14px] text-ink-soft">Nenhuma notícia cadastrada.</p>
+        ) : (servicos?.length ?? 0) === 0 ? (
+          <p className="text-[14px] text-ink-soft">Nenhum serviço cadastrado.</p>
         ) : (
           <ul className="space-y-3">
-            {noticias!.map((n) => (
+            {servicos!.map((s) => (
               <li
-                key={n.id}
+                key={s.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
               >
-                <img
-                  src={n.imagem_capa_url ?? "/images/news/news-default.jpg"}
-                  alt={n.titulo}
-                  className="w-24 h-16 object-cover rounded bg-cream shrink-0"
-                />
+                <div className="w-24 h-16 rounded bg-cream overflow-hidden shrink-0 flex items-center justify-center">
+                  {s.imagem_url ? (
+                    <img src={s.imagem_url} alt={s.titulo} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-[11px] text-ink-soft">sem foto</span>
+                  )}
+                </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-[14px] font-semibold text-navy truncate">{n.titulo}</div>
-                  <div className="text-[12px] text-ink-soft">
-                    {n.categoria} · {formatDate(n.data_publicacao)} ·{" "}
-                    {n.publicado ? "publicada" : "rascunho"}
+                  <div className="text-[14px] font-semibold text-navy truncate">{s.titulo}</div>
+                  <div className="text-[12px] text-ink-soft truncate">
+                    ordem {s.ordem} · {s.ativo ? "ativo" : "oculto"}
                   </div>
                 </div>
                 <button
-                  onClick={() => edit(n)}
+                  onClick={() => edit(s)}
                   className="p-2 rounded-md text-ink-soft hover:text-navy hover:bg-cream cursor-pointer"
                   aria-label="Editar"
                 >
                   <Pencil size={16} />
                 </button>
                 <button
-                  onClick={() => setPendingDelete(n.id)}
+                  onClick={() => setPendingDelete(s.id)}
                   className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
                   aria-label="Excluir"
                 >
@@ -174,7 +169,7 @@ function AdminNoticias() {
       {draft && (
         <div className="bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[760px]">
           <h2 className="font-display font-semibold text-[20px] text-navy">
-            {draft.id ? "Editar notícia" : "Nova notícia"}
+            {draft.id ? "Editar serviço" : "Novo serviço"}
           </h2>
 
           <div className="space-y-1.5">
@@ -202,63 +197,57 @@ function AdminNoticias() {
           </div>
 
           <ImageField
-            label="Imagem de capa"
-            value={draft.imagem_capa_url}
-            folder="noticias"
-            onChange={(url) => setDraft({ ...draft, imagem_capa_url: url })}
+            label="Imagem do serviço"
+            value={draft.imagem_url}
+            folder="servicos"
+            onChange={(url) => setDraft({ ...draft, imagem_url: url })}
           />
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div className="space-y-1.5">
-              <label className="block text-[13px] font-semibold text-navy">Categoria</label>
-              <select
-                value={draft.categoria}
-                onChange={(e) => setDraft({ ...draft, categoria: e.target.value })}
-                className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy cursor-pointer bg-white"
-              >
-                {CATEGORIAS.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <label className="block text-[13px] font-semibold text-navy">Data de publicação</label>
-              <input
-                type="date"
-                value={draft.data_publicacao}
-                onChange={(e) => setDraft({ ...draft, data_publicacao: e.target.value })}
-                className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy"
-              />
-            </div>
-          </div>
-
           <div className="space-y-1.5">
-            <label className="block text-[13px] font-semibold text-navy">Resumo (chamada do card)</label>
+            <label className="block text-[13px] font-semibold text-navy">Descrição curta (card)</label>
             <textarea
-              rows={2}
-              value={draft.resumo}
-              onChange={(e) => setDraft({ ...draft, resumo: e.target.value })}
+              rows={3}
+              value={draft.descricao_curta}
+              onChange={(e) => setDraft({ ...draft, descricao_curta: e.target.value })}
               className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy resize-y"
             />
           </div>
 
           <RichTextEditor
-            label="Conteúdo completo da matéria"
-            value={draft.conteudo}
-            onChange={(html) => setDraft({ ...draft, conteudo: html })}
-            minHeight={340}
+            label="Conteúdo detalhado"
+            value={draft.conteudo_detalhado}
+            onChange={(html) => setDraft({ ...draft, conteudo_detalhado: html })}
           />
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="space-y-1.5">
+              <label className="block text-[13px] font-semibold text-navy">Link externo (opcional)</label>
+              <input
+                value={draft.link_externo}
+                onChange={(e) => setDraft({ ...draft, link_externo: e.target.value })}
+                placeholder="https://wa.me/..."
+                className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="block text-[13px] font-semibold text-navy">Ordem de exibição</label>
+              <input
+                type="number"
+                value={draft.ordem}
+                onChange={(e) => setDraft({ ...draft, ordem: Number(e.target.value) })}
+                className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy"
+              />
+            </div>
+          </div>
 
           <label className="flex items-center gap-2 text-[14px] text-navy font-medium cursor-pointer">
             <input
               type="checkbox"
-              checked={draft.publicado}
-              onChange={(e) => setDraft({ ...draft, publicado: e.target.checked })}
+              checked={draft.ativo}
+              onChange={(e) => setDraft({ ...draft, ativo: e.target.checked })}
               className="w-4 h-4 cursor-pointer"
             />
-            Publicada no site
+            Visível no site
           </label>
 
           <div className="flex gap-3">
@@ -278,10 +267,11 @@ function AdminNoticias() {
           </div>
         </div>
       )}
+
       <ConfirmDialog
         open={!!pendingDelete}
         onOpenChange={(o) => !o && setPendingDelete(null)}
-        description="Esta ação não pode ser desfeita. O item será removido do site imediatamente."
+        description="Esta ação não pode ser desfeita. O serviço será removido do site imediatamente."
         onConfirm={() => {
           const id = pendingDelete;
           setPendingDelete(null);

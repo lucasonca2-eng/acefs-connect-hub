@@ -47,6 +47,54 @@ export type Database = {
         }
         Relationships: []
       }
+      eventos: {
+        Row: {
+          ativo: boolean
+          conteudo_detalhado: string | null
+          created_at: string
+          data_evento: string
+          descricao: string | null
+          id: string
+          imagem_url: string | null
+          link_inscricao: string | null
+          local: string | null
+          ordem: number
+          slug: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          conteudo_detalhado?: string | null
+          created_at?: string
+          data_evento?: string
+          descricao?: string | null
+          id?: string
+          imagem_url?: string | null
+          link_inscricao?: string | null
+          local?: string | null
+          ordem?: number
+          slug: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          conteudo_detalhado?: string | null
+          created_at?: string
+          data_evento?: string
+          descricao?: string | null
+          id?: string
+          imagem_url?: string | null
+          link_inscricao?: string | null
+          local?: string | null
+          ordem?: number
+          slug?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       noticias: {
         Row: {
           categoria: string
@@ -83,6 +131,48 @@ export type Database = {
           imagem_capa_url?: string | null
           publicado?: boolean
           resumo?: string | null
+          slug?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      servicos: {
+        Row: {
+          ativo: boolean
+          conteudo_detalhado: string | null
+          created_at: string
+          descricao_curta: string | null
+          id: string
+          imagem_url: string | null
+          link_externo: string | null
+          ordem: number
+          slug: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          conteudo_detalhado?: string | null
+          created_at?: string
+          descricao_curta?: string | null
+          id?: string
+          imagem_url?: string | null
+          link_externo?: string | null
+          ordem?: number
+          slug: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          conteudo_detalhado?: string | null
+          created_at?: string
+          descricao_curta?: string | null
+          id?: string
+          imagem_url?: string | null
+          link_externo?: string | null
+          ordem?: number
           slug?: string
           titulo?: string
           updated_at?: string

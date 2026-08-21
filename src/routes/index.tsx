@@ -4,7 +4,8 @@ import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { NewsCard } from "@/components/news-card";
-import { useNoticias } from "@/hooks/use-cms";
+import { useNoticias, useEventos } from "@/hooks/use-cms";
+import { formatDate } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +33,7 @@ function Home() {
       <AboutTeaser />
       <RadioSection />
       <NewsTeaser />
+      <EventsTeaser />
       <CTABand />
     </>
   );
@@ -281,6 +283,53 @@ function NewsTeaser() {
         <div className="grid md:grid-cols-3 gap-6">
           {items.map((n) => (
             <NewsCard key={n.slug} item={n} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EventsTeaser() {
+  const { data } = useEventos(true);
+  const items = (data ?? []).slice(0, 3);
+  if (items.length === 0) return null;
+  return (
+    <section className="bg-cream py-20 md:py-24">
+      <div className="mx-auto max-w-[1240px] px-6 md:px-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <div className="text-[11px] tracking-[0.22em] uppercase text-gold font-semibold mb-3">Agenda</div>
+            <h2 className="font-display font-semibold text-[clamp(28px,3.6vw,42px)] leading-tight tracking-tight text-navy">
+              Próximos eventos da ACEFS.
+            </h2>
+          </div>
+          <Link to="/eventos" className="text-navy font-semibold text-[14px] hover:text-gold inline-flex items-center gap-2">
+            Ver agenda completa <Arrow />
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {items.map((ev) => (
+            <article
+              key={ev.id}
+              className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+                {ev.imagem_url && (
+                  <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" loading="lazy" />
+                )}
+              </div>
+              <div className="p-6">
+                <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-gold mb-2">
+                  {formatDate(ev.data_evento)}
+                </div>
+                <h3 className="font-display font-semibold text-[19px] leading-snug text-navy mb-2">{ev.titulo}</h3>
+                {ev.local && <p className="text-[13px] text-ink-soft mb-2">{ev.local}</p>}
+                {ev.descricao && (
+                  <p className="text-[14px] leading-relaxed text-ink-soft line-clamp-3">{ev.descricao}</p>
+                )}
+              </div>
+            </article>
           ))}
         </div>
       </div>

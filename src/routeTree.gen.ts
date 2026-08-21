@@ -25,9 +25,11 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
+import { Route as AdminServicosRouteImport } from './routes/admin.servicos'
 import { Route as AdminRedefinirSenhaRouteImport } from './routes/admin.redefinir-senha'
 import { Route as AdminRecuperarSenhaRouteImport } from './routes/admin.recuperar-senha'
 import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
+import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
 import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
 import { Route as AdminBannersRouteImport } from './routes/admin.banners'
 
@@ -111,6 +113,11 @@ const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   path: '/noticia/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminServicosRoute = AdminServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRedefinirSenhaRoute = AdminRedefinirSenhaRouteImport.update({
   id: '/redefinir-senha',
   path: '/redefinir-senha',
@@ -124,6 +131,11 @@ const AdminRecuperarSenhaRoute = AdminRecuperarSenhaRouteImport.update({
 const AdminNoticiasRoute = AdminNoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventosRoute = AdminEventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminEquipeRoute = AdminEquipeRouteImport.update({
@@ -154,9 +166,11 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
+  '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -176,9 +190,11 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
+  '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -200,9 +216,11 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
+  '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
+  '/admin/servicos': typeof AdminServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -225,9 +243,11 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/banners'
     | '/admin/equipe'
+    | '/admin/eventos'
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -247,9 +267,11 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/banners'
     | '/admin/equipe'
+    | '/admin/eventos'
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin'
   id:
@@ -270,9 +292,11 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/banners'
     | '/admin/equipe'
+    | '/admin/eventos'
     | '/admin/noticias'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
+    | '/admin/servicos'
     | '/noticia/$slug'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -409,6 +433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/servicos': {
+      id: '/admin/servicos'
+      path: '/servicos'
+      fullPath: '/admin/servicos'
+      preLoaderRoute: typeof AdminServicosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/redefinir-senha': {
       id: '/admin/redefinir-senha'
       path: '/redefinir-senha'
@@ -428,6 +459,13 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/admin/noticias'
       preLoaderRoute: typeof AdminNoticiasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eventos': {
+      id: '/admin/eventos'
+      path: '/eventos'
+      fullPath: '/admin/eventos'
+      preLoaderRoute: typeof AdminEventosRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/equipe': {
@@ -450,18 +488,22 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminBannersRoute: typeof AdminBannersRoute
   AdminEquipeRoute: typeof AdminEquipeRoute
+  AdminEventosRoute: typeof AdminEventosRoute
   AdminNoticiasRoute: typeof AdminNoticiasRoute
   AdminRecuperarSenhaRoute: typeof AdminRecuperarSenhaRoute
   AdminRedefinirSenhaRoute: typeof AdminRedefinirSenhaRoute
+  AdminServicosRoute: typeof AdminServicosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBannersRoute: AdminBannersRoute,
   AdminEquipeRoute: AdminEquipeRoute,
+  AdminEventosRoute: AdminEventosRoute,
   AdminNoticiasRoute: AdminNoticiasRoute,
   AdminRecuperarSenhaRoute: AdminRecuperarSenhaRoute,
   AdminRedefinirSenhaRoute: AdminRedefinirSenhaRoute,
+  AdminServicosRoute: AdminServicosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
