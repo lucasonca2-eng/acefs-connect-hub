@@ -53,7 +53,7 @@ export function SiteHeader() {
           </nav>
           <div className="hidden md:block">
             <a
-              href="https://linktr.ee/acefs"
+              href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-navy-deep transition-colors"
@@ -93,7 +93,7 @@ export function SiteHeader() {
               ))}
               <li className="pt-2">
                 <a
-                  href="https://linktr.ee/acefs"
+                  href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}

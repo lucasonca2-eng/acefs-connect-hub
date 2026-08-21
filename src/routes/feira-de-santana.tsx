@@ -85,7 +85,7 @@ function FeiraDeSantana() {
             Faça parte do comércio que constrói Feira de Santana.
           </h2>
           <a
-            href="https://linktr.ee/acefs"
+            href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
