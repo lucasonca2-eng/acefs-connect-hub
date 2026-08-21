@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { NEWS, SERVICES } from "@/lib/site-data";
-import { newsImage, DEFAULT_NEWS_IMAGE } from "@/lib/news-images";
+import { SERVICES } from "@/lib/site-data";
 import { ServiceIcon } from "@/components/service-icon";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { NewsCard } from "@/components/news-card";
+import { useNoticias } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
