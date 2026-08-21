@@ -1,0 +1,85 @@
+import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+
+export type TeamMember = {
+  userId: string;
+  email: string;
+  createdAt: string;
+};
+
+async function assertAdmin(context: { supabase: any; userId: string }) {
+  const { data, error } = await context.supabase.rpc("has_role", {
+    _user_id: context.userId,
+    _role: "admin",
+  });
+  if (error || !data) throw new Error("Forbidden");
+}
+
+export const listAdmins = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }): Promise<TeamMember[]> => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: roles, error } = await supabaseAdmin
+      .from("user_roles")
+      .select("user_id, created_at")
+      .eq("role", "admin")
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+
+    const { data: users } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
+    const byId = new Map((users?.users ?? []).map((u) => [u.id, u.email ?? ""]));
+
+    return (roles ?? []).map((r) => ({
+      userId: r.user_id,
+      email: byId.get(r.user_id) ?? "(conta removida)",
+      createdAt: r.created_at,
+    }));
+  });
+
+export const createAdmin = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { email: string; password: string }) => {
+    const email = String(input?.email ?? "").trim().toLowerCase();
+    const password = String(input?.password ?? "");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("E-mail inválido");
+    if (password.length < 8) throw new Error("A senha precisa ter ao menos 8 caracteres");
+    return { email, password };
+  })
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
+      email: data.email,
+      password: data.password,
+      email_confirm: true,
+    });
+    if (error || !created?.user) throw new Error(error?.message ?? "Não foi possível criar a conta");
+
+    const { error: roleError } = await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: created.user.id, role: "admin" });
+    if (roleError) throw new Error(roleError.message);
+
+    return { userId: created.user.id, email: data.email };
+  });
+
+export const removeAdmin = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { userId: string }) => {
+    const userId = String(input?.userId ?? "");
+    if (!/^[0-9a-f-]{36}$/i.test(userId)) throw new Error("Usuário inválido");
+    return { userId };
+  })
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    if (data.userId === context.userId) throw new Error("Você não pode remover o próprio acesso");
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(data.userId);
+    if (error) throw new Error(error.message);
+    await supabaseAdmin.from("user_roles").delete().eq("user_id", data.userId);
+    return { ok: true };
+  });
