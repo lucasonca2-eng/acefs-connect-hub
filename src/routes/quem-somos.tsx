@@ -102,7 +102,7 @@ function QuemSomos() {
             <h3 className="font-display font-semibold text-[22px] md:text-[28px] leading-tight max-w-2xl">
               Faça parte da maior rede empresarial da região.
             </h3>
-            <a href="https://linktr.ee/acefs" target="_blank" rel="noopener noreferrer" className="bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors">
+            <a href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana" target="_blank" rel="noopener noreferrer" className="bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors">
               Associe-se
             </a>
           </div>

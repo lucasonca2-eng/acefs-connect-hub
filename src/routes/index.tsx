@@ -63,7 +63,7 @@ function Hero() {
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a
-              href="https://linktr.ee/acefs"
+              href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gold text-navy-deep px-6 py-3.5 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors"
@@ -350,7 +350,7 @@ function CTABand() {
           </p>
         </div>
         <a
-          href="https://linktr.ee/acefs"
+          href="https://app.higestor.com.br/inscricao/empresa/associacao-comercial-de-feira-de-santana"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-gold text-navy-deep px-7 py-4 rounded-md font-semibold text-[14px] hover:bg-gold-soft transition-colors shrink-0"
