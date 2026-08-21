@@ -6,6 +6,7 @@ import { useNoticias } from "@/hooks/use-cms";
 import { slugify, formatDate, type Noticia } from "@/lib/cms";
 import { ImageField } from "@/components/admin/image-field";
 import { toast } from "sonner";
+import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
 
 export const Route = createFileRoute("/admin/noticias")({
@@ -45,6 +46,7 @@ function AdminNoticias() {
   const qc = useQueryClient();
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<string | null>(null);
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["noticias"] });
 
@@ -98,7 +100,6 @@ function AdminNoticias() {
   }
 
   async function remove(id: string) {
-    if (!confirm("Excluir esta notícia?")) return;
     const { error } = await supabase.from("noticias").delete().eq("id", id);
     if (error) {
       toast.error("Não foi possível excluir.");
@@ -157,7 +158,7 @@ function AdminNoticias() {
                   <Pencil size={16} />
                 </button>
                 <button
-                  onClick={() => remove(n.id)}
+                  onClick={() => setPendingDelete(n.id)}
                   className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
                   aria-label="Excluir"
                 >
@@ -281,6 +282,16 @@ function AdminNoticias() {
           </div>
         </div>
       )}
+      <ConfirmDialog
+        open={!!pendingDelete}
+        onOpenChange={(o) => !o && setPendingDelete(null)}
+        description="Esta ação não pode ser desfeita. O item será removido do site imediatamente."
+        onConfirm={() => {
+          const id = pendingDelete;
+          setPendingDelete(null);
+          if (id) void remove(id);
+        }}
+      />
     </div>
   );
 }
