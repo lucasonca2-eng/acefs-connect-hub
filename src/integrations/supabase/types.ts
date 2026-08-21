@@ -185,11 +185,16 @@ export type Database = {
           email: string | null
           endereco: string | null
           facebook_url: string | null
+          feira_de_santana_texto: string | null
           id: string
           instagram_url: string | null
           linkedin_url: string | null
           logo_branca_url: string | null
           logo_url: string | null
+          menu_links: Json
+          rodape_descricao: string | null
+          rodape_links_institucionais: Json
+          sobre_nos_texto: string | null
           telefone: string | null
           updated_at: string
           whatsapp: string | null
@@ -200,11 +205,16 @@ export type Database = {
           email?: string | null
           endereco?: string | null
           facebook_url?: string | null
+          feira_de_santana_texto?: string | null
           id?: string
           instagram_url?: string | null
           linkedin_url?: string | null
           logo_branca_url?: string | null
           logo_url?: string | null
+          menu_links?: Json
+          rodape_descricao?: string | null
+          rodape_links_institucionais?: Json
+          sobre_nos_texto?: string | null
           telefone?: string | null
           updated_at?: string
           whatsapp?: string | null
@@ -215,11 +225,16 @@ export type Database = {
           email?: string | null
           endereco?: string | null
           facebook_url?: string | null
+          feira_de_santana_texto?: string | null
           id?: string
           instagram_url?: string | null
           linkedin_url?: string | null
           logo_branca_url?: string | null
           logo_url?: string | null
+          menu_links?: Json
+          rodape_descricao?: string | null
+          rodape_links_institucionais?: Json
+          sobre_nos_texto?: string | null
           telefone?: string | null
           updated_at?: string
           whatsapp?: string | null
