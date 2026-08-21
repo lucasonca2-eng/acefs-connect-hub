@@ -33,6 +33,7 @@ import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
 import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
 import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
 import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminAjudaRouteImport } from './routes/admin.ajuda'
 
 const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
@@ -154,6 +155,11 @@ const AdminBannersRoute = AdminBannersRouteImport.update({
   path: '/banners',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAjudaRoute = AdminAjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/ajuda'
     | '/admin/banners'
     | '/admin/equipe'
     | '/admin/eventos'
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/ajuda'
     | '/admin/banners'
     | '/admin/equipe'
     | '/admin/eventos'
@@ -301,6 +312,7 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/ajuda'
     | '/admin/banners'
     | '/admin/equipe'
     | '/admin/eventos'
@@ -501,10 +513,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBannersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/ajuda': {
+      id: '/admin/ajuda'
+      path: '/ajuda'
+      fullPath: '/admin/ajuda'
+      preLoaderRoute: typeof AdminAjudaRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAjudaRoute: typeof AdminAjudaRoute
   AdminBannersRoute: typeof AdminBannersRoute
   AdminEquipeRoute: typeof AdminEquipeRoute
   AdminEventosRoute: typeof AdminEventosRoute
@@ -517,6 +537,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAjudaRoute: AdminAjudaRoute,
   AdminBannersRoute: AdminBannersRoute,
   AdminEquipeRoute: AdminEquipeRoute,
   AdminEventosRoute: AdminEventosRoute,
