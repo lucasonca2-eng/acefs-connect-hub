@@ -294,8 +294,8 @@ export function NewsCard({
   const src = newsImage(item.slug, item.category);
   return (
     <Link
-      to="/noticias"
-      hash={item.slug}
+      to="/noticia/$slug"
+      params={{ slug: item.slug }}
       target="_blank"
       rel="noopener noreferrer"
       className="group block bg-white border border-line rounded-lg overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
