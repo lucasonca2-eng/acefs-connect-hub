@@ -24,16 +24,10 @@ export function SiteFooter() {
           <div className="flex items-center gap-3 mb-5">
             <AnimatedLogo variant="white" />
           </div>
-          <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">
-            Associação Comercial e Empresarial de Feira de Santana. Representando, defendendo e fortalecendo o empresariado baiano há mais de oito décadas.
-          </p>
+          <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">{descricao}</p>
         </div>
 
-        <FooterCol title="Institucional" links={[
-          { label: "Quem Somos", to: "/quem-somos" },
-          { label: "Notícias", to: "/noticias" },
-          { label: "Contato", to: "/contato" },
-        ]} />
+        <FooterCol title="Institucional" links={institucional} />
 
         <FooterCol title="Serviços" links={[
           { label: "SCPC · Boa Vista", to: "/servicos" },
