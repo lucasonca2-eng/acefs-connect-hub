@@ -56,19 +56,38 @@ export const createAdmin = createServerFn({ method: "POST" })
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
+    let userId: string | null = null;
+
     const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
       email: data.email,
       password: data.password,
       email_confirm: true,
     });
-    if (error || !created?.user) throw new Error(error?.message ?? "Não foi possível criar a conta");
+
+    if (created?.user) {
+      userId = created.user.id;
+    } else {
+      // Conta já existente: reaproveita o usuário e apenas garante a senha/role.
+      const { data: list } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
+      const existing = (list?.users ?? []).find(
+        (u) => (u.email ?? "").toLowerCase() === data.email,
+      );
+      if (!existing) {
+        throw new Error(error?.message ?? "Não foi possível criar a conta");
+      }
+      userId = existing.id;
+      await supabaseAdmin.auth.admin.updateUserById(userId, {
+        password: data.password,
+        email_confirm: true,
+      });
+    }
 
     const { error: roleError } = await supabaseAdmin
       .from("user_roles")
-      .insert({ user_id: created.user.id, role: data.role });
+      .upsert({ user_id: userId, role: data.role }, { onConflict: "user_id,role" });
     if (roleError) throw new Error(roleError.message);
 
-    return { userId: created.user.id, email: data.email, role: data.role };
+    return { userId, email: data.email, role: data.role };
   });
 
 export const removeAdmin = createServerFn({ method: "POST" })
