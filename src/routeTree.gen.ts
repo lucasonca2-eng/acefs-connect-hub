@@ -21,8 +21,12 @@ import { Route as DiretoriaRouteImport } from './routes/diretoria'
 import { Route as CurriculoRouteImport } from './routes/curriculo'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ArtigosRouteImport } from './routes/artigos'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
+import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
+import { Route as AdminBannersRouteImport } from './routes/admin.banners'
 
 const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
@@ -84,19 +88,40 @@ const ArtigosRoute = ArtigosRouteImport.update({
   path: '/artigos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   id: '/noticia/$slug',
   path: '/noticia/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNoticiasRoute = AdminNoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBannersRoute = AdminBannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
   '/curriculo': typeof CurriculoRoute
@@ -109,7 +134,10 @@ export interface FileRoutesByFullPath {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/noticias': typeof AdminNoticiasRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,11 +153,15 @@ export interface FileRoutesByTo {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/noticias': typeof AdminNoticiasRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
   '/curriculo': typeof CurriculoRoute
@@ -142,12 +174,16 @@ export interface FileRoutesById {
   '/parceiros': typeof ParceirosRoute
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/noticias': typeof AdminNoticiasRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/artigos'
     | '/contato'
     | '/curriculo'
@@ -160,7 +196,10 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/banners'
+    | '/admin/noticias'
     | '/noticia/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,10 +215,14 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/banners'
+    | '/admin/noticias'
     | '/noticia/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/artigos'
     | '/contato'
     | '/curriculo'
@@ -192,11 +235,15 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/quem-somos'
     | '/servicos'
+    | '/admin/banners'
+    | '/admin/noticias'
     | '/noticia/$slug'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ArtigosRoute: typeof ArtigosRoute
   ContatoRoute: typeof ContatoRoute
   CurriculoRoute: typeof CurriculoRoute
@@ -298,12 +345,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtigosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/noticia/$slug': {
       id: '/noticia/$slug'
@@ -312,11 +373,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/noticias': {
+      id: '/admin/noticias'
+      path: '/noticias'
+      fullPath: '/admin/noticias'
+      preLoaderRoute: typeof AdminNoticiasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/banners': {
+      id: '/admin/banners'
+      path: '/banners'
+      fullPath: '/admin/banners'
+      preLoaderRoute: typeof AdminBannersRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminBannersRoute: typeof AdminBannersRoute
+  AdminNoticiasRoute: typeof AdminNoticiasRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBannersRoute: AdminBannersRoute,
+  AdminNoticiasRoute: AdminNoticiasRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   ArtigosRoute: ArtigosRoute,
   ContatoRoute: ContatoRoute,
   CurriculoRoute: CurriculoRoute,

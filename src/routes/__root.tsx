@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
 import { RadioMiniPlayer } from "../components/radio-player";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -139,6 +140,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <RadioMiniPlayer />
+        <Toaster />
       </div>
     </QueryClientProvider>
   );

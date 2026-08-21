@@ -1,14 +1,19 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { NEWS } from "@/lib/site-data";
-import { NewsCard } from "./index";
+import { NewsCard } from "@/components/news-card";
+import { useNoticias } from "@/hooks/use-cms";
 import { PageHeader } from "./quem-somos";
+import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
     meta: [
       { title: "Notícias — ACEFS" },
-      { name: "description", content: "Acompanhe as últimas notícias, eventos e comunicados da Associação Comercial e Empresarial de Feira de Santana." },
+      {
+        name: "description",
+        content:
+          "Acompanhe as últimas notícias, eventos e comunicados da Associação Comercial e Empresarial de Feira de Santana.",
+      },
       { property: "og:title", content: "Notícias — ACEFS" },
       { property: "og:description", content: "Últimas notícias e eventos da ACEFS." },
     ],
@@ -16,11 +21,21 @@ export const Route = createFileRoute("/noticias")({
   component: Noticias,
 });
 
-const CATEGORIES = ["Todas", "Encontro", "Formação", "Parceria", "Institucional", "Evento"] as const;
+const CATEGORIES = [
+  "Todas",
+  "Encontro",
+  "Formação",
+  "Parceria",
+  "Institucional",
+  "Evento",
+  "Reconhecimento",
+] as const;
 
 function Noticias() {
   const [active, setActive] = useState<string>("Todas");
-  const filtered = active === "Todas" ? NEWS : NEWS.filter((n) => n.category === active);
+  const { data, isLoading } = useNoticias(true);
+  const news = data ?? [];
+  const filtered = active === "Todas" ? news : news.filter((n) => n.categoria === active);
 
   return (
     <>
@@ -50,7 +65,11 @@ function Noticias() {
             })}
           </div>
 
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center gap-2 text-ink-soft text-[14px] py-10">
+              <Loader2 size={16} className="animate-spin" /> Carregando notícias…
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-16 text-ink-soft">
               <p className="text-[15px]">Nenhuma notícia encontrada para essa categoria.</p>
               <button
@@ -62,8 +81,8 @@ function Noticias() {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((n, i) => (
-                <NewsCard key={n.slug} item={n} tone={i % 3 === 0 ? "navy" : i % 3 === 1 ? "gold" : "muted"} />
+              {filtered.map((n) => (
+                <NewsCard key={n.slug} item={n} />
               ))}
             </div>
           )}
