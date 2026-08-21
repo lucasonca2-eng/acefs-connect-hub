@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SERVICES } from "@/lib/site-data";
+import { useServicos } from "@/hooks/use-cms";
 import { ServiceIcon } from "@/components/service-icon";
 import { PageHeader } from "./quem-somos";
 
@@ -23,6 +24,7 @@ function Servicos() {
         title="Serviços para sua empresa"
         subtitle="Da consulta de crédito à formação de equipes, oferecemos soluções pensadas para o dia a dia do empresariado."
       />
+      <ServicosCms />
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-2 gap-6">
           {SERVICES.map((s) => (
@@ -66,5 +68,50 @@ function Servicos() {
         </div>
       </section>
     </>
+  );
+}
+function ServicosCms() {
+  const { data } = useServicos(true);
+  const items = data ?? [];
+  if (items.length === 0) return null;
+  return (
+    <section className="bg-white pt-16 md:pt-20">
+      <div className="mx-auto max-w-[1240px] px-6 md:px-10 grid md:grid-cols-3 gap-6">
+        {items.map((s) => (
+          <article
+            key={s.id}
+            className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+          >
+            {s.imagem_url && (
+              <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+                <img src={s.imagem_url} alt={s.titulo} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+            )}
+            <div className="p-6">
+              <h3 className="font-display font-semibold text-[20px] text-navy mb-2">{s.titulo}</h3>
+              {s.descricao_curta && (
+                <p className="text-[14px] text-ink-soft leading-relaxed mb-4">{s.descricao_curta}</p>
+              )}
+              {s.conteudo_detalhado && (
+                <div
+                  className="cms-content text-[14px] text-ink-soft leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: s.conteudo_detalhado }}
+                />
+              )}
+              {s.link_externo && (
+                <a
+                  href={s.link_externo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 text-navy font-semibold text-[14px] hover:text-gold"
+                >
+                  Saiba mais
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
