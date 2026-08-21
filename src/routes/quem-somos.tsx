@@ -14,6 +14,9 @@ export const Route = createFileRoute("/quem-somos")({
 });
 
 function QuemSomos() {
+  const { data: settings } = useSettings();
+  const texto = settings?.sobre_nos_texto?.trim() || "";
+
   return (
     <>
       <PageHeader
