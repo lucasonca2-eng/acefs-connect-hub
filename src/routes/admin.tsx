@@ -102,6 +102,8 @@ function AdminLayout() {
             <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
             <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
             <SideLink to="/admin/noticias" icon={<Newspaper size={16} />} label="Notícias" />
+            <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
+            <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
             <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
           </nav>
           <button
