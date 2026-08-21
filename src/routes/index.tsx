@@ -5,6 +5,7 @@ import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { NewsCard } from "@/components/news-card";
 import { useNoticias, useEventos } from "@/hooks/use-cms";
+import { formatDate } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
