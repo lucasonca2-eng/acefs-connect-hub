@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNoticias } from "@/hooks/use-cms";
 import { slugify, formatDate, type Noticia } from "@/lib/cms";
 import { ImageField } from "@/components/admin/image-field";
+import { RichTextEditor } from "@/components/admin/rich-text";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
@@ -243,17 +244,12 @@ function AdminNoticias() {
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="block text-[13px] font-semibold text-navy">
-              Conteúdo (uma linha em branco separa parágrafos)
-            </label>
-            <textarea
-              rows={12}
-              value={draft.conteudo}
-              onChange={(e) => setDraft({ ...draft, conteudo: e.target.value })}
-              className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] leading-relaxed outline-none focus:border-navy resize-y"
-            />
-          </div>
+          <RichTextEditor
+            label="Conteúdo completo da matéria"
+            value={draft.conteudo}
+            onChange={(html) => setDraft({ ...draft, conteudo: html })}
+            minHeight={340}
+          />
 
           <label className="flex items-center gap-2 text-[14px] text-navy font-medium cursor-pointer">
             <input
