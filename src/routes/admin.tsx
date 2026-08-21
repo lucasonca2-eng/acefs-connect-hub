@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useRouter, useRouterState } from "@tanst
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText } from "lucide-react";
+import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -127,6 +127,7 @@ function AdminLayout() {
                 <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
               </>
             )}
+            <SideLink to="/admin/ajuda" icon={<HelpCircle size={16} />} label="Ajuda" />
           </nav>
           <button
             onClick={signOut}
