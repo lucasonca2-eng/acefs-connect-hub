@@ -23,6 +23,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ArtigosRouteImport } from './routes/artigos'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
 
 const ServicosRoute = ServicosRouteImport.update({
@@ -95,6 +96,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   id: '/noticia/$slug',
   path: '/noticia/$slug',
@@ -103,7 +109,7 @@ const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
   '/curriculo': typeof CurriculoRoute
@@ -117,10 +123,10 @@ export interface FileRoutesByFullPath {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
   '/curriculo': typeof CurriculoRoute
@@ -134,11 +140,12 @@ export interface FileRoutesByTo {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/artigos': typeof ArtigosRoute
   '/contato': typeof ContatoRoute
   '/curriculo': typeof CurriculoRoute
@@ -152,6 +159,7 @@ export interface FileRoutesById {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,10 +179,10 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/noticia/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/artigos'
     | '/contato'
     | '/curriculo'
@@ -188,6 +196,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/noticia/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -205,11 +214,12 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/noticia/$slug'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ArtigosRoute: typeof ArtigosRoute
   ContatoRoute: typeof ContatoRoute
   CurriculoRoute: typeof CurriculoRoute
@@ -325,6 +335,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/noticia/$slug': {
       id: '/noticia/$slug'
       path: '/noticia/$slug'
@@ -335,9 +352,19 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   ArtigosRoute: ArtigosRoute,
   ContatoRoute: ContatoRoute,
   CurriculoRoute: CurriculoRoute,
