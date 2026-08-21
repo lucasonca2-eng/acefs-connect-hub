@@ -261,7 +261,9 @@ function RadioSection() {
 }
 
 function NewsTeaser() {
-  const items = NEWS.slice(0, 3);
+  const { data } = useNoticias(true);
+  const items = (data ?? []).slice(0, 3);
+  if (items.length === 0) return null;
   return (
     <section className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
