@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./quem-somos";
+import { useSettings } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/feira-de-santana")({
   head: () => ({
@@ -28,6 +29,9 @@ const PHOTOS = [
 ];
 
 function FeiraDeSantana() {
+  const { data: settings } = useSettings();
+  const texto = settings?.feira_de_santana_texto?.trim() || "";
+
   return (
     <>
       <PageHeader
@@ -42,17 +46,23 @@ function FeiraDeSantana() {
             <h2 className="font-display font-semibold text-[28px] md:text-[34px] text-navy leading-tight">
               A cidade que move o interior da Bahia
             </h2>
-            <p>
-              Conhecida como o "Portal do Sertão", Feira de Santana ocupa uma posição estratégica no
-              cruzamento das principais rodovias que ligam Salvador ao interior do estado — uma
-              vocação comercial que remonta às antigas feiras de gado do século XIX e que hoje faz da
-              cidade o maior polo econômico, comercial e industrial do interior baiano.
-            </p>
-            <p>
-              É nesse cenário que a ACEFS nasceu e se desenvolveu: representando um empresariado
-              diverso, que vai do pequeno comerciante do centro histórico às indústrias que hoje geram
-              empregos para toda a região.
-            </p>
+            {texto ? (
+              <div className="cms-content" dangerouslySetInnerHTML={{ __html: texto }} />
+            ) : (
+              <>
+                <p>
+                  Conhecida como o "Portal do Sertão", Feira de Santana ocupa uma posição estratégica no
+                  cruzamento das principais rodovias que ligam Salvador ao interior do estado — uma
+                  vocação comercial que remonta às antigas feiras de gado do século XIX e que hoje faz da
+                  cidade o maior polo econômico, comercial e industrial do interior baiano.
+                </p>
+                <p>
+                  É nesse cenário que a ACEFS nasceu e se desenvolveu: representando um empresariado
+                  diverso, que vai do pequeno comerciante do centro histórico às indústrias que hoje geram
+                  empregos para toda a região.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>

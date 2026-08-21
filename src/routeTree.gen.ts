@@ -28,6 +28,7 @@ import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
 import { Route as AdminServicosRouteImport } from './routes/admin.servicos'
 import { Route as AdminRedefinirSenhaRouteImport } from './routes/admin.redefinir-senha'
 import { Route as AdminRecuperarSenhaRouteImport } from './routes/admin.recuperar-senha'
+import { Route as AdminPaginasRouteImport } from './routes/admin.paginas'
 import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
 import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
 import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
@@ -128,6 +129,11 @@ const AdminRecuperarSenhaRoute = AdminRecuperarSenhaRouteImport.update({
   path: '/recuperar-senha',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPaginasRoute = AdminPaginasRouteImport.update({
+  id: '/paginas',
+  path: '/paginas',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminNoticiasRoute = AdminNoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
@@ -168,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
+  '/admin/paginas': typeof AdminPaginasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
   '/admin/servicos': typeof AdminServicosRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
+  '/admin/paginas': typeof AdminPaginasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
   '/admin/servicos': typeof AdminServicosRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
+  '/admin/paginas': typeof AdminPaginasRoute
   '/admin/recuperar-senha': typeof AdminRecuperarSenhaRoute
   '/admin/redefinir-senha': typeof AdminRedefinirSenhaRoute
   '/admin/servicos': typeof AdminServicosRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
+    | '/admin/paginas'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
     | '/admin/servicos'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
+    | '/admin/paginas'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
     | '/admin/servicos'
@@ -294,6 +305,7 @@ export interface FileRouteTypes {
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
+    | '/admin/paginas'
     | '/admin/recuperar-senha'
     | '/admin/redefinir-senha'
     | '/admin/servicos'
@@ -454,6 +466,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRecuperarSenhaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/paginas': {
+      id: '/admin/paginas'
+      path: '/paginas'
+      fullPath: '/admin/paginas'
+      preLoaderRoute: typeof AdminPaginasRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/noticias': {
       id: '/admin/noticias'
       path: '/noticias'
@@ -490,6 +509,7 @@ interface AdminRouteChildren {
   AdminEquipeRoute: typeof AdminEquipeRoute
   AdminEventosRoute: typeof AdminEventosRoute
   AdminNoticiasRoute: typeof AdminNoticiasRoute
+  AdminPaginasRoute: typeof AdminPaginasRoute
   AdminRecuperarSenhaRoute: typeof AdminRecuperarSenhaRoute
   AdminRedefinirSenhaRoute: typeof AdminRedefinirSenhaRoute
   AdminServicosRoute: typeof AdminServicosRoute
@@ -501,6 +521,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminEquipeRoute: AdminEquipeRoute,
   AdminEventosRoute: AdminEventosRoute,
   AdminNoticiasRoute: AdminNoticiasRoute,
+  AdminPaginasRoute: AdminPaginasRoute,
   AdminRecuperarSenhaRoute: AdminRecuperarSenhaRoute,
   AdminRedefinirSenhaRoute: AdminRedefinirSenhaRoute,
   AdminServicosRoute: AdminServicosRoute,

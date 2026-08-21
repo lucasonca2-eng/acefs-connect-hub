@@ -2,10 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site-data";
 import { AnimatedLogo } from "@/components/animated-logo";
+import { useSettings } from "@/hooks/use-cms";
+import { parseLinks } from "@/lib/cms";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { data: settings } = useSettings();
+  const nav = parseLinks(settings?.menu_links, [...NAV]);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,7 +38,7 @@ export function SiteHeader() {
           <AnimatedLogo className="shrink-0" />
           <nav className="hidden md:block">
             <ul className="flex gap-8 list-none">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <li key={n.to}>
                   <Link
                     to={n.to}
@@ -74,7 +79,7 @@ export function SiteHeader() {
         {open && (
           <div className="md:hidden border-t border-line bg-white">
             <ul className="px-6 py-4 space-y-1">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <li key={n.to}>
                   <Link
                     to={n.to}
