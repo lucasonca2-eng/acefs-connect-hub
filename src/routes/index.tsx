@@ -329,30 +329,36 @@ function EventsTeaser() {
             Ver agenda completa <Arrow />
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {items.map((ev) => (
-            <article
-              key={ev.id}
-              className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+        {isLoading ? (
+          <div className="flex items-center gap-2 text-ink-soft text-[14px] py-6">
+            <Loader2 size={16} className="animate-spin" /> Carregando eventos…
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {items.map((ev) => (
+              <article
+                key={ev.id}
+                className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+              >
                 {ev.imagem_url && (
-                  <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" loading="lazy" />
+                  <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+                    <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
                 )}
-              </div>
-              <div className="p-6">
-                <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-gold mb-2">
-                  {formatDate(ev.data_evento)}
+                <div className="p-6">
+                  <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-gold mb-2">
+                    {formatDate(ev.data_evento)}
+                  </div>
+                  <h3 className="font-display font-semibold text-[19px] leading-snug text-navy mb-2">{ev.titulo}</h3>
+                  {ev.local && <p className="text-[13px] text-ink-soft mb-2">{ev.local}</p>}
+                  {ev.descricao && (
+                    <p className="text-[14px] leading-relaxed text-ink-soft line-clamp-3">{ev.descricao}</p>
+                  )}
                 </div>
-                <h3 className="font-display font-semibold text-[19px] leading-snug text-navy mb-2">{ev.titulo}</h3>
-                {ev.local && <p className="text-[13px] text-ink-soft mb-2">{ev.local}</p>}
-                {ev.descricao && (
-                  <p className="text-[14px] leading-relaxed text-ink-soft line-clamp-3">{ev.descricao}</p>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
