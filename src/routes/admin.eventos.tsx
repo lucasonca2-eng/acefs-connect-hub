@@ -175,12 +175,33 @@ function AdminEventos() {
         ) : (eventos?.length ?? 0) === 0 ? (
           <p className="text-[14px] text-ink-soft">Nenhum evento cadastrado.</p>
         ) : (
-          <ul className="space-y-3">
+          <>
+            {selecionados.length > 0 && (
+              <BulkBar
+                count={selecionados.length}
+                total={eventos!.length}
+                busy={bulkBusy}
+                canDelete={podeExcluir}
+                publishLabel="Publicar"
+                unpublishLabel="Ocultar"
+                onSelectAll={() => setSelecionados(eventos!.map((e) => e.id))}
+                onClear={() => setSelecionados([])}
+                onPublish={() => void bulkAtivar(true)}
+                onUnpublish={() => void bulkAtivar(false)}
+                onDelete={() => setBulkDelete(true)}
+              />
+            )}
+            <ul className="space-y-3">
             {eventos!.map((ev) => (
               <li
                 key={ev.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
               >
+                <SelectBox
+                  checked={selecionados.includes(ev.id)}
+                  onChange={(v) => toggleSel(ev.id, v)}
+                  label={`Selecionar ${ev.titulo}`}
+                />
                 <div className="w-24 h-16 rounded bg-cream overflow-hidden shrink-0 flex items-center justify-center">
                   {ev.imagem_url ? (
                     <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" />
@@ -202,17 +223,21 @@ function AdminEventos() {
                 >
                   <Pencil size={16} />
                 </button>
-                <button
-                  onClick={() => setPendingDelete(ev.id)}
-                  className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
-                  aria-label="Excluir"
-                >
-                  <Trash2 size={16} />
-                </button>
+                {podeExcluir && (
+                  <button
+                    onClick={() => setPendingDelete(ev.id)}
+                    className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                    aria-label="Excluir"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </li>
             ))}
-          </ul>
+            </ul>
+          </>
         )}
+
       </div>
 
       {draft && (
