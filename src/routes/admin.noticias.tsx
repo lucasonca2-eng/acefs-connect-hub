@@ -296,17 +296,21 @@ function AdminNoticias() {
                 >
                   <Pencil size={16} />
                 </button>
-                <button
-                  onClick={() => setPendingDelete(n.id)}
-                  className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
-                  aria-label="Excluir"
-                >
-                  <Trash2 size={16} />
-                </button>
+                {podeExcluir && (
+                  <button
+                    onClick={() => setPendingDelete(n.id)}
+                    className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                    aria-label="Excluir"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </li>
             ))}
-          </ul>
+            </ul>
+          </>
         )}
+
       </div>
 
       {draft && (
