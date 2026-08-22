@@ -7,6 +7,8 @@ import { slugify, formatDate, type Evento } from "@/lib/cms";
 import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { BulkBar, SelectBox } from "@/components/admin/bulk-bar";
+import { useCan } from "@/lib/admin-role";
 import { toast } from "sonner";
 import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
 
