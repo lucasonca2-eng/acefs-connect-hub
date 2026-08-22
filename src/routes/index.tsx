@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SERVICES } from "@/lib/site-data";
-import { ServiceIcon } from "@/components/service-icon";
+import { Loader2 } from "lucide-react";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { NewsCard } from "@/components/news-card";
-import { useNoticias, useEventos } from "@/hooks/use-cms";
+import { useNoticias, useEventos, useServicos } from "@/hooks/use-cms";
 import { formatDate } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
