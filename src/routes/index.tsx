@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SERVICES } from "@/lib/site-data";
-import { ServiceIcon } from "@/components/service-icon";
+import { Loader2 } from "lucide-react";
 import { RadioFeatureCard } from "@/components/radio-player";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { NewsCard } from "@/components/news-card";
-import { useNoticias, useEventos } from "@/hooks/use-cms";
+import { useNoticias, useEventos, useServicos } from "@/hooks/use-cms";
 import { formatDate } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
@@ -135,6 +134,9 @@ function Partners() {
 }
 
 function ServicesTeaser() {
+  const { data, isLoading } = useServicos(true);
+  const items = (data ?? []).slice(0, 4);
+  if (!isLoading && items.length === 0) return null;
   return (
     <section className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
@@ -149,25 +151,38 @@ function ServicesTeaser() {
             Ver todos os serviços <Arrow />
           </Link>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SERVICES.slice(0, 4).map((s) => (
-            <Link
-              key={s.slug}
-              to="/servicos"
-              className="group block bg-mint border border-navy-soft/20 rounded-lg p-6 hover:border-navy-soft hover:shadow-lg hover:-translate-y-0.5 transition-all"
-            >
-              <div className="w-11 h-11 rounded-md bg-navy-soft text-white flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform">
-                <ServiceIcon name={s.icon} />
-              </div>
-              <h3 className="font-display font-semibold text-[19px] text-navy leading-tight mb-2">{s.title}</h3>
-              <p className="text-[14px] text-ink-soft leading-relaxed">{s.short}</p>
-            </Link>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex items-center gap-2 text-ink-soft text-[14px] py-6">
+            <Loader2 size={16} className="animate-spin" /> Carregando serviços…
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {items.map((s) => (
+              <Link
+                key={s.id}
+                to="/servicos"
+                className="group block bg-mint border border-navy-soft/20 rounded-lg overflow-hidden hover:border-navy-soft hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              >
+                {s.imagem_url && (
+                  <div className="h-36 bg-[#E5E7EB] overflow-hidden">
+                    <img src={s.imagem_url} alt={s.titulo} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <h3 className="font-display font-semibold text-[19px] text-navy leading-tight mb-2">{s.titulo}</h3>
+                  {s.descricao_curta && (
+                    <p className="text-[14px] text-ink-soft leading-relaxed">{s.descricao_curta}</p>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
 
 function AboutTeaser() {
   return (
@@ -263,9 +278,9 @@ function RadioSection() {
 }
 
 function NewsTeaser() {
-  const { data } = useNoticias(true);
+  const { data, isLoading } = useNoticias(true);
   const items = (data ?? []).slice(0, 3);
-  if (items.length === 0) return null;
+  if (!isLoading && items.length === 0) return null;
   return (
     <section className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
@@ -280,20 +295,26 @@ function NewsTeaser() {
             Ver todas as notícias <Arrow />
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {items.map((n) => (
-            <NewsCard key={n.slug} item={n} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex items-center gap-2 text-ink-soft text-[14px] py-6">
+            <Loader2 size={16} className="animate-spin" /> Carregando notícias…
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {items.map((n) => (
+              <NewsCard key={n.slug} item={n} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
 function EventsTeaser() {
-  const { data } = useEventos(true);
+  const { data, isLoading } = useEventos(true);
   const items = (data ?? []).slice(0, 3);
-  if (items.length === 0) return null;
+  if (!isLoading && items.length === 0) return null;
   return (
     <section className="bg-cream py-20 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
@@ -308,30 +329,36 @@ function EventsTeaser() {
             Ver agenda completa <Arrow />
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {items.map((ev) => (
-            <article
-              key={ev.id}
-              className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+        {isLoading ? (
+          <div className="flex items-center gap-2 text-ink-soft text-[14px] py-6">
+            <Loader2 size={16} className="animate-spin" /> Carregando eventos…
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {items.map((ev) => (
+              <article
+                key={ev.id}
+                className="bg-white border border-line rounded-xl overflow-hidden shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+              >
                 {ev.imagem_url && (
-                  <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" loading="lazy" />
+                  <div className="h-44 bg-[#E5E7EB] overflow-hidden">
+                    <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
                 )}
-              </div>
-              <div className="p-6">
-                <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-gold mb-2">
-                  {formatDate(ev.data_evento)}
+                <div className="p-6">
+                  <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-gold mb-2">
+                    {formatDate(ev.data_evento)}
+                  </div>
+                  <h3 className="font-display font-semibold text-[19px] leading-snug text-navy mb-2">{ev.titulo}</h3>
+                  {ev.local && <p className="text-[13px] text-ink-soft mb-2">{ev.local}</p>}
+                  {ev.descricao && (
+                    <p className="text-[14px] leading-relaxed text-ink-soft line-clamp-3">{ev.descricao}</p>
+                  )}
                 </div>
-                <h3 className="font-display font-semibold text-[19px] leading-snug text-navy mb-2">{ev.titulo}</h3>
-                {ev.local && <p className="text-[13px] text-ink-soft mb-2">{ev.local}</p>}
-                {ev.descricao && (
-                  <p className="text-[14px] leading-relaxed text-ink-soft line-clamp-3">{ev.descricao}</p>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
