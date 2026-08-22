@@ -430,6 +430,15 @@ function AdminNoticias() {
           if (id) void remove(id);
         }}
       />
+      <ConfirmDialog
+        open={bulkDelete}
+        onOpenChange={(o) => !o && setBulkDelete(false)}
+        description={`Excluir ${selecionados.length} ${selecionados.length === 1 ? "notícia" : "notícias"}? Esta ação não pode ser desfeita.`}
+        onConfirm={() => {
+          setBulkDelete(false);
+          void bulkExcluir();
+        }}
+      />
     </div>
   );
 }
