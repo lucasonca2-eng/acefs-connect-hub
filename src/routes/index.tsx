@@ -295,20 +295,26 @@ function NewsTeaser() {
             Ver todas as notícias <Arrow />
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {items.map((n) => (
-            <NewsCard key={n.slug} item={n} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex items-center gap-2 text-ink-soft text-[14px] py-6">
+            <Loader2 size={16} className="animate-spin" /> Carregando notícias…
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {items.map((n) => (
+              <NewsCard key={n.slug} item={n} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
 function EventsTeaser() {
-  const { data } = useEventos(true);
+  const { data, isLoading } = useEventos(true);
   const items = (data ?? []).slice(0, 3);
-  if (items.length === 0) return null;
+  if (!isLoading && items.length === 0) return null;
   return (
     <section className="bg-cream py-20 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
