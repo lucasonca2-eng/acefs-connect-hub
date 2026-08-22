@@ -53,6 +53,10 @@ function AdminNoticias() {
   const [busca, setBusca] = useState("");
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
   const [filtroStatus, setFiltroStatus] = useState("todos");
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkDelete, setBulkDelete] = useState(false);
+  const podeExcluir = useCan("excluir");
 
   const termo = busca.trim().toLowerCase();
   const listaFiltrada = (noticias ?? []).filter((n) => {
@@ -65,6 +69,42 @@ function AdminNoticias() {
   });
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["noticias"] });
+
+  function toggleSel(id: string, on: boolean) {
+    setSelecionados((s) => (on ? [...s, id] : s.filter((x) => x !== id)));
+  }
+
+  async function bulkPublicar(publicado: boolean) {
+    setBulkBusy(true);
+    const { error } = await supabase
+      .from("noticias")
+      .update({ publicado })
+      .in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível atualizar as notícias selecionadas.");
+      return;
+    }
+    toast.success(
+      `${selecionados.length} ${selecionados.length === 1 ? "notícia" : "notícias"} ${publicado ? "publicadas" : "despublicadas"}.`,
+    );
+    setSelecionados([]);
+    void refresh();
+  }
+
+  async function bulkExcluir() {
+    setBulkBusy(true);
+    const { error } = await supabase.from("noticias").delete().in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível excluir as notícias selecionadas.");
+      return;
+    }
+    toast.success(`${selecionados.length} ${selecionados.length === 1 ? "notícia excluída" : "notícias excluídas"}.`);
+    setSelecionados([]);
+    void refresh();
+  }
+
 
   function edit(n: Noticia) {
     setDraft({
