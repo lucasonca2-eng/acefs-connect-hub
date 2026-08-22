@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useRouter, useRouterState } from "@tanst
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle } from "lucide-react";
+import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle, Settings, Menu, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -25,6 +25,7 @@ function AdminLayout() {
   const [state, setState] = useState<State>("loading");
   const [role, setRole] = useState<Role | null>(null);
   const [email, setEmail] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isPublicAuthPage =
