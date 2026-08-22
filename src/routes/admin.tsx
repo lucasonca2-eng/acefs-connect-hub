@@ -71,7 +71,12 @@ function AdminLayout() {
   }
 
   const isJournalist = role === "jornalista";
-  const journalistBlocked = isJournalist && !pathname.startsWith("/admin/noticias");
+  const journalistAllowed =
+    pathname === "/admin" ||
+    pathname === "/admin/" ||
+    pathname.startsWith("/admin/noticias") ||
+    pathname.startsWith("/admin/ajuda");
+  const journalistBlocked = isJournalist && !journalistAllowed;
 
   if (isPublicAuthPage) return <Outlet />;
 
