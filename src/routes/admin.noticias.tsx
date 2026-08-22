@@ -8,7 +8,7 @@ import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
-import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
+import { Loader2, Plus, Trash2, Pencil, Search, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/admin/noticias")({
   ssr: false,
@@ -48,6 +48,19 @@ function AdminNoticias() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
+  const [busca, setBusca] = useState("");
+  const [filtroCategoria, setFiltroCategoria] = useState("todas");
+  const [filtroStatus, setFiltroStatus] = useState("todos");
+
+  const termo = busca.trim().toLowerCase();
+  const listaFiltrada = (noticias ?? []).filter((n) => {
+    const okTermo = !termo || n.titulo.toLowerCase().includes(termo);
+    const okCategoria = filtroCategoria === "todas" || n.categoria === filtroCategoria;
+    const okStatus =
+      filtroStatus === "todos" ||
+      (filtroStatus === "publicadas" ? n.publicado : !n.publicado);
+    return okTermo && okCategoria && okStatus;
+  });
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["noticias"] });
 
@@ -126,15 +139,58 @@ function AdminNoticias() {
           </button>
         </div>
 
+        <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto] mb-5">
+          <div className="relative">
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
+            <input
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Buscar por título…"
+              className="w-full rounded-md border border-line pl-9 pr-3 py-2.5 text-[14px] outline-none focus:border-navy transition-colors"
+            />
+          </div>
+          <select
+            value={filtroCategoria}
+            onChange={(e) => setFiltroCategoria(e.target.value)}
+            className="rounded-md border border-line px-3 py-2.5 text-[14px] bg-white outline-none focus:border-navy cursor-pointer"
+          >
+            <option value="todas">Todas as categorias</option>
+            {CATEGORIAS.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <select
+            value={filtroStatus}
+            onChange={(e) => setFiltroStatus(e.target.value)}
+            className="rounded-md border border-line px-3 py-2.5 text-[14px] bg-white outline-none focus:border-navy cursor-pointer"
+          >
+            <option value="todos">Todos os status</option>
+            <option value="publicadas">Publicadas</option>
+            <option value="rascunhos">Rascunhos</option>
+          </select>
+        </div>
+
         {isLoading ? (
           <div className="flex items-center gap-2 text-ink-soft text-[14px]">
             <Loader2 size={16} className="animate-spin" /> Carregando…
           </div>
         ) : (noticias?.length ?? 0) === 0 ? (
-          <p className="text-[14px] text-ink-soft">Nenhuma notícia cadastrada.</p>
+          <div className="text-center py-10 border border-dashed border-line rounded-lg">
+            <p className="text-[14px] text-ink-soft mb-4">Nenhuma notícia cadastrada ainda.</p>
+            <button
+              onClick={() => setDraft({ ...EMPTY })}
+              className="inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md font-semibold text-[13px] hover:bg-navy-deep transition-colors cursor-pointer"
+            >
+              <Plus size={16} /> Criar a primeira notícia
+            </button>
+          </div>
+        ) : listaFiltrada.length === 0 ? (
+          <p className="text-[14px] text-ink-soft">Nenhuma notícia encontrada com esses filtros.</p>
         ) : (
           <ul className="space-y-3">
-            {noticias!.map((n) => (
+            {listaFiltrada.map((n) => (
               <li
                 key={n.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
@@ -146,11 +202,31 @@ function AdminNoticias() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="text-[14px] font-semibold text-navy truncate">{n.titulo}</div>
-                  <div className="text-[12px] text-ink-soft">
-                    {n.categoria} · {formatDate(n.data_publicacao)} ·{" "}
-                    {n.publicado ? "publicada" : "rascunho"}
+                  <div className="text-[12px] text-ink-soft flex items-center gap-2 flex-wrap">
+                    <span>
+                      {n.categoria} · {formatDate(n.data_publicacao)}
+                    </span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                        n.publicado
+                          ? "bg-green-50 text-green-700"
+                          : "bg-amber-50 text-amber-700"
+                      }`}
+                    >
+                      {n.publicado ? "Publicada" : "Rascunho"}
+                    </span>
                   </div>
                 </div>
+                <a
+                  href={`/noticia/${n.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-md text-ink-soft hover:text-navy hover:bg-cream"
+                  aria-label="Ver no site"
+                  title="Ver no site"
+                >
+                  <ExternalLink size={16} />
+                </a>
                 <button
                   onClick={() => edit(n)}
                   className="p-2 rounded-md text-ink-soft hover:text-navy hover:bg-cream cursor-pointer"
@@ -267,7 +343,7 @@ function AdminNoticias() {
               disabled={saving}
               className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors active:scale-[0.99] cursor-pointer disabled:opacity-60"
             >
-              {saving && <Loader2 size={16} className="animate-spin" />} Salvar
+              {saving && <Loader2 size={16} className="animate-spin" />} {saving ? "Salvando…" : "Salvar"}
             </button>
             <button
               onClick={() => setDraft(null)}

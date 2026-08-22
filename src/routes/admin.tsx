@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useRouter, useRouterState } from "@tanst
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle } from "lucide-react";
+import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle, Settings, Menu, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -25,6 +25,7 @@ function AdminLayout() {
   const [state, setState] = useState<State>("loading");
   const [role, setRole] = useState<Role | null>(null);
   const [email, setEmail] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isPublicAuthPage =
@@ -71,7 +72,12 @@ function AdminLayout() {
   }
 
   const isJournalist = role === "jornalista";
-  const journalistBlocked = isJournalist && !pathname.startsWith("/admin/noticias");
+  const journalistAllowed =
+    pathname === "/admin" ||
+    pathname === "/admin/" ||
+    pathname.startsWith("/admin/noticias") ||
+    pathname.startsWith("/admin/ajuda");
+  const journalistBlocked = isJournalist && !journalistAllowed;
 
   if (isPublicAuthPage) return <Outlet />;
 
@@ -106,15 +112,30 @@ function AdminLayout() {
   return (
     <div className="min-h-[80vh] bg-cream">
       <div className="mx-auto max-w-[1240px] px-4 md:px-10 py-8 grid md:grid-cols-[240px_1fr] gap-6">
-        <aside className="bg-white border border-line rounded-lg p-4 h-fit md:sticky md:top-24">
+        <div className="md:hidden">
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            className="w-full inline-flex items-center justify-between gap-2 bg-white border border-line rounded-lg px-4 py-3 text-[14px] font-semibold text-navy cursor-pointer"
+          >
+            <span className="inline-flex items-center gap-2">
+              <Menu size={18} /> Menu do painel
+            </span>
+            <span className="text-[12px] font-medium text-ink-soft">{menuOpen ? "fechar" : "abrir"}</span>
+          </button>
+        </div>
+        <aside
+          className={`${menuOpen ? "block" : "hidden"} md:block bg-white border border-line rounded-lg p-4 h-fit md:sticky md:top-24`}
+        >
           <div className="px-2 pb-4 mb-2 border-b border-line">
             <div className="text-[11px] tracking-[0.2em] uppercase text-gold font-semibold">Painel</div>
             <div className="text-[13px] text-ink-soft mt-1 break-all">{email}</div>
+            <div className="mt-1 inline-flex items-center rounded-full bg-cream px-2 py-0.5 text-[11px] font-semibold text-navy">
+              {isJournalist ? "Jornalista" : "Administrador"}
+            </div>
           </div>
-          <nav className="space-y-1">
-            {!isJournalist && (
-              <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Configurações gerais" exact />
-            )}
+          <nav className="space-y-1" onClick={() => setMenuOpen(false)}>
+            <SideLink to="/admin" icon={<LayoutDashboard size={16} />} label="Início" exact />
             {!isJournalist && (
               <SideLink to="/admin/banners" icon={<Images size={16} />} label="Banners" />
             )}
@@ -125,17 +146,27 @@ function AdminLayout() {
                 <SideLink to="/admin/servicos" icon={<Briefcase size={16} />} label="Serviços" />
                 <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
                 <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
+                <SideLink to="/admin/configuracoes" icon={<Settings size={16} />} label="Configurações gerais" />
               </>
             )}
             <SideLink to="/admin/ajuda" icon={<HelpCircle size={16} />} label="Ajuda" />
           </nav>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 w-full inline-flex items-center gap-2 px-3 py-2 rounded-md text-[13px] font-medium text-ink-soft hover:bg-cream hover:text-navy transition-colors"
+          >
+            <ExternalLink size={16} /> Ver o site
+          </a>
           <button
             onClick={signOut}
-            className="mt-4 w-full inline-flex items-center gap-2 px-3 py-2 rounded-md text-[13px] font-medium text-ink-soft hover:bg-cream hover:text-navy transition-colors cursor-pointer"
+            className="mt-1 w-full inline-flex items-center gap-2 px-3 py-2 rounded-md text-[13px] font-medium text-ink-soft hover:bg-cream hover:text-navy transition-colors cursor-pointer"
           >
             <LogOut size={16} /> Sair
           </button>
         </aside>
+
         <main className="min-w-0">
           {journalistBlocked ? (
             <div className="bg-white border border-line rounded-lg p-8 text-center">
