@@ -8,6 +8,8 @@ import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { BulkBar, SelectBox } from "@/components/admin/bulk-bar";
+import { useCan } from "@/lib/admin-role";
 import { Loader2, Plus, Trash2, Pencil, Search, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/admin/noticias")({
