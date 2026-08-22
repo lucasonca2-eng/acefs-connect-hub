@@ -231,17 +231,37 @@ function AdminNoticias() {
         ) : listaFiltrada.length === 0 ? (
           <p className="text-[14px] text-ink-soft">Nenhuma notícia encontrada com esses filtros.</p>
         ) : (
-          <ul className="space-y-3">
+          <>
+            {selecionados.length > 0 && (
+              <BulkBar
+                count={selecionados.length}
+                total={listaFiltrada.length}
+                busy={bulkBusy}
+                canDelete={podeExcluir}
+                onSelectAll={() => setSelecionados(listaFiltrada.map((n) => n.id))}
+                onClear={() => setSelecionados([])}
+                onPublish={() => void bulkPublicar(true)}
+                onUnpublish={() => void bulkPublicar(false)}
+                onDelete={() => setBulkDelete(true)}
+              />
+            )}
+            <ul className="space-y-3">
             {listaFiltrada.map((n) => (
               <li
                 key={n.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
               >
+                <SelectBox
+                  checked={selecionados.includes(n.id)}
+                  onChange={(v) => toggleSel(n.id, v)}
+                  label={`Selecionar ${n.titulo}`}
+                />
                 <img
                   src={n.imagem_capa_url ?? "/images/news/news-default.jpg"}
                   alt={n.titulo}
                   className="w-24 h-16 object-cover rounded bg-cream shrink-0"
                 />
+
                 <div className="min-w-0 flex-1">
                   <div className="text-[14px] font-semibold text-navy truncate">{n.titulo}</div>
                   <div className="text-[12px] text-ink-soft flex items-center gap-2 flex-wrap">
