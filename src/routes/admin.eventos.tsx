@@ -7,6 +7,8 @@ import { slugify, formatDate, type Evento } from "@/lib/cms";
 import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { BulkBar, SelectBox } from "@/components/admin/bulk-bar";
+import { useCan } from "@/lib/admin-role";
 import { toast } from "sonner";
 import { Loader2, Plus, Trash2, Pencil } from "lucide-react";
 
@@ -50,8 +52,44 @@ function AdminEventos() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkDelete, setBulkDelete] = useState(false);
+  const podeExcluir = useCan("excluir");
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["eventos"] });
+
+  function toggleSel(id: string, on: boolean) {
+    setSelecionados((s) => (on ? [...s, id] : s.filter((x) => x !== id)));
+  }
+
+  async function bulkAtivar(ativo: boolean) {
+    setBulkBusy(true);
+    const { error } = await supabase.from("eventos").update({ ativo }).in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível atualizar os eventos selecionados.");
+      return;
+    }
+    toast.success(
+      `${selecionados.length} ${selecionados.length === 1 ? "evento" : "eventos"} ${ativo ? "publicados" : "ocultados"}.`,
+    );
+    setSelecionados([]);
+    void refresh();
+  }
+
+  async function bulkExcluir() {
+    setBulkBusy(true);
+    const { error } = await supabase.from("eventos").delete().in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível excluir os eventos selecionados.");
+      return;
+    }
+    toast.success(`${selecionados.length} ${selecionados.length === 1 ? "evento excluído" : "eventos excluídos"}.`);
+    setSelecionados([]);
+    void refresh();
+  }
 
   function edit(e: Evento) {
     setDraft({
@@ -137,12 +175,33 @@ function AdminEventos() {
         ) : (eventos?.length ?? 0) === 0 ? (
           <p className="text-[14px] text-ink-soft">Nenhum evento cadastrado.</p>
         ) : (
-          <ul className="space-y-3">
+          <>
+            {selecionados.length > 0 && (
+              <BulkBar
+                count={selecionados.length}
+                total={eventos!.length}
+                busy={bulkBusy}
+                canDelete={podeExcluir}
+                publishLabel="Publicar"
+                unpublishLabel="Ocultar"
+                onSelectAll={() => setSelecionados(eventos!.map((e) => e.id))}
+                onClear={() => setSelecionados([])}
+                onPublish={() => void bulkAtivar(true)}
+                onUnpublish={() => void bulkAtivar(false)}
+                onDelete={() => setBulkDelete(true)}
+              />
+            )}
+            <ul className="space-y-3">
             {eventos!.map((ev) => (
               <li
                 key={ev.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
               >
+                <SelectBox
+                  checked={selecionados.includes(ev.id)}
+                  onChange={(v) => toggleSel(ev.id, v)}
+                  label={`Selecionar ${ev.titulo}`}
+                />
                 <div className="w-24 h-16 rounded bg-cream overflow-hidden shrink-0 flex items-center justify-center">
                   {ev.imagem_url ? (
                     <img src={ev.imagem_url} alt={ev.titulo} className="w-full h-full object-cover" />
@@ -164,17 +223,21 @@ function AdminEventos() {
                 >
                   <Pencil size={16} />
                 </button>
-                <button
-                  onClick={() => setPendingDelete(ev.id)}
-                  className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
-                  aria-label="Excluir"
-                >
-                  <Trash2 size={16} />
-                </button>
+                {podeExcluir && (
+                  <button
+                    onClick={() => setPendingDelete(ev.id)}
+                    className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                    aria-label="Excluir"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </li>
             ))}
-          </ul>
+            </ul>
+          </>
         )}
+
       </div>
 
       {draft && (
@@ -298,6 +361,15 @@ function AdminEventos() {
           const id = pendingDelete;
           setPendingDelete(null);
           if (id) void remove(id);
+        }}
+      />
+      <ConfirmDialog
+        open={bulkDelete}
+        onOpenChange={(o) => !o && setBulkDelete(false)}
+        description={`Excluir ${selecionados.length} ${selecionados.length === 1 ? "evento" : "eventos"}? Esta ação não pode ser desfeita.`}
+        onConfirm={() => {
+          setBulkDelete(false);
+          void bulkExcluir();
         }}
       />
     </div>

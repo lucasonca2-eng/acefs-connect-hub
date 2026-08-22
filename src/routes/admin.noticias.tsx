@@ -8,6 +8,8 @@ import { ImageField } from "@/components/admin/image-field";
 import { RichTextEditor } from "@/components/admin/rich-text";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { BulkBar, SelectBox } from "@/components/admin/bulk-bar";
+import { useCan } from "@/lib/admin-role";
 import { Loader2, Plus, Trash2, Pencil, Search, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/admin/noticias")({
@@ -51,6 +53,10 @@ function AdminNoticias() {
   const [busca, setBusca] = useState("");
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
   const [filtroStatus, setFiltroStatus] = useState("todos");
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkDelete, setBulkDelete] = useState(false);
+  const podeExcluir = useCan("excluir");
 
   const termo = busca.trim().toLowerCase();
   const listaFiltrada = (noticias ?? []).filter((n) => {
@@ -63,6 +69,42 @@ function AdminNoticias() {
   });
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["noticias"] });
+
+  function toggleSel(id: string, on: boolean) {
+    setSelecionados((s) => (on ? [...s, id] : s.filter((x) => x !== id)));
+  }
+
+  async function bulkPublicar(publicado: boolean) {
+    setBulkBusy(true);
+    const { error } = await supabase
+      .from("noticias")
+      .update({ publicado })
+      .in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível atualizar as notícias selecionadas.");
+      return;
+    }
+    toast.success(
+      `${selecionados.length} ${selecionados.length === 1 ? "notícia" : "notícias"} ${publicado ? "publicadas" : "despublicadas"}.`,
+    );
+    setSelecionados([]);
+    void refresh();
+  }
+
+  async function bulkExcluir() {
+    setBulkBusy(true);
+    const { error } = await supabase.from("noticias").delete().in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível excluir as notícias selecionadas.");
+      return;
+    }
+    toast.success(`${selecionados.length} ${selecionados.length === 1 ? "notícia excluída" : "notícias excluídas"}.`);
+    setSelecionados([]);
+    void refresh();
+  }
+
 
   function edit(n: Noticia) {
     setDraft({
@@ -189,17 +231,37 @@ function AdminNoticias() {
         ) : listaFiltrada.length === 0 ? (
           <p className="text-[14px] text-ink-soft">Nenhuma notícia encontrada com esses filtros.</p>
         ) : (
-          <ul className="space-y-3">
+          <>
+            {selecionados.length > 0 && (
+              <BulkBar
+                count={selecionados.length}
+                total={listaFiltrada.length}
+                busy={bulkBusy}
+                canDelete={podeExcluir}
+                onSelectAll={() => setSelecionados(listaFiltrada.map((n) => n.id))}
+                onClear={() => setSelecionados([])}
+                onPublish={() => void bulkPublicar(true)}
+                onUnpublish={() => void bulkPublicar(false)}
+                onDelete={() => setBulkDelete(true)}
+              />
+            )}
+            <ul className="space-y-3">
             {listaFiltrada.map((n) => (
               <li
                 key={n.id}
                 className="flex items-center gap-4 border border-line rounded-md p-3 hover:border-navy/40 transition-colors"
               >
+                <SelectBox
+                  checked={selecionados.includes(n.id)}
+                  onChange={(v) => toggleSel(n.id, v)}
+                  label={`Selecionar ${n.titulo}`}
+                />
                 <img
                   src={n.imagem_capa_url ?? "/images/news/news-default.jpg"}
                   alt={n.titulo}
                   className="w-24 h-16 object-cover rounded bg-cream shrink-0"
                 />
+
                 <div className="min-w-0 flex-1">
                   <div className="text-[14px] font-semibold text-navy truncate">{n.titulo}</div>
                   <div className="text-[12px] text-ink-soft flex items-center gap-2 flex-wrap">
@@ -234,17 +296,21 @@ function AdminNoticias() {
                 >
                   <Pencil size={16} />
                 </button>
-                <button
-                  onClick={() => setPendingDelete(n.id)}
-                  className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
-                  aria-label="Excluir"
-                >
-                  <Trash2 size={16} />
-                </button>
+                {podeExcluir && (
+                  <button
+                    onClick={() => setPendingDelete(n.id)}
+                    className="p-2 rounded-md text-ink-soft hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                    aria-label="Excluir"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </li>
             ))}
-          </ul>
+            </ul>
+          </>
         )}
+
       </div>
 
       {draft && (
@@ -362,6 +428,15 @@ function AdminNoticias() {
           const id = pendingDelete;
           setPendingDelete(null);
           if (id) void remove(id);
+        }}
+      />
+      <ConfirmDialog
+        open={bulkDelete}
+        onOpenChange={(o) => !o && setBulkDelete(false)}
+        description={`Excluir ${selecionados.length} ${selecionados.length === 1 ? "notícia" : "notícias"}? Esta ação não pode ser desfeita.`}
+        onConfirm={() => {
+          setBulkDelete(false);
+          void bulkExcluir();
         }}
       />
     </div>

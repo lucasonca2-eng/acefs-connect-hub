@@ -34,6 +34,7 @@ import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
 import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
 import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminAuditoriaRouteImport } from './routes/admin.auditoria'
 import { Route as AdminAjudaRouteImport } from './routes/admin.ajuda'
 
 const ServicosRoute = ServicosRouteImport.update({
@@ -161,6 +162,11 @@ const AdminBannersRoute = AdminBannersRouteImport.update({
   path: '/banners',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAuditoriaRoute = AdminAuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAjudaRoute = AdminAjudaRouteImport.update({
   id: '/ajuda',
   path: '/ajuda',
@@ -183,6 +189,7 @@ export interface FileRoutesByFullPath {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
@@ -210,6 +217,7 @@ export interface FileRoutesByTo {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/quem-somos': typeof QuemSomosRoute
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
   '/admin/banners': typeof AdminBannersRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
@@ -269,6 +278,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/admin/ajuda'
+    | '/admin/auditoria'
     | '/admin/banners'
     | '/admin/configuracoes'
     | '/admin/equipe'
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/admin/ajuda'
+    | '/admin/auditoria'
     | '/admin/banners'
     | '/admin/configuracoes'
     | '/admin/equipe'
@@ -324,6 +335,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/servicos'
     | '/admin/ajuda'
+    | '/admin/auditoria'
     | '/admin/banners'
     | '/admin/configuracoes'
     | '/admin/equipe'
@@ -532,6 +544,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBannersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/auditoria': {
+      id: '/admin/auditoria'
+      path: '/auditoria'
+      fullPath: '/admin/auditoria'
+      preLoaderRoute: typeof AdminAuditoriaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/ajuda': {
       id: '/admin/ajuda'
       path: '/ajuda'
@@ -544,6 +563,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminAjudaRoute: typeof AdminAjudaRoute
+  AdminAuditoriaRoute: typeof AdminAuditoriaRoute
   AdminBannersRoute: typeof AdminBannersRoute
   AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
   AdminEquipeRoute: typeof AdminEquipeRoute
@@ -558,6 +578,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAjudaRoute: AdminAjudaRoute,
+  AdminAuditoriaRoute: AdminAuditoriaRoute,
   AdminBannersRoute: AdminBannersRoute,
   AdminConfiguracoesRoute: AdminConfiguracoesRoute,
   AdminEquipeRoute: AdminEquipeRoute,

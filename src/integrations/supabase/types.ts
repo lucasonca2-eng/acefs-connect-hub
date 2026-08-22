@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_log: {
+        Row: {
+          acao: string
+          ator_email: string | null
+          ator_id: string | null
+          campos: string[]
+          created_at: string
+          id: string
+          registro_id: string | null
+          tabela: string
+          titulo: string | null
+        }
+        Insert: {
+          acao: string
+          ator_email?: string | null
+          ator_id?: string | null
+          campos?: string[]
+          created_at?: string
+          id?: string
+          registro_id?: string | null
+          tabela: string
+          titulo?: string | null
+        }
+        Update: {
+          acao?: string
+          ator_email?: string | null
+          ator_id?: string | null
+          campos?: string[]
+          created_at?: string
+          id?: string
+          registro_id?: string | null
+          tabela?: string
+          titulo?: string | null
+        }
+        Relationships: []
+      }
       banners: {
         Row: {
           ativo: boolean

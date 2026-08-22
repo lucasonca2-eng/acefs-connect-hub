@@ -123,3 +123,16 @@ export async function fetchEventoBySlug(slug: string): Promise<Evento | null> {
   const { data } = await supabase.from("eventos").select("*").eq("slug", slug).maybeSingle();
   return data ?? null;
 }
+
+export type AuditEntry = Tables<"audit_log">;
+
+/** Histórico de alterações feitas pelo painel (somente administradores conseguem ler). */
+export async function fetchAuditLog(limit = 200): Promise<AuditEntry[]> {
+  const { data, error } = await supabase
+    .from("audit_log")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return data ?? [];
+}

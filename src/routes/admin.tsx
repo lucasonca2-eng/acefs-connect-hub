@@ -2,7 +2,8 @@ import { createFileRoute, Link, Outlet, useRouter, useRouterState } from "@tanst
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle, Settings, Menu, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Images, Newspaper, Users, LogOut, Loader2, Briefcase, CalendarDays, FileText, HelpCircle, Settings, Menu, ExternalLink, History } from "lucide-react";
+import { AdminRoleProvider, pathAllowed, type AdminRole } from "@/lib/admin-role";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/admin")({
 });
 
 type State = "loading" | "anon" | "denied" | "ok";
-type Role = "admin" | "jornalista";
+type Role = AdminRole;
 
 function AdminLayout() {
   const [state, setState] = useState<State>("loading");
@@ -72,12 +73,7 @@ function AdminLayout() {
   }
 
   const isJournalist = role === "jornalista";
-  const journalistAllowed =
-    pathname === "/admin" ||
-    pathname === "/admin/" ||
-    pathname.startsWith("/admin/noticias") ||
-    pathname.startsWith("/admin/ajuda");
-  const journalistBlocked = isJournalist && !journalistAllowed;
+  const journalistBlocked = state === "ok" && !pathAllowed(role, pathname);
 
   if (isPublicAuthPage) return <Outlet />;
 
@@ -110,6 +106,7 @@ function AdminLayout() {
   }
 
   return (
+    <AdminRoleProvider value={role}>
     <div className="min-h-[80vh] bg-cream">
       <div className="mx-auto max-w-[1240px] px-4 md:px-10 py-8 grid md:grid-cols-[240px_1fr] gap-6">
         <div className="md:hidden">
@@ -147,6 +144,7 @@ function AdminLayout() {
                 <SideLink to="/admin/eventos" icon={<CalendarDays size={16} />} label="Eventos" />
                 <SideLink to="/admin/equipe" icon={<Users size={16} />} label="Equipe" />
                 <SideLink to="/admin/configuracoes" icon={<Settings size={16} />} label="Configurações gerais" />
+                <SideLink to="/admin/auditoria" icon={<History size={16} />} label="Histórico de alterações" />
               </>
             )}
             <SideLink to="/admin/ajuda" icon={<HelpCircle size={16} />} label="Ajuda" />
@@ -189,6 +187,7 @@ function AdminLayout() {
         </main>
       </div>
     </div>
+    </AdminRoleProvider>
   );
 }
 
