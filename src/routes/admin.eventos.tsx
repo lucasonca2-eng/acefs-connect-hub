@@ -52,8 +52,44 @@ function AdminEventos() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkDelete, setBulkDelete] = useState(false);
+  const podeExcluir = useCan("excluir");
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["eventos"] });
+
+  function toggleSel(id: string, on: boolean) {
+    setSelecionados((s) => (on ? [...s, id] : s.filter((x) => x !== id)));
+  }
+
+  async function bulkAtivar(ativo: boolean) {
+    setBulkBusy(true);
+    const { error } = await supabase.from("eventos").update({ ativo }).in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível atualizar os eventos selecionados.");
+      return;
+    }
+    toast.success(
+      `${selecionados.length} ${selecionados.length === 1 ? "evento" : "eventos"} ${ativo ? "publicados" : "ocultados"}.`,
+    );
+    setSelecionados([]);
+    void refresh();
+  }
+
+  async function bulkExcluir() {
+    setBulkBusy(true);
+    const { error } = await supabase.from("eventos").delete().in("id", selecionados);
+    setBulkBusy(false);
+    if (error) {
+      toast.error("Não foi possível excluir os eventos selecionados.");
+      return;
+    }
+    toast.success(`${selecionados.length} ${selecionados.length === 1 ? "evento excluído" : "eventos excluídos"}.`);
+    setSelecionados([]);
+    void refresh();
+  }
 
   function edit(e: Evento) {
     setDraft({
