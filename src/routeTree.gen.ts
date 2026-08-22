@@ -32,6 +32,7 @@ import { Route as AdminPaginasRouteImport } from './routes/admin.paginas'
 import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
 import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
 import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminBannersRouteImport } from './routes/admin.banners'
 import { Route as AdminAjudaRouteImport } from './routes/admin.ajuda'
 
@@ -150,6 +151,11 @@ const AdminEquipeRoute = AdminEquipeRouteImport.update({
   path: '/equipe',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBannersRoute = AdminBannersRouteImport.update({
   id: '/banners',
   path: '/banners',
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/admin/ajuda': typeof AdminAjudaRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/equipe': typeof AdminEquipeRoute
   '/admin/eventos': typeof AdminEventosRoute
   '/admin/noticias': typeof AdminNoticiasRoute
@@ -261,6 +270,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/ajuda'
     | '/admin/banners'
+    | '/admin/configuracoes'
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
@@ -287,6 +297,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/ajuda'
     | '/admin/banners'
+    | '/admin/configuracoes'
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
@@ -314,6 +325,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/admin/ajuda'
     | '/admin/banners'
+    | '/admin/configuracoes'
     | '/admin/equipe'
     | '/admin/eventos'
     | '/admin/noticias'
@@ -506,6 +518,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEquipeRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/banners': {
       id: '/admin/banners'
       path: '/banners'
@@ -526,6 +545,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminAjudaRoute: typeof AdminAjudaRoute
   AdminBannersRoute: typeof AdminBannersRoute
+  AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
   AdminEquipeRoute: typeof AdminEquipeRoute
   AdminEventosRoute: typeof AdminEventosRoute
   AdminNoticiasRoute: typeof AdminNoticiasRoute
@@ -539,6 +559,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAjudaRoute: AdminAjudaRoute,
   AdminBannersRoute: AdminBannersRoute,
+  AdminConfiguracoesRoute: AdminConfiguracoesRoute,
   AdminEquipeRoute: AdminEquipeRoute,
   AdminEventosRoute: AdminEventosRoute,
   AdminNoticiasRoute: AdminNoticiasRoute,

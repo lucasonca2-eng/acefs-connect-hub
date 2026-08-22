@@ -1,232 +1,201 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { useSettings } from "@/hooks/use-cms";
-import { ImageField } from "@/components/admin/image-field";
-import { parseLinks, type NavLink } from "@/lib/cms";
-import { NAV } from "@/lib/site-data";
-import { toast } from "sonner";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useBanners, useEventos, useNoticias, useServicos } from "@/hooks/use-cms";
+import { formatDate } from "@/lib/cms";
+import {
+  Newspaper,
+  Images,
+  Briefcase,
+  CalendarDays,
+  Plus,
+  Settings,
+  ExternalLink,
+  Loader2,
+} from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
   ssr: false,
-  component: AdminSettings,
+  component: AdminDashboard,
 });
 
-const FIELDS = [
-  { key: "telefone", label: "Telefone" },
-  { key: "whatsapp", label: "WhatsApp (somente números, ex: 557532117446)" },
-  { key: "email", label: "E-mail de contato" },
-  { key: "endereco", label: "Endereço" },
-  { key: "instagram_url", label: "Instagram" },
-  { key: "facebook_url", label: "Facebook" },
-  { key: "linkedin_url", label: "LinkedIn" },
-  { key: "youtube_url", label: "YouTube" },
-] as const;
+function AdminDashboard() {
+  const noticias = useNoticias(false);
+  const banners = useBanners(false);
+  const servicos = useServicos(false);
+  const eventos = useEventos(false);
 
-const DEFAULT_FOOTER_LINKS: NavLink[] = [
-  { label: "Quem Somos", to: "/quem-somos" },
-  { label: "Notícias", to: "/noticias" },
-  { label: "Contato", to: "/contato" },
-];
+  const loading =
+    noticias.isLoading || banners.isLoading || servicos.isLoading || eventos.isLoading;
 
-function AdminSettings() {
-  const { data, isLoading } = useSettings();
-  const qc = useQueryClient();
-  const [form, setForm] = useState<Record<string, string>>({});
-  const [menu, setMenu] = useState<NavLink[]>([]);
-  const [footer, setFooter] = useState<NavLink[]>([]);
-  const [saving, setSaving] = useState(false);
+  const publicadas = (noticias.data ?? []).filter((n) => n.publicado).length;
+  const bannersAtivos = (banners.data ?? []).filter((b) => b.ativo).length;
+  const servicosAtivos = (servicos.data ?? []).filter((s) => s.ativo).length;
+  const agora = Date.now();
+  const eventosFuturos = (eventos.data ?? []).filter(
+    (e) => new Date(e.data_evento).getTime() >= agora,
+  ).length;
 
-  useEffect(() => {
-    if (data) {
-      const next: Record<string, string> = {};
-      for (const [k, v] of Object.entries(data)) next[k] = typeof v === "string" ? v : "";
-      setForm(next);
-      setMenu(parseLinks(data.menu_links, [...NAV]));
-      setFooter(parseLinks(data.rodape_links_institucionais, DEFAULT_FOOTER_LINKS));
-    }
-  }, [data]);
-
-  function set(key: string, value: string) {
-    setForm((f) => ({ ...f, [key]: value }));
-  }
-
-  async function save() {
-    setSaving(true);
-    const clean = (list: NavLink[]) =>
-      list
-        .map((l) => ({ label: l.label.trim(), to: l.to.trim() }))
-        .filter((l) => l.label && l.to);
-    const payload = {
-      logo_url: form["logo_url"] || null,
-      logo_branca_url: form["logo_branca_url"] || null,
-      telefone: form["telefone"] || null,
-      whatsapp: form["whatsapp"] || null,
-      email: form["email"] || null,
-      endereco: form["endereco"] || null,
-      instagram_url: form["instagram_url"] || null,
-      facebook_url: form["facebook_url"] || null,
-      linkedin_url: form["linkedin_url"] || null,
-      youtube_url: form["youtube_url"] || null,
-      rodape_descricao: form["rodape_descricao"] || null,
-      menu_links: clean(menu),
-      rodape_links_institucionais: clean(footer),
-    };
-    const { error } = data?.id
-      ? await supabase.from("settings").update(payload).eq("id", data.id)
-      : await supabase.from("settings").insert(payload);
-    setSaving(false);
-    if (error) {
-      toast.error("Não foi possível salvar as configurações.");
-      return;
-    }
-    toast.success("Configurações salvas.");
-    void qc.invalidateQueries({ queryKey: ["settings"] });
-  }
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center gap-2 text-ink-soft text-[14px]">
-        <Loader2 size={16} className="animate-spin" /> Carregando…
-      </div>
-    );
-  }
+  const recentes = [...(noticias.data ?? [])]
+    .sort((a, b) => (a.updated_at > b.updated_at ? -1 : 1))
+    .slice(0, 5);
 
   return (
-    <div className="bg-white border border-line rounded-lg p-6 md:p-8">
-      <h1 className="font-display font-semibold text-[26px] text-navy mb-1">Configurações gerais</h1>
-      <p className="text-[14px] text-ink-soft mb-8">
-        Logo, contatos, redes sociais, menu e rodapé exibidos em todo o site.
-      </p>
+    <div className="space-y-6">
+      <div className="bg-white border border-line rounded-lg p-6 md:p-8">
+        <h1 className="font-display font-semibold text-[26px] text-navy mb-1">Painel de conteúdo</h1>
+        <p className="text-[14px] text-ink-soft">
+          Um resumo do que está publicado no site e atalhos para as tarefas do dia a dia.
+        </p>
 
-      <div className="space-y-7 max-w-[720px]">
-        <ImageField
-          label="Logo principal (cabeçalho)"
-          value={form["logo_url"]}
-          folder="logos"
-          onChange={(url) => set("logo_url", url)}
-        />
-        <ImageField
-          label="Logo branca (rodapé)"
-          value={form["logo_branca_url"]}
-          folder="logos"
-          onChange={(url) => set("logo_branca_url", url)}
-        />
-
-        {FIELDS.map((f) => (
-          <div key={f.key} className="space-y-1.5">
-            <label className="block text-[13px] font-semibold text-navy">{f.label}</label>
-            <input
-              type="text"
-              value={form[f.key] ?? ""}
-              onChange={(e) => set(f.key, e.target.value)}
-              className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] outline-none focus:border-navy transition-colors"
-            />
-          </div>
-        ))}
-
-        <div className="space-y-1.5">
-          <label className="block text-[13px] font-semibold text-navy">
-            Texto descritivo do rodapé (abaixo da logo)
-          </label>
-          <textarea
-            rows={4}
-            value={form["rodape_descricao"] ?? ""}
-            onChange={(e) => set("rodape_descricao", e.target.value)}
-            className="w-full rounded-md border border-line px-3.5 py-2.5 text-[14px] leading-relaxed outline-none focus:border-navy transition-colors"
+        <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            to="/admin/noticias"
+            icon={<Newspaper size={18} />}
+            label="Notícias publicadas"
+            value={publicadas}
+            hint={`${noticias.data?.length ?? 0} no total`}
+            loading={loading}
+          />
+          <StatCard
+            to="/admin/banners"
+            icon={<Images size={18} />}
+            label="Banners ativos"
+            value={bannersAtivos}
+            hint={`${banners.data?.length ?? 0} cadastrados`}
+            loading={loading}
+          />
+          <StatCard
+            to="/admin/servicos"
+            icon={<Briefcase size={18} />}
+            label="Serviços ativos"
+            value={servicosAtivos}
+            hint={`${servicos.data?.length ?? 0} cadastrados`}
+            loading={loading}
+          />
+          <StatCard
+            to="/admin/eventos"
+            icon={<CalendarDays size={18} />}
+            label="Eventos futuros"
+            value={eventosFuturos}
+            hint={`${eventos.data?.length ?? 0} cadastrados`}
+            loading={loading}
           />
         </div>
+      </div>
 
-        <LinkManager
-          title="Menu principal (cabeçalho)"
-          hint="Ordem dos itens do menu. Use caminhos internos (ex.: /servicos) ou endereços completos."
-          links={menu}
-          onChange={setMenu}
-        />
+      <div className="grid gap-6 lg:grid-cols-[1fr_320px] items-start">
+        <div className="bg-white border border-line rounded-lg p-6 md:p-8">
+          <div className="flex items-center justify-between gap-4 mb-5">
+            <h2 className="font-display font-semibold text-[20px] text-navy">Últimas edições</h2>
+            <Link
+              to="/admin/noticias"
+              className="text-[13px] font-semibold text-navy hover:text-gold transition-colors"
+            >
+              Ver todas
+            </Link>
+          </div>
 
-        <LinkManager
-          title="Rodapé — coluna Institucional"
-          hint="Links exibidos na coluna “Institucional” do rodapé."
-          links={footer}
-          onChange={setFooter}
-        />
+          {loading ? (
+            <div className="flex items-center gap-2 text-ink-soft text-[14px]">
+              <Loader2 size={16} className="animate-spin" /> Carregando…
+            </div>
+          ) : recentes.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-[14px] text-ink-soft mb-4">Nenhuma notícia cadastrada ainda.</p>
+              <Link
+                to="/admin/noticias"
+                className="inline-flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-md font-semibold text-[13px] hover:bg-navy-deep transition-colors"
+              >
+                <Plus size={16} /> Criar a primeira notícia
+              </Link>
+            </div>
+          ) : (
+            <ul className="divide-y divide-line">
+              {recentes.map((n) => (
+                <li key={n.id} className="py-3 flex items-center gap-3">
+                  <img
+                    src={n.imagem_capa_url ?? "/images/news/news-default.jpg"}
+                    alt=""
+                    className="w-14 h-10 rounded object-cover bg-cream shrink-0"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[14px] font-semibold text-navy truncate">{n.titulo}</div>
+                    <div className="text-[12px] text-ink-soft">
+                      {formatDate(n.updated_at)} · {n.publicado ? "publicada" : "rascunho"}
+                    </div>
+                  </div>
+                  <Link
+                    to="/admin/noticias"
+                    className="text-[12.5px] font-semibold text-navy hover:text-gold transition-colors shrink-0"
+                  >
+                    Editar
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-        <button
-          onClick={save}
-          disabled={saving}
-          className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-md font-semibold text-[14px] hover:bg-navy-deep transition-colors active:scale-[0.99] cursor-pointer disabled:opacity-60"
-        >
-          {saving && <Loader2 size={16} className="animate-spin" />}
-          Salvar alterações
-        </button>
+        <div className="bg-white border border-line rounded-lg p-6 space-y-3">
+          <h2 className="font-display font-semibold text-[18px] text-navy mb-1">Atalhos</h2>
+          <Shortcut to="/admin/noticias" icon={<Newspaper size={16} />} label="Nova notícia" />
+          <Shortcut to="/admin/banners" icon={<Images size={16} />} label="Gerenciar banners" />
+          <Shortcut to="/admin/eventos" icon={<CalendarDays size={16} />} label="Novo evento" />
+          <Shortcut
+            to="/admin/configuracoes"
+            icon={<Settings size={16} />}
+            label="Configurações gerais"
+          />
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border border-line text-[13.5px] font-medium text-ink hover:border-navy hover:text-navy transition-colors"
+          >
+            <ExternalLink size={16} /> Ver o site publicado
+          </a>
+        </div>
       </div>
     </div>
   );
 }
 
-function LinkManager({
-  title,
+function StatCard({
+  to,
+  icon,
+  label,
+  value,
   hint,
-  links,
-  onChange,
+  loading,
 }: {
-  title: string;
+  to: string;
+  icon: React.ReactNode;
+  label: string;
+  value: number;
   hint: string;
-  links: NavLink[];
-  onChange: (list: NavLink[]) => void;
+  loading: boolean;
 }) {
-  function update(index: number, patch: Partial<NavLink>) {
-    onChange(links.map((l, i) => (i === index ? { ...l, ...patch } : l)));
-  }
-
   return (
-    <div className="rounded-lg border border-line p-5 space-y-4">
-      <div>
-        <h2 className="text-[15px] font-semibold text-navy">{title}</h2>
-        <p className="text-[12.5px] text-ink-soft mt-0.5">{hint}</p>
+    <Link
+      to={to}
+      className="rounded-lg border border-line p-4 hover:border-navy/40 hover:shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)] transition-all block"
+    >
+      <div className="flex items-center gap-2 text-gold">{icon}</div>
+      <div className="mt-3 font-display font-semibold text-[28px] leading-none text-navy">
+        {loading ? <span className="text-ink-soft text-[18px]">…</span> : value}
       </div>
+      <div className="mt-2 text-[13px] font-semibold text-navy">{label}</div>
+      <div className="text-[12px] text-ink-soft">{hint}</div>
+    </Link>
+  );
+}
 
-      <div className="space-y-3">
-        {links.map((l, i) => (
-          <div key={i} className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="text"
-              value={l.label}
-              placeholder="Nome exibido"
-              onChange={(e) => update(i, { label: e.target.value })}
-              className="flex-1 rounded-md border border-line px-3 py-2 text-[14px] outline-none focus:border-navy transition-colors"
-            />
-            <input
-              type="text"
-              value={l.to}
-              placeholder="/caminho ou https://..."
-              onChange={(e) => update(i, { to: e.target.value })}
-              className="flex-1 rounded-md border border-line px-3 py-2 text-[14px] outline-none focus:border-navy transition-colors"
-            />
-            <button
-              type="button"
-              aria-label="Remover link"
-              onClick={() => onChange(links.filter((_, idx) => idx !== i))}
-              className="inline-flex items-center justify-center rounded-md border border-line px-3 py-2 text-ink-soft hover:text-red-600 hover:border-red-200 transition-colors cursor-pointer"
-            >
-              <Trash2 size={16} />
-            </button>
-          </div>
-        ))}
-        {links.length === 0 && (
-          <p className="text-[13px] text-ink-soft">Nenhum link cadastrado.</p>
-        )}
-      </div>
-
-      <button
-        type="button"
-        onClick={() => onChange([...links, { label: "", to: "" }])}
-        className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 text-[13px] font-semibold text-navy hover:bg-cream transition-colors cursor-pointer"
-      >
-        <Plus size={15} /> Adicionar link
-      </button>
-    </div>
+function Shortcut({ to, icon, label }: { to: string; icon: React.ReactNode; label: string }) {
+  return (
+    <Link
+      to={to}
+      className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border border-line text-[13.5px] font-medium text-ink hover:border-navy hover:text-navy transition-colors"
+    >
+      {icon} {label}
+    </Link>
   );
 }
