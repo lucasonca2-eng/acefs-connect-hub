@@ -9,92 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicosRouteImport } from './routes/servicos'
-import { Route as QuemSomosRouteImport } from './routes/quem-somos'
-import { Route as ParceirosRouteImport } from './routes/parceiros'
-import { Route as NoticiasRouteImport } from './routes/noticias'
-import { Route as NegociosEConexoesRouteImport } from './routes/negocios-e-conexoes'
-import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
-import { Route as EventosRouteImport } from './routes/eventos'
-import { Route as EmpregosRouteImport } from './routes/empregos'
-import { Route as DiretoriaRouteImport } from './routes/diretoria'
-import { Route as CurriculoRouteImport } from './routes/curriculo'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ArtigosRouteImport } from './routes/artigos'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ArtigosRouteImport } from './routes/artigos'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as CurriculoRouteImport } from './routes/curriculo'
+import { Route as DiretoriaRouteImport } from './routes/diretoria'
+import { Route as EmpregosRouteImport } from './routes/empregos'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as FeiraDeSantanaRouteImport } from './routes/feira-de-santana'
+import { Route as NegociosEConexoesRouteImport } from './routes/negocios-e-conexoes'
+import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as QuemSomosRouteImport } from './routes/quem-somos'
+import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
-import { Route as AdminServicosRouteImport } from './routes/admin.servicos'
-import { Route as AdminRedefinirSenhaRouteImport } from './routes/admin.redefinir-senha'
-import { Route as AdminRecuperarSenhaRouteImport } from './routes/admin.recuperar-senha'
-import { Route as AdminPaginasRouteImport } from './routes/admin.paginas'
-import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
-import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
-import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
-import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
-import { Route as AdminBannersRouteImport } from './routes/admin.banners'
-import { Route as AdminAuditoriaRouteImport } from './routes/admin.auditoria'
 import { Route as AdminAjudaRouteImport } from './routes/admin.ajuda'
+import { Route as AdminAuditoriaRouteImport } from './routes/admin.auditoria'
+import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
+import { Route as AdminEquipeRouteImport } from './routes/admin.equipe'
+import { Route as AdminEventosRouteImport } from './routes/admin.eventos'
+import { Route as AdminNoticiasRouteImport } from './routes/admin.noticias'
+import { Route as AdminPaginasRouteImport } from './routes/admin.paginas'
+import { Route as AdminRecuperarSenhaRouteImport } from './routes/admin.recuperar-senha'
+import { Route as AdminRedefinirSenhaRouteImport } from './routes/admin.redefinir-senha'
+import { Route as AdminServicosRouteImport } from './routes/admin.servicos'
+import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
 
-const ServicosRoute = ServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuemSomosRoute = QuemSomosRouteImport.update({
-  id: '/quem-somos',
-  path: '/quem-somos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ParceirosRoute = ParceirosRouteImport.update({
-  id: '/parceiros',
-  path: '/parceiros',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NoticiasRoute = NoticiasRouteImport.update({
-  id: '/noticias',
-  path: '/noticias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NegociosEConexoesRoute = NegociosEConexoesRouteImport.update({
-  id: '/negocios-e-conexoes',
-  path: '/negocios-e-conexoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
-  id: '/feira-de-santana',
-  path: '/feira-de-santana',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventosRoute = EventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmpregosRoute = EmpregosRouteImport.update({
-  id: '/empregos',
-  path: '/empregos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiretoriaRoute = DiretoriaRouteImport.update({
-  id: '/diretoria',
-  path: '/diretoria',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurriculoRoute = CurriculoRouteImport.update({
-  id: '/curriculo',
-  path: '/curriculo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArtigosRoute = ArtigosRouteImport.update({
-  id: '/artigos',
-  path: '/artigos',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -102,9 +47,64 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ArtigosRoute = ArtigosRouteImport.update({
+  id: '/artigos',
+  path: '/artigos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculoRoute = CurriculoRouteImport.update({
+  id: '/curriculo',
+  path: '/curriculo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiretoriaRoute = DiretoriaRouteImport.update({
+  id: '/diretoria',
+  path: '/diretoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpregosRoute = EmpregosRouteImport.update({
+  id: '/empregos',
+  path: '/empregos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeiraDeSantanaRoute = FeiraDeSantanaRouteImport.update({
+  id: '/feira-de-santana',
+  path: '/feira-de-santana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NegociosEConexoesRoute = NegociosEConexoesRouteImport.update({
+  id: '/negocios-e-conexoes',
+  path: '/negocios-e-conexoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuemSomosRoute = QuemSomosRouteImport.update({
+  id: '/quem-somos',
+  path: '/quem-somos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -112,54 +112,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
-  id: '/noticia/$slug',
-  path: '/noticia/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminServicosRoute = AdminServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminRedefinirSenhaRoute = AdminRedefinirSenhaRouteImport.update({
-  id: '/redefinir-senha',
-  path: '/redefinir-senha',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminRecuperarSenhaRoute = AdminRecuperarSenhaRouteImport.update({
-  id: '/recuperar-senha',
-  path: '/recuperar-senha',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaginasRoute = AdminPaginasRouteImport.update({
-  id: '/paginas',
-  path: '/paginas',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminNoticiasRoute = AdminNoticiasRouteImport.update({
-  id: '/noticias',
-  path: '/noticias',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminEventosRoute = AdminEventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminEquipeRoute = AdminEquipeRouteImport.update({
-  id: '/equipe',
-  path: '/equipe',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
-  id: '/configuracoes',
-  path: '/configuracoes',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminBannersRoute = AdminBannersRouteImport.update({
-  id: '/banners',
-  path: '/banners',
+const AdminAjudaRoute = AdminAjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminAuditoriaRoute = AdminAuditoriaRouteImport.update({
@@ -167,10 +122,55 @@ const AdminAuditoriaRoute = AdminAuditoriaRouteImport.update({
   path: '/auditoria',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAjudaRoute = AdminAjudaRouteImport.update({
-  id: '/ajuda',
-  path: '/ajuda',
+const AdminBannersRoute = AdminBannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
   getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEquipeRoute = AdminEquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventosRoute = AdminEventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNoticiasRoute = AdminNoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaginasRoute = AdminPaginasRouteImport.update({
+  id: '/paginas',
+  path: '/paginas',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRecuperarSenhaRoute = AdminRecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRedefinirSenhaRoute = AdminRedefinirSenhaRouteImport.update({
+  id: '/redefinir-senha',
+  path: '/redefinir-senha',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicosRoute = AdminServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
+  id: '/noticia/$slug',
+  path: '/noticia/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -369,88 +369,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/servicos': {
-      id: '/servicos'
-      path: '/servicos'
-      fullPath: '/servicos'
-      preLoaderRoute: typeof ServicosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quem-somos': {
-      id: '/quem-somos'
-      path: '/quem-somos'
-      fullPath: '/quem-somos'
-      preLoaderRoute: typeof QuemSomosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/parceiros': {
-      id: '/parceiros'
-      path: '/parceiros'
-      fullPath: '/parceiros'
-      preLoaderRoute: typeof ParceirosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/noticias': {
-      id: '/noticias'
-      path: '/noticias'
-      fullPath: '/noticias'
-      preLoaderRoute: typeof NoticiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/negocios-e-conexoes': {
-      id: '/negocios-e-conexoes'
-      path: '/negocios-e-conexoes'
-      fullPath: '/negocios-e-conexoes'
-      preLoaderRoute: typeof NegociosEConexoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/feira-de-santana': {
-      id: '/feira-de-santana'
-      path: '/feira-de-santana'
-      fullPath: '/feira-de-santana'
-      preLoaderRoute: typeof FeiraDeSantanaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/eventos': {
-      id: '/eventos'
-      path: '/eventos'
-      fullPath: '/eventos'
-      preLoaderRoute: typeof EventosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/empregos': {
-      id: '/empregos'
-      path: '/empregos'
-      fullPath: '/empregos'
-      preLoaderRoute: typeof EmpregosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/diretoria': {
-      id: '/diretoria'
-      path: '/diretoria'
-      fullPath: '/diretoria'
-      preLoaderRoute: typeof DiretoriaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curriculo': {
-      id: '/curriculo'
-      path: '/curriculo'
-      fullPath: '/curriculo'
-      preLoaderRoute: typeof CurriculoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/artigos': {
-      id: '/artigos'
-      path: '/artigos'
-      fullPath: '/artigos'
-      preLoaderRoute: typeof ArtigosRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -460,11 +383,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/artigos': {
+      id: '/artigos'
+      path: '/artigos'
+      fullPath: '/artigos'
+      preLoaderRoute: typeof ArtigosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculo': {
+      id: '/curriculo'
+      path: '/curriculo'
+      fullPath: '/curriculo'
+      preLoaderRoute: typeof CurriculoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diretoria': {
+      id: '/diretoria'
+      path: '/diretoria'
+      fullPath: '/diretoria'
+      preLoaderRoute: typeof DiretoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empregos': {
+      id: '/empregos'
+      path: '/empregos'
+      fullPath: '/empregos'
+      preLoaderRoute: typeof EmpregosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feira-de-santana': {
+      id: '/feira-de-santana'
+      path: '/feira-de-santana'
+      fullPath: '/feira-de-santana'
+      preLoaderRoute: typeof FeiraDeSantanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/negocios-e-conexoes': {
+      id: '/negocios-e-conexoes'
+      path: '/negocios-e-conexoes'
+      fullPath: '/negocios-e-conexoes'
+      preLoaderRoute: typeof NegociosEConexoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quem-somos': {
+      id: '/quem-somos'
+      path: '/quem-somos'
+      fullPath: '/quem-somos'
+      preLoaderRoute: typeof QuemSomosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -474,74 +474,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/noticia/$slug': {
-      id: '/noticia/$slug'
-      path: '/noticia/$slug'
-      fullPath: '/noticia/$slug'
-      preLoaderRoute: typeof NoticiaSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/servicos': {
-      id: '/admin/servicos'
-      path: '/servicos'
-      fullPath: '/admin/servicos'
-      preLoaderRoute: typeof AdminServicosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/redefinir-senha': {
-      id: '/admin/redefinir-senha'
-      path: '/redefinir-senha'
-      fullPath: '/admin/redefinir-senha'
-      preLoaderRoute: typeof AdminRedefinirSenhaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/recuperar-senha': {
-      id: '/admin/recuperar-senha'
-      path: '/recuperar-senha'
-      fullPath: '/admin/recuperar-senha'
-      preLoaderRoute: typeof AdminRecuperarSenhaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/paginas': {
-      id: '/admin/paginas'
-      path: '/paginas'
-      fullPath: '/admin/paginas'
-      preLoaderRoute: typeof AdminPaginasRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/noticias': {
-      id: '/admin/noticias'
-      path: '/noticias'
-      fullPath: '/admin/noticias'
-      preLoaderRoute: typeof AdminNoticiasRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/eventos': {
-      id: '/admin/eventos'
-      path: '/eventos'
-      fullPath: '/admin/eventos'
-      preLoaderRoute: typeof AdminEventosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/equipe': {
-      id: '/admin/equipe'
-      path: '/equipe'
-      fullPath: '/admin/equipe'
-      preLoaderRoute: typeof AdminEquipeRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/configuracoes': {
-      id: '/admin/configuracoes'
-      path: '/configuracoes'
-      fullPath: '/admin/configuracoes'
-      preLoaderRoute: typeof AdminConfiguracoesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/banners': {
-      id: '/admin/banners'
-      path: '/banners'
-      fullPath: '/admin/banners'
-      preLoaderRoute: typeof AdminBannersRouteImport
+    '/admin/ajuda': {
+      id: '/admin/ajuda'
+      path: '/ajuda'
+      fullPath: '/admin/ajuda'
+      preLoaderRoute: typeof AdminAjudaRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/auditoria': {
@@ -551,12 +488,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAuditoriaRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/ajuda': {
-      id: '/admin/ajuda'
-      path: '/ajuda'
-      fullPath: '/admin/ajuda'
-      preLoaderRoute: typeof AdminAjudaRouteImport
+    '/admin/banners': {
+      id: '/admin/banners'
+      path: '/banners'
+      fullPath: '/admin/banners'
+      preLoaderRoute: typeof AdminBannersRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/equipe': {
+      id: '/admin/equipe'
+      path: '/equipe'
+      fullPath: '/admin/equipe'
+      preLoaderRoute: typeof AdminEquipeRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eventos': {
+      id: '/admin/eventos'
+      path: '/eventos'
+      fullPath: '/admin/eventos'
+      preLoaderRoute: typeof AdminEventosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/noticias': {
+      id: '/admin/noticias'
+      path: '/noticias'
+      fullPath: '/admin/noticias'
+      preLoaderRoute: typeof AdminNoticiasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/paginas': {
+      id: '/admin/paginas'
+      path: '/paginas'
+      fullPath: '/admin/paginas'
+      preLoaderRoute: typeof AdminPaginasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/recuperar-senha': {
+      id: '/admin/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/admin/recuperar-senha'
+      preLoaderRoute: typeof AdminRecuperarSenhaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/redefinir-senha': {
+      id: '/admin/redefinir-senha'
+      path: '/redefinir-senha'
+      fullPath: '/admin/redefinir-senha'
+      preLoaderRoute: typeof AdminRedefinirSenhaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/servicos': {
+      id: '/admin/servicos'
+      path: '/servicos'
+      fullPath: '/admin/servicos'
+      preLoaderRoute: typeof AdminServicosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/noticia/$slug': {
+      id: '/noticia/$slug'
+      path: '/noticia/$slug'
+      fullPath: '/noticia/$slug'
+      preLoaderRoute: typeof NoticiaSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
