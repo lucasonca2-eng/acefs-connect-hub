@@ -11,6 +11,8 @@ export const Route = createFileRoute("/noticia/$slug")({
       { name: "description", content: "Leia a matéria completa no site da ACEFS." },
       { property: "og:title", content: "Notícia — ACEFS" },
       { property: "og:description", content: "Leia a matéria completa no site da ACEFS." },
+       { property: "og:type", content: "article" },
+       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: NoticiaDetalhe,
@@ -75,13 +77,11 @@ function NoticiaDetalhe() {
         </div>
       </div>
 
-      <div className="w-full h-64 md:h-[420px] bg-[#E5E7EB] overflow-hidden">
+      <div className="mx-auto w-full max-w-[1000px] px-6 md:px-10">
         <img
           src={src}
           alt={item.titulo}
-          width={1280}
-          height={600}
-          className="w-full h-full object-cover"
+          className="block w-full h-auto object-contain"
           onError={(e) => {
             const el = e.currentTarget;
             if (!el.src.endsWith(DEFAULT_NEWS_IMAGE)) el.src = DEFAULT_NEWS_IMAGE;
