@@ -48,6 +48,7 @@ function AdminServicos() {
   const refresh = () => qc.invalidateQueries({ queryKey: ["servicos"] });
 
   function edit(s: Servico) {
+    setTimeout(() => document.getElementById("editor-form")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     setDraft({
       id: s.id,
       titulo: s.titulo,
@@ -167,7 +168,7 @@ function AdminServicos() {
       </div>
 
       {draft && (
-        <div className="bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[760px]">
+        <div id="editor-form" className="scroll-mt-6 bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[760px]">
           <h2 className="font-display font-semibold text-[20px] text-navy">
             {draft.id ? "Editar serviço" : "Novo serviço"}
           </h2>

@@ -92,6 +92,7 @@ function AdminEventos() {
   }
 
   function edit(e: Evento) {
+    setTimeout(() => document.getElementById("editor-form")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     setDraft({
       id: e.id,
       titulo: e.titulo,
@@ -241,7 +242,7 @@ function AdminEventos() {
       </div>
 
       {draft && (
-        <div className="bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[760px]">
+        <div id="editor-form" className="scroll-mt-6 bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[760px]">
           <h2 className="font-display font-semibold text-[20px] text-navy">
             {draft.id ? "Editar evento" : "Novo evento"}
           </h2>

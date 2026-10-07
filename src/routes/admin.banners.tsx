@@ -35,6 +35,7 @@ function AdminBanners() {
   const refresh = () => qc.invalidateQueries({ queryKey: ["banners"] });
 
   function edit(b: Banner) {
+    setTimeout(() => document.getElementById("editor-form")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     setDraft({
       id: b.id,
       titulo: b.titulo,
@@ -143,7 +144,7 @@ function AdminBanners() {
       </div>
 
       {draft && (
-        <div className="bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[640px]">
+        <div id="editor-form" className="scroll-mt-6 bg-white border border-line rounded-lg p-6 md:p-8 space-y-6 max-w-[640px]">
           <h2 className="font-display font-semibold text-[20px] text-navy">
             {draft.id ? "Editar banner" : "Novo banner"}
           </h2>
